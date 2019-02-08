@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Observable;
+import physics.Vect;
 
 public class Model extends Observable{
 
@@ -21,7 +22,11 @@ public class Model extends Observable{
     }
 
     private Ball moveBallForTime(Ball ball, double time){
-
+        Vect vel = ball.getVelo();
+        Coordinate p = ball.getPos();
+        double newX = p.getX() + (vel.x() * time);
+        double newY = p.getY() + (vel.y() * time);
+        ball.setPos(newX, newY);
         return ball;
     }
 

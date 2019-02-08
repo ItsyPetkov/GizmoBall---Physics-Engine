@@ -6,13 +6,11 @@ import physics.Circle;
 public class Ball {
 
     private Vect velocity;
-    private double xpos;
-    private double ypos;
+    private Coordinate pos;
     private double radius;
 
     public Ball(double x, double y, double xv, double yv){
-        xpos = x;
-        ypos = y;
+        pos = new Coordinate(x, y);
         velocity = new Vect(xv, yv);
         radius = 10;
     }
@@ -25,12 +23,21 @@ public class Ball {
         velocity = newV;
     }
 
+    public Coordinate getPos(){
+        return pos;
+    }
+
+    public void setPos(double newX, double newY){
+        pos.setX(newX);
+        pos.setY(newY);
+    }
+
     public double getRadius(){
         return radius;
     }
 
     public Circle getCircle(){
-        return new Circle(xpos, ypos, radius);
+        return new Circle(pos.getX(), pos.getY(), radius);
     }
 
 }
