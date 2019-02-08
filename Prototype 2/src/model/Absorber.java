@@ -6,10 +6,10 @@ import physics.Circle;
 
 public class Absorber {
 
-    int xpos1;
-    int ypos1;
-    int xpos2;
-    int ypos2;
+    private int xpos1;
+    private int ypos1;
+    private int xpos2;
+    private int ypos2;
     Circle topleft;
     Circle topright;
     Circle bottomleft;

@@ -5,10 +5,10 @@ import physics.Circle;
 
 public class Ball {
 
-    Vect velocity;
-    double xpos;
-    double ypos;
-    double radius;
+    private Vect velocity;
+    private double xpos;
+    private double ypos;
+    private double radius;
 
     public Ball(double x, double y, double xv, double yv){
         xpos = x;

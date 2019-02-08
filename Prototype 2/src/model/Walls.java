@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public class Walls {
 
-    int xpos1;
-    int ypos1;
-    int xpos2;
-    int ypos2;
+    private int xpos1;
+    private int ypos1;
+    private int xpos2;
+    private int ypos2;
 
     public Walls(int x1, int y1, int x2, int y2){
         xpos1 = x1;
