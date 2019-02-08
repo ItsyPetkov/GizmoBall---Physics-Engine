@@ -1,24 +1,63 @@
 package model;
 
 import java.util.Observable;
+
+import java.util.List;
+
+import physics.Geometry;
+import physics.LineSegment;
 import physics.Vect;
+import physics.Circle;
 
 public class Model extends Observable{
 
     private Absorber abs;
     private Ball ball;
-    private Walls gws;
+    private Walls walls;
     private double gravity = 9.8;
 
     public Model(){
         ball = new Ball(100, 400, 0, 0);
-        gws = new Walls(0, 0, 500, 500);
+        walls = new Walls(0, 0, 500, 500);
         abs = new Absorber(0,400,500,500);
     }
 
     public void moveBall(){
         double moveTime = 0.05;
-        ball = moveBallForTime(ball, moveTime);
+
+        if(!(ball.getVelo().x() == 0 && ball.getVelo().y() == 0)) {
+            CollisionDetails cd = timeUntilCollision();
+            double tuc = cd.getTuc();
+            if (tuc > moveTime) {
+                ball = moveBallForTime(ball, moveTime);
+            } else {
+                ball = moveBallForTime(ball, tuc);
+                ball.setVelo(cd.getVelo());
+            }
+        }
+
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    private CollisionDetails timeUntilCollision(){
+        Circle ballCircle = ball.getCircle();
+        Vect ballVelo = ball.getVelo();
+        Vect newVelo = new Vect(0,0);
+
+        double shortestTime = 0.0;
+        double currentTime = 0.0;
+
+        List<LineSegment> wallSegs = walls.getLineSegments();
+        for(int i=0; i<wallSegs.size(); i++){
+            currentTime = Geometry.timeUntilWallCollision(wallSegs.get(i), ballCircle, ballVelo);
+            if(shortestTime > currentTime){
+                shortestTime = currentTime;
+                newVelo = Geometry.reflectWall(wallSegs.get(i), ballVelo, 1.0);
+            }
+        }
+
+        return new CollisionDetails(shortestTime, newVelo);
     }
 
     private Ball moveBallForTime(Ball ball, double time){
