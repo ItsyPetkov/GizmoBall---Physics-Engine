@@ -17,7 +17,8 @@ public class Model extends Observable{
     private double gravity = 9.8;
 
     public Model(){
-        ball = new Ball(100, 400, 0, 0);
+        // 25px = 1L
+        ball = new Ball(100, 390, 0, 0);
         walls = new Walls(0, 0, 500, 500);
         abs = new Absorber(0,400,500,500);
     }
@@ -64,10 +65,24 @@ public class Model extends Observable{
         Vect velo = ball.getVelo();
         Coordinate p = ball.getPos();
         double newX = p.getX() + (velo.x() * time);
-        double yDist = (velo.y() * time) + 0.5*(-gravity*(time*time));
+        double yDist = (velo.y() * time) + 0.5*(gravity*(time*time));
         double newY = p.getY() + yDist;
         setBallVelo(ball, velo.x(), velo.y()+(yDist/time));
         ball.setPos(newX, newY);
+        return ball;
+    }
+
+    //0.25L = 6.25px
+    private Ball absorberCapture(Ball ball, Absorber abs){
+        Coordinate bottomRight = abs.getPos();
+        ball.setPos( bottomRight.getX() - 6.25, bottomRight.getY() + 6.25);
+        setBallVelo(ball, 0.0,0.0);
+        return ball;
+    }
+
+    //50L = 1250px
+    private Ball absorberShoot(Ball ball){
+        setBallVelo(ball, 0.0, -1250);
         return ball;
     }
 

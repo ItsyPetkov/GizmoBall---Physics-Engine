@@ -27,7 +27,11 @@ public class Absorber {
         bottomright = new Circle(xpos2, ypos2, 0);
     }
 
-    public ArrayList<LineSegment> getPos(){
+    public Coordinate getPos(){
+        return new Coordinate(xpos2, ypos2);
+    }
+
+    public ArrayList<LineSegment> getLineSegments(){
         ArrayList<LineSegment> ls = new ArrayList<LineSegment>();
         LineSegment l1 = new LineSegment(xpos1, ypos1, xpos2, ypos1);
         LineSegment l2 = new LineSegment(xpos1, ypos1, xpos1, ypos2);
