@@ -15,6 +15,7 @@ public class Model extends Observable{
     private Ball ball;
     private Walls walls;
     private double gravity = 9.8;
+    private boolean absCheck = false;
 
     public Model(){
         // 25px = 1L
@@ -34,7 +35,13 @@ public class Model extends Observable{
             } else {
                 ball = moveBallForTime(ball, tuc);
                 ball.setVelo(cd.getVelo());
+                if(absCheck){
+                    absorberCapture(ball, abs);
+                }
             }
+        } else if(absCheck){
+            absorberShoot(ball);
+            absCheck = false;
         }
 
         this.setChanged();
@@ -58,6 +65,16 @@ public class Model extends Observable{
             }
         }
 
+        List<LineSegment> absSegs = abs.getLineSegments();
+        for(int i=0; i<absSegs.size(); i++){
+            currentTime = Geometry.timeUntilWallCollision(absSegs.get(i), ballCircle, ballVelo);
+            if(shortestTime > currentTime){
+                shortestTime = currentTime;
+                newVelo = new Vect(0.0,0.0);
+                absCheck = true;
+            }
+        }
+
         return new CollisionDetails(shortestTime, newVelo);
     }
 
@@ -76,7 +93,6 @@ public class Model extends Observable{
     private Ball absorberCapture(Ball ball, Absorber abs){
         Coordinate bottomRight = abs.getPos();
         ball.setPos( bottomRight.getX() - 6.25, bottomRight.getY() + 6.25);
-        setBallVelo(ball, 0.0,0.0);
         return ball;
     }
 
