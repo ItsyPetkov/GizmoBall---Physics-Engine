@@ -91,7 +91,7 @@ public class Model extends Observable{
 
     //0.25L = 6.25px
     private Ball absorberCapture(Ball ball, Absorber abs){
-        Coordinate bottomRight = abs.getPos();
+        Coordinate bottomRight = abs.getBRPos();
         ball.setPos( bottomRight.getX() - 6.25, bottomRight.getY() + 6.25);
         return ball;
     }
@@ -108,6 +108,18 @@ public class Model extends Observable{
 
     public Coordinate getBallPos(){
         return ball.getPos();
+    }
+
+    public double getBallRadius(){
+        return ball.getRadius();
+    }
+
+    public Coordinate getAbsTLPos(){
+        return abs.getTLPos();
+    }
+
+    public Coordinate getAbsBRPos(){
+        return abs.getBRPos();
     }
 
 }

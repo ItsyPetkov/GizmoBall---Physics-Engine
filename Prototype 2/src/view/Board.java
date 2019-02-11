@@ -10,6 +10,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import model.Ball;
+import model.Coordinate;
 import model.Model;
 
 public class Board extends JPanel implements Observer {
@@ -49,9 +50,13 @@ public class Board extends JPanel implements Observer {
 		}else {
 			//drawing the objects and setting up the scene for Prototype 2
 			g.setColor(Color.MAGENTA);
-			g.fillRect(0, 450, 500, 50);
+			Coordinate absTLPos = model.getAbsTLPos();
+			Coordinate absBRPos = model.getAbsBRPos();
+			g.fillRect((int) (absTLPos.getX()), (int) (absTLPos.getY()), (int) (absBRPos.getX()-absTLPos.getX()), (int) (absBRPos.getY()-absTLPos.getY()));
 			g.setColor(Color.BLUE);
-			g.fillOval(400, 470, 20, 20);
+			Coordinate ballPos = model.getBallPos();
+			double bRad = model.getBallRadius();
+			g.fillOval(((int) ballPos.getX()), ((int) ballPos.getY()), ((int) bRad*2), ((int) bRad*2));
 			Graphics2D g2 = (Graphics2D) g;
 			g2.setColor(Color.BLACK);
 			g2.setStroke(new BasicStroke(3));
