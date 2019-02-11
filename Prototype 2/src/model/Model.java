@@ -19,7 +19,7 @@ public class Model extends Observable{
 
     public Model(){
         // 25px = 1L
-        ball = new Ball(100, 390, 0, 0);
+        ball = new Ball(100, 390, 0, 1);
         walls = new Walls(0, 0, 500, 500);
         abs = new Absorber(0,400,500,500);
     }
@@ -104,6 +104,10 @@ public class Model extends Observable{
 
     public void setBallVelo(Ball ball, double x, double y){
         ball.setVelo(new Vect(x, y));
+    }
+
+    public Coordinate getBallPos(){
+        return ball.getPos();
     }
 
 }

@@ -1,3 +1,5 @@
+package main;
+
 import model.Model;
 import view.GUI;
 
