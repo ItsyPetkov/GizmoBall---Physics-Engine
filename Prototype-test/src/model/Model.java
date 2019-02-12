@@ -41,8 +41,10 @@ public class Model extends Observable{
             } else {
                 ball = moveBallForTime(ball, tuc);
                 ball.setVelo(cd.getVelo());
-                if(!absCollide) {
-                	absCheck = false;
+                if(absCollide) {
+                    absorberCapture(ball, abs);
+                } else {
+                    absCheck = false;
                 }
             }
         } 
@@ -74,7 +76,6 @@ public class Model extends Observable{
 	            if(shortestTime > currentTime){
 	                shortestTime = currentTime;
 	                newVelo = new Vect(0.0,0.0);
-	                absorberCapture(ball, abs);
 	                absCollide = true;
 	            }
 	        }
@@ -85,10 +86,11 @@ public class Model extends Observable{
     private Ball moveBallForTime(Ball ball, double time){
         Vect velo = ball.getVelo();
         Coordinate p = ball.getPos();
+
         double newX = p.getX() + (velo.x() * time);
-        double yDist = (velo.y() * time) + 0.5*(-gravity*(time*time));
+        double yDist = (velo.y() * time) + 0.5*(gravity*(time*time));
         double newY = p.getY() + yDist;
-        setBallVelo(ball, velo.x(), velo.y()+(yDist/time));
+        setBallVelo(ball, velo.x(), velo.y()+(gravity/time));
         ball.setPos(newX, newY);
         return ball;
     }
@@ -96,14 +98,14 @@ public class Model extends Observable{
     //0.25L = 6.25px
     private Ball absorberCapture(Ball ball, Absorber abs){
         Coordinate bottomRight = abs.getBRPos();
-        ball.setPos( bottomRight.getX() - 6.25, bottomRight.getY() + 6.25);
+        ball.setPos( bottomRight.getX() - 6.25, bottomRight.getY() - 6.25);
         absCheck = true;
         return ball;
     }
 
     //50L = 1250px
     private Ball absorberShoot(Ball ball){
-        setBallVelo(ball, 0.0, -250);
+        setBallVelo(ball, 0.0, -1250);
         return ball;
     }
 
