@@ -8,6 +8,7 @@ import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.xml.bind.SchemaOutputResolver;
 
 import model.Ball;
 import model.Coordinate;
@@ -60,11 +61,11 @@ public class Board extends JPanel implements Observer {
 			double bRad = model.getBallRadius();
 			g.fillOval(((int) ballPos.getX()), ((int) ballPos.getY()), ((int) bRad*2), ((int) bRad*2));
 			//drawing the walls
-			Graphics2D g2 = (Graphics2D) g;
-			g2.setColor(Color.BLACK);
-			g2.setStroke(new BasicStroke(3));
-			g2.drawLine(0, 0, 500, 100);
-			g2.drawLine(0, 100, 400, 200);
+//			Graphics2D g2 = (Graphics2D) g;
+//			g2.setColor(Color.BLACK);
+//			g2.setStroke(new BasicStroke(3));
+//			g2.drawLine(0, 0, 500, 100);
+//			g2.drawLine(0, 100, 400, 200);
 			
 		}
 	}

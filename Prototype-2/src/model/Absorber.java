@@ -27,6 +27,7 @@ public class Absorber {
         bottomright = new Circle(xpos2, ypos2, 0);
     }
 
+    // returns coordinates of top left corner
     public Coordinate getTLPos(){
         return new Coordinate(xpos1, ypos1);
     }
