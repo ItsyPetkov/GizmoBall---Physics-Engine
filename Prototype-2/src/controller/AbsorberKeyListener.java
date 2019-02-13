@@ -9,9 +9,6 @@ public class AbsorberKeyListener implements KeyListener {
 	
 	private Model model;
 	
-	private int x1 = 0;
-	private int y1 = 0;
-	
 	public AbsorberKeyListener(Model m) {
 		model = m;
 	}
@@ -23,10 +20,11 @@ public class AbsorberKeyListener implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println("start");
-		model.absorberShoot(model.getBall());
-		model.moveBall();
-		System.out.println("stop");
+		int key = e.getKeyCode();
+		if(key == KeyEvent.VK_F) {
+			model.absorberShoot(model.getBall());
+			System.out.println("F");
+		}
 	}
 
 	@Override
