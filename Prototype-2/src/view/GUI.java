@@ -8,11 +8,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
 import controller.AbsorberKeyListener;
 import controller.PauseButtonListener;
 import controller.TickButtonListener;
+import controller.TimerTickListener;
 import model.Model;
 
 public class GUI extends JFrame {
@@ -20,6 +22,7 @@ public class GUI extends JFrame {
 	private JPanel contentPane;
 	private Model model;
 	private Board board;
+	private Timer timer;
 	
 	public GUI(Model model){
 		this.model = model;
@@ -30,6 +33,9 @@ public class GUI extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		this.setVisible(true);
+		this.addKeyListener(new AbsorberKeyListener(model, this));
+		this.setFocusable(true);
+		timer = new Timer(100, new TimerTickListener(model));
 		
 		JLabel lblWelcomeToGizmoball = new JLabel("Welcome to Gizmoball Prototype 2");
 		lblWelcomeToGizmoball.setFont(new Font("Tahoma", Font.ITALIC, 25));
@@ -44,9 +50,15 @@ public class GUI extends JFrame {
 		button.addActionListener(new TickButtonListener(model));
 		JButton button2 = new JButton("Pause");
 		button2.addActionListener(new PauseButtonListener(model));
-		this.addKeyListener(new AbsorberKeyListener(model));
+		
 		buttonPanel.add(button);
 		buttonPanel.add(button2);
 		contentPane.add(buttonPanel, BorderLayout.SOUTH);
+		
+		
+	}
+	
+	public Timer getTimer() {
+		return timer;
 	}
 }

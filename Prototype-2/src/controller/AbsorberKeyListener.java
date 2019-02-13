@@ -3,14 +3,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import model.Model;
-import view.Board;
+import view.GUI;
 
 public class AbsorberKeyListener implements KeyListener {
 	
 	private Model model;
+	private GUI gui;
 	
-	public AbsorberKeyListener(Model m) {
+	public AbsorberKeyListener(Model m, GUI g) {
 		model = m;
+		gui = g;
 	}
 
 	@Override
@@ -23,7 +25,7 @@ public class AbsorberKeyListener implements KeyListener {
 		int key = e.getKeyCode();
 		if(key == KeyEvent.VK_F) {
 			model.absorberShoot(model.getBall());
-			System.out.println("F");
+			gui.getTimer().start();
 		}
 	}
 
