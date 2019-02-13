@@ -109,13 +109,17 @@ public class Model extends Observable{
     }
 
     //50L = 1250px
-    private Ball absorberShoot(Ball ball){
+    public Ball absorberShoot(Ball ball){
         setBallVelo(ball, 0.0, -1250);
         return ball;
     }
 
     public void setBallVelo(Ball ball, double x, double y){
         ball.setVelo(new Vect(x, y));
+    }
+
+    public Ball getBall(){
+        return ball;
     }
 
     public Coordinate getBallPos(){

@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import controller.AbsorberKeyListener;
 import controller.PauseButtonListener;
 import controller.TickButtonListener;
 import model.Model;
@@ -40,9 +41,10 @@ public class GUI extends JFrame {
 		
 		JPanel buttonPanel = new JPanel(new GridLayout(1,1));
 		JButton button = new JButton("Tick");
-		button.addActionListener(new TickButtonListener(model, this));
+		button.addActionListener(new TickButtonListener(model));
 		JButton button2 = new JButton("Pause");
-		button2.addActionListener(new PauseButtonListener(model, this));
+		button2.addActionListener(new PauseButtonListener(model));
+		this.addKeyListener(new AbsorberKeyListener(model));
 		buttonPanel.add(button);
 		buttonPanel.add(button2);
 		contentPane.add(buttonPanel, BorderLayout.SOUTH);

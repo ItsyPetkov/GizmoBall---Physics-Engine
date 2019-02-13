@@ -4,16 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import model.Model;
-import view.GUI;
 
 public class PauseButtonListener implements ActionListener {
 
 	private Model model;
-	private GUI gui;
 	
-	public PauseButtonListener(Model m, GUI g) {
-		model = m; 
-		gui = g;
+	public PauseButtonListener(Model m) {
+		model = m;
 	}
 	
 	@Override
