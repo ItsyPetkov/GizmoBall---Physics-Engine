@@ -31,10 +31,6 @@ public class Model extends Observable{
     public void moveBall(){
         double moveTime = 0.05;
 
-        if(absCaptured){
-            absorberShoot(ball);
-        }
-
         if(absCollision){
             absorberCapture(ball, abs);
             absCollision = false;
