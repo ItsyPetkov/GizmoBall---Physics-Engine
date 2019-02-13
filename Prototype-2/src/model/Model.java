@@ -23,7 +23,7 @@ public class Model extends Observable{
     public Model(){
         // 25px = 1L
         ball = new Ball(425, 355, 0, 0);
-        walls = new Walls(0, 0, 500, 500);
+        walls = new Walls(-20, -20, 500, 500);
         abs = new Absorber(0,400,500,500);
         absorberCapture(ball, abs);
     }
