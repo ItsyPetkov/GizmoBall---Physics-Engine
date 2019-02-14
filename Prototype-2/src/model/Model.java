@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.SQLOutput;
 import java.util.Observable;
 import java.lang.Math.*;
 import java.util.List;
@@ -16,6 +15,8 @@ public class Model extends Observable{
     private Ball ball;
     private Walls walls;
     private double gravity = 625;
+    private double mu = 0.025;
+    private double mu2 = 0.025;
     private boolean absCaptured = true;
     private boolean absCollision = false;
     private boolean absClosest = false;
@@ -36,6 +37,7 @@ public class Model extends Observable{
             absCollision = false;
             absClosest = false;
         } else if(!(ball.getVelo().x() == 0 && ball.getVelo().y() == 0)) {
+            System.out.println(ball.getVelo().y()/25 + "L/sec");
             CollisionDetails cd = timeUntilCollision();
             double tuc = cd.getTuc();
             if (tuc > moveTime) {
@@ -88,12 +90,21 @@ public class Model extends Observable{
         Vect velo = ball.getVelo();
         Coordinate p = ball.getPos();
 
+        ball.setVelo(friction(ball.getVelo(), time));
         double newX = p.getX() + (velo.x() * time);
         double yDist = (velo.y() * time) + 0.5*(gravity*(time*time));
         double newY = p.getY() + yDist;
         setBallVelo(ball, velo.x(), velo.y()+(gravity*time));
         ball.setPos(newX, newY);
         return ball;
+    }
+
+    private Vect friction(Vect old, double moveTime){
+        double x = 25*(old.x()/25*(1-mu*moveTime-mu2*(Math.abs(old.x()/25))*moveTime));
+        double y = 25*(old.y()/25*(1-mu*moveTime-mu2*(Math.abs(old.y()/25))*moveTime));
+        //System.out.println("old velo: "+old.y());
+        //System.out.println("new velo: "+y);
+        return new Vect(x,y);
     }
 
     //0.25L = 6.25px
