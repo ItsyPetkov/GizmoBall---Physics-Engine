@@ -8,7 +8,6 @@ import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.xml.bind.SchemaOutputResolver;
 
 import model.Ball;
 import model.Coordinate;
