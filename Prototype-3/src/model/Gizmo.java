@@ -20,6 +20,8 @@ public abstract class Gizmo {
 
     abstract Color getColour();
 
+    abstract public List<LineSegment> getSides();
+
     abstract public List<Circle> getCorners();
 
 }
