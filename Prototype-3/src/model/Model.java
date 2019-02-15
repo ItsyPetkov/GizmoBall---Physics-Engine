@@ -8,7 +8,7 @@ import physics.Vect;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Model {
+public class Model extends Observable {
 
     private Ball ball;
     private Walls walls;
