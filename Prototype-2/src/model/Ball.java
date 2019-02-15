@@ -12,7 +12,7 @@ public class Ball {
     public Ball(double x, double y, double xv, double yv){
         pos = new Coordinate(x, y);
         velocity = new Vect(xv, yv);
-        radius = 10;
+        radius = 12.5;
     }
 
     public Vect getVelo(){
