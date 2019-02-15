@@ -51,15 +51,16 @@ public class Board extends JPanel implements Observer {
 		}else {
 			//drawing the objects and setting up the scene for Prototype 2
 			//drawing the absorber
-			g.setColor(Color.MAGENTA);
-			Coordinate absTLPos = model.getAbsTLPos();
-			Coordinate absBRPos = model.getAbsBRPos();
-			g.fillRect((int) (absTLPos.getX()), (int) (absTLPos.getY()), (int) (absBRPos.getX()-absTLPos.getX()), (int) (absBRPos.getY()-absTLPos.getY()));
-			//drawing the ball
-			g.setColor(Color.BLUE);
-			Coordinate ballPos = model.getBallPos();
-			double bRad = model.getBallRadius();
-			g.fillOval(((int) ballPos.getX()), ((int) ballPos.getY()), ((int) bRad*2), ((int) bRad*2));
+
+//			g.setColor(Color.MAGENTA);
+//			Coordinate absTLPos = model.getAbsTLPos();
+//			Coordinate absBRPos = model.getAbsBRPos();
+//			g.fillRect((int) (absTLPos.getX()), (int) (absTLPos.getY()), (int) (absBRPos.getX()-absTLPos.getX()), (int) (absBRPos.getY()-absTLPos.getY()));
+//			//drawing the ball
+//			g.setColor(Color.BLUE);
+//			Coordinate ballPos = model.getBallPos();
+//			double bRad = model.getBallRadius();
+//			g.fillOval(((int) ballPos.getX()), ((int) ballPos.getY()), ((int) bRad*2), ((int) bRad*2));
 			//drawing the walls
 //			Graphics2D g2 = (Graphics2D) g;
 //			g2.setColor(Color.BLACK);
