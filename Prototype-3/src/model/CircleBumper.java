@@ -6,11 +6,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Circle extends Gizmo {
+public class CircleBumper extends Gizmo {
 
     private Color colour;
 
-    public Circle(int x, int y) {
+    public CircleBumper(int x, int y) {
         super(x,y);
         colour = Color.RED;
     }

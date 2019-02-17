@@ -7,13 +7,13 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Square extends Gizmo{
+public class TriangleBumper extends Gizmo{
 
     private Color colour;
 
-    public Square(int x, int y){
+    public TriangleBumper(int x, int y){
         super(x,y);
-        colour = Color.BLUE;
+        colour = Color.GREEN;
     }
 
     public Color getColour(){
@@ -24,17 +24,16 @@ public class Square extends Gizmo{
         List<LineSegment> ls = new ArrayList<LineSegment>();
         ls.add(new LineSegment(super.getPos().getX(), super.getPos().getY(), super.getPos().getX()+1, super.getPos().getY()));
         ls.add(new LineSegment(super.getPos().getX(), super.getPos().getY(), super.getPos().getX(), super.getPos().getY()+1));
-        ls.add(new LineSegment(super.getPos().getX()+1, super.getPos().getY(), super.getPos().getX()+1, super.getPos().getY()+1));
-        ls.add(new LineSegment(super.getPos().getX(), super.getPos().getY()+1, super.getPos().getX()+1, super.getPos().getY()+1));
+        ls.add(new LineSegment(super.getPos().getX(), super.getPos().getY()+1, super.getPos().getX()+1, super.getPos().getY()));
         return ls;
     }
 
     public List<Circle> getCorners(){
-        List<Circle> cs = new ArrayList<Circle>();
+        List<Circle> cs = new ArrayList<physics.Circle>();
         cs.add(new Circle(super.getPos().getX(), super.getPos().getY(), 0));
         cs.add(new Circle(super.getPos().getX()+1, super.getPos().getY(), 0));
         cs.add(new Circle(super.getPos().getX(), super.getPos().getY()+1, 0));
-        cs.add(new Circle(super.getPos().getX()+1, super.getPos().getY()+1, 0));
         return cs;
     }
+
 }

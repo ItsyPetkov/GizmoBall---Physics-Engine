@@ -21,10 +21,6 @@ public class Model extends Observable {
         gizmoList = new ArrayList<Gizmo>();
     }
 
-    public void addGizmo(Gizmo g){
-        gizmoList.add(g);
-    }
-
     public void moveBall(){
         double moveTime = 0.05;
 
@@ -98,8 +94,8 @@ public class Model extends Observable {
         return ball;
     }
 
-    public Coordinate getBallPos(){
-        return ball.getPos();
+    public void addGizmo(Gizmo g){
+        gizmoList.add(g);
     }
 
     public List<Coordinate> getGizmoPos(){
@@ -116,15 +112,6 @@ public class Model extends Observable {
     
     public Ball getBall(){
         return ball;
-    }
-    
-    public Ball absorberShoot(Ball ball){
-        setBallVelo(ball, 0.0, -1250);
-        return ball;
-    }
-    
-    public void setBallVelo(Ball ball, double x, double y){
-        ball.setVelo(new Vect(x, y));
     }
 
 }

@@ -18,7 +18,7 @@ public abstract class Gizmo {
         return pos;
     }
 
-    abstract Color getColour();
+    abstract public Color getColour();
 
     abstract public List<LineSegment> getSides();
 
