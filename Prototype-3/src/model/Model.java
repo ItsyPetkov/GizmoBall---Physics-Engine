@@ -109,5 +109,22 @@ public class Model extends Observable {
         }
         return gizmoPos;
     }
+    
+     public List<Gizmo> getGizmos(){
+    	return gizmoList;
+    }
+    
+    public Ball getBall(){
+        return ball;
+    }
+    
+    public Ball absorberShoot(Ball ball){
+        setBallVelo(ball, 0.0, -1250);
+        return ball;
+    }
+    
+    public void setBallVelo(Ball ball, double x, double y){
+        ball.setVelo(new Vect(x, y));
+    }
 
 }
