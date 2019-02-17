@@ -59,10 +59,19 @@ public class Board extends JPanel implements Observer {
 			//drawing gizmos
 			List<Gizmo> gizmoList = model.getGizmos();
 			for(int i=0; i<gizmoList.size(); i++){
-				// need test for what type of gizmo, right now draws everything as a square
 				g.setColor(gizmoList.get(i).getColour());
 				Coordinate gPos = gizmoList.get(i).getPos();
-				g.fillRect((int) (gPos.getX()*LtoPx), (int) (gPos.getY()*LtoPx), LtoPx, LtoPx);
+
+				if(gizmoList.get(i).getSides().size() == 4){
+					g.fillRect((int) (gPos.getX()*LtoPx), (int) (gPos.getY()*LtoPx), LtoPx, LtoPx);
+				} else if(gizmoList.get(i).getSides().size() == 3){
+					int[] xP = {(int) (gPos.getX()*LtoPx), (int) ((gPos.getX()+1)*LtoPx), (int) (gPos.getX()*LtoPx)};
+					int[] yP = {(int) (gPos.getY()*LtoPx), (int) (gPos.getY()*LtoPx), (int) ((gPos.getY()+1)*LtoPx)};
+					g.fillPolygon(xP, yP, 3);
+				} else {
+					g.fillOval((int) (gPos.getX()*LtoPx), (int) (gPos.getY()*LtoPx), LtoPx, LtoPx);
+				}
+
 			}
 
 			//drawing the walls
