@@ -54,7 +54,7 @@ public class Board extends JPanel implements Observer {
 			g.setColor(model.getBall().getColour());
 			Coordinate ballPos = model.getBall().getPos();
 			double bRad = model.getBall().getRadius();
-			g.fillOval(((int) ballPos.getX()*LtoPx), ((int) ballPos.getY()*LtoPx), ((int) (bRad*2)*LtoPx), ((int) (bRad*2)*LtoPx));
+			g.fillOval((int) (ballPos.getX()*LtoPx), (int) (ballPos.getY()*LtoPx), (int) ((bRad*2)*LtoPx), (int) ((bRad*2)*LtoPx));
 
 			//drawing gizmos
 			List<Gizmo> gizmoList = model.getGizmos();

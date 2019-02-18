@@ -16,7 +16,7 @@ public class Model extends Observable {
     private List<Gizmo> gizmoList;
 
     public Model(){
-        ball = new Ball(10,10,10,10);
+        ball = new Ball(10,10,20,-10);
         walls = new Walls(0,0,20,20);
         gizmoList = new ArrayList<Gizmo>();
     }
@@ -35,6 +35,8 @@ public class Model extends Observable {
             }
         }
 
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public CollisionDetails timeUntilCollision(){
