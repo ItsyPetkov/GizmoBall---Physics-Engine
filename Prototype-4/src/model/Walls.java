@@ -20,10 +20,10 @@ public class Walls {
 
     public ArrayList<LineSegment> getLineSegments() {
         ArrayList<LineSegment> ls = new ArrayList<LineSegment>();
-        physics.LineSegment l1 = new physics.LineSegment(xpos1, ypos1, xpos2, ypos1);
-        physics.LineSegment l2 = new physics.LineSegment(xpos1, ypos1, xpos1, ypos2);
-        physics.LineSegment l3 = new physics.LineSegment(xpos2, ypos1, xpos2, ypos2);
-        physics.LineSegment l4 = new physics.LineSegment(xpos1, ypos2, xpos2, ypos2);
+        LineSegment l1 = new LineSegment(xpos1, ypos1, xpos2, ypos1);
+        LineSegment l2 = new LineSegment(xpos1, ypos1, xpos1, ypos2);
+        LineSegment l3 = new LineSegment(xpos2, ypos1, xpos2, ypos2);
+        LineSegment l4 = new LineSegment(xpos1, ypos2, xpos2, ypos2);
         ls.add(l1);
         ls.add(l2);
         ls.add(l3);

@@ -6,7 +6,7 @@ import physics.LineSegment;
 import java.awt.*;
 import java.util.List;
 
-public class RightFlipper extends model.Gizmo {
+public class RightFlipper extends Gizmo {
     String name;
     String type = "RightFlipper";
     int x;
@@ -16,7 +16,7 @@ public class RightFlipper extends model.Gizmo {
     }
 
     @Override
-    Color getColour() {
+    public Color getColour() {
         return null;
     }
 

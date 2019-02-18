@@ -1,4 +1,8 @@
+/**
 package model;
+
+
+import view.GUI;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,16 +12,17 @@ import java.util.List;
 
 public class SaveFile {
     public static void main(String[] args) {
-         List<model.Gizmo> gizmoList = new ArrayList<>();
-         List<model.Ball> ballList = new ArrayList<>();
-         List<model.Gizmo> deletedGizmos = new ArrayList<>();
-         List<model.Gizmo> movedGizmos = new ArrayList<>();
+        Model m = new Model();
+         List<Gizmo> gizmoList = new ArrayList<>();
+         List<Ball> ballList = new ArrayList<>();
+         List<Gizmo> deletedGizmos = new ArrayList<>();
+         List<Gizmo> movedGizmos = new ArrayList<>();
          String[] bumpers = {"Square", "Triangle", "Circle", "LeftFlipper", "RightFlipper"};
 
-         model.Gizmo T1 = new model.Triangle("T1", 2, 4);
-         model.Gizmo C1 = new model.Circle("C1", 4, 6);
-         model.Gizmo S3 = new Square("S3", 3, 3);
-         model.Gizmo LF1 = new model.LeftFlipper("LF1", 5, 18);
+         Gizmo T1 = new TriangleBumper("T1", 2, 4);
+         Gizmo C1 = new CircleBumper("C1", 4, 6);
+         Gizmo S3 = new SquareBumper("S3", 3, 3);
+         Gizmo LF1 = new LeftFlipper("LF1", 5, 18);
 
          gizmoList.add(T1);
          gizmoList.add(C1);
@@ -30,13 +35,15 @@ public class SaveFile {
          movedGizmos.add(T1);
          movedGizmos.add(LF1);
 
-         ballList.add(new model.Ball("B", 1.0, 11.0, 5.0, 2.0));
-         ballList.add(new model.Ball("B2", 4.0, 5.0, 3.0, 7.0));
+        GUI gui = new GUI(m);
+
+         ballList.add(new Ball("B", 1.0, 11.0, 5.0, 2.0));
+         ballList.add(new Ball("B2", 4.0, 5.0, 3.0, 7.0));
 
          try {
              Writer wr = new FileWriter("gizmo.txt");
 
-             for (model.Gizmo g : gizmoList) {
+             for (Gizmo g : gizmoList) {
                  for (int i = 0; i < bumpers.length; i++) {
                      if (g.getType().equals(bumpers[i])) {
                          wr.write(g.getType()+ " ");
@@ -49,7 +56,7 @@ public class SaveFile {
                  }
              }
              wr.write("\n");
-             for (model.Ball b : ballList) {
+             for (Ball b : ballList) {
                  if (b.getType().equals("Ball")) {
                      wr.write(b.getType()+" ");
                      wr.write(b.getId()+" ");
@@ -61,14 +68,14 @@ public class SaveFile {
                  }
              }
              wr.write("\n");
-             for (model.Gizmo g : deletedGizmos) {
+             for (Gizmo g : deletedGizmos) {
                         wr.write("Delete ");
                         wr.write(g.getId());
                         wr.write("\n");
                         break;
              }
              wr.write("\n");
-             for (model.Gizmo g : movedGizmos) {
+             for (Gizmo g : movedGizmos) {
                  wr.write("Move ");
                  wr.write(g.getId());
                  wr.write(Double.toString(g.getPos().getX())+" ");
@@ -87,3 +94,4 @@ public class SaveFile {
          }
     }
 }
+**/

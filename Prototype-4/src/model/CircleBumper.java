@@ -6,13 +6,13 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Circle extends model.Gizmo {
+public class CircleBumper extends Gizmo {
 
     private Color colour;
-    private String type = "Circle";
+    private String type = "Triangle";
 
-    public Circle(String id, int x, int y) {
-        super(id,x,y);
+    public CircleBumper(String id, int x, int y) {
+        super(id, x, y);
         colour = Color.RED;
     }
 
