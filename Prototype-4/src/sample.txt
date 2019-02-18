@@ -1,0 +1,20 @@
+Triangle T1 0 7
+Square S2 15 15
+LeftFlipper LF1 5 18
+Triangle T2 2 5
+
+Rotate T1
+Rotate S2
+
+KeyConnect key 32 down LF92
+KeyConnect key 32 up LF92
+
+Connect T1 S2
+Connect C1 T2
+
+Ball B 1.0 11.0 5.0 2.0
+
+Move T1 5 7
+Delete T1
+
+Circle C1 2 3
