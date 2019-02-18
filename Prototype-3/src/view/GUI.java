@@ -46,10 +46,10 @@ public class GUI extends JFrame {
 		contentPane.add(board, BorderLayout.CENTER);
 		
 		JPanel buttonPanel = new JPanel(new GridLayout(1,1));
-		JButton button = new JButton("Tick");
+		JButton button = new JButton("Start");
 
 //		button.addActionListener(new TickButtonListener(model));
-		JButton button2 = new JButton("Pause");
+		JButton button2 = new JButton("Stop");
 //		button2.addActionListener(new PauseButtonListener(model));
 		
 		buttonPanel.add(button);
