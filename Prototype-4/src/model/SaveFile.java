@@ -1,5 +1,6 @@
-package model; /**
+/**
 package model;
+
 
 import view.GUI;
 
