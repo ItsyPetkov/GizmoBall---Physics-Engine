@@ -12,8 +12,6 @@ import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
 import controller.AbsorberKeyListener;
-import controller.PauseButtonListener;
-import controller.TickButtonListener;
 import controller.TimerTickListener;
 import model.Model;
 
@@ -35,7 +33,7 @@ public class GUI extends JFrame {
 		this.setVisible(true);
 		this.addKeyListener(new AbsorberKeyListener(model, this));
 		this.setFocusable(true);
-		timer = new Timer(100, new TimerTickListener(model));
+		timer = new Timer(50, new TimerTickListener(model));
 		
 		JLabel lblWelcomeToGizmoball = new JLabel("Welcome to Gizmoball Prototype 2");
 		lblWelcomeToGizmoball.setFont(new Font("Tahoma", Font.ITALIC, 25));

@@ -24,7 +24,7 @@ public class Model extends Observable{
     public Model(){
         // 25px = 1L
         ball = new Ball(425, 355, 0, 0);
-        walls = new Walls(-20, -20, 500, 500);
+        walls = new Walls(0, 0, 500, 500);
         abs = new Absorber(0,400,500,500);
         absorberCapture(ball, abs);
     }
@@ -61,11 +61,11 @@ public class Model extends Observable{
 
 
         List<LineSegment> wallSegs = walls.getLineSegments();
-        double shortestTime = Geometry.timeUntilWallCollision(wallSegs.get(0), ballCircle, ballVelo) - (ball.getRadius()/getTotalVector(ball));
+        double shortestTime = Geometry.timeUntilWallCollision(wallSegs.get(0), ballCircle, ballVelo);
         Vect newVelo = Geometry.reflectWall(wallSegs.get(0), ballVelo, 1.0);
         double currentTime = Geometry.timeUntilWallCollision(wallSegs.get(0), ballCircle, ballVelo);
         for(int i=1; i<wallSegs.size(); i++){
-            currentTime = Geometry.timeUntilWallCollision(wallSegs.get(i), ballCircle, ballVelo) - (ball.getRadius()/getTotalVector(ball));
+            currentTime = Geometry.timeUntilWallCollision(wallSegs.get(i), ballCircle, ballVelo);
             if(shortestTime > currentTime){
                 shortestTime = currentTime;
                 newVelo = Geometry.reflectWall(wallSegs.get(i), ballVelo, 1.0);
@@ -75,7 +75,7 @@ public class Model extends Observable{
         if(!absCaptured) {
 	        List<LineSegment> absSegs = abs.getLineSegments();
 	        for(int i=0; i<absSegs.size(); i++){
-	            currentTime = Geometry.timeUntilWallCollision(absSegs.get(i), ballCircle, ballVelo) - (ball.getRadius()/getTotalVector(ball));
+	            currentTime = Geometry.timeUntilWallCollision(absSegs.get(i), ballCircle, ballVelo);
 	            if(shortestTime > currentTime){
 	                shortestTime = currentTime;
 	                newVelo = new Vect(0.0,0.0);
