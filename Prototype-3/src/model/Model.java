@@ -14,11 +14,13 @@ public class Model extends Observable {
     private Ball ball;
     private Walls walls;
     private List<Gizmo> gizmoList;
+    private boolean collision;
 
     public Model(){
         ball = new Ball(10,10,20,-10);
-        walls = new Walls(0,0,20,20);
+        walls = new Walls(-1,-1,20,19);
         gizmoList = new ArrayList<Gizmo>();
+        collision = false;
     }
 
     public void moveBall(){
@@ -29,9 +31,11 @@ public class Model extends Observable {
             double tuc = cd.getTuc();
             if (tuc > moveTime) {
                 ball = moveBallForTime(ball, moveTime);
+                collision = false;
             } else {
                 ball = moveBallForTime(ball, tuc);
                 ball.setVelo(cd.getVelo());
+                collision = true;
             }
         }
 
@@ -45,12 +49,12 @@ public class Model extends Observable {
 
 
         List<LineSegment> wallSegs = walls.getLineSegments();
-        double shortestTime = Geometry.timeUntilWallCollision(wallSegs.get(0), ballCircle, ballVelo);
+        double shortestTime = Geometry.timeUntilWallCollision(wallSegs.get(0), ballCircle, ballVelo) - (ball.getRadius()/getTotalVector(ball));
         Vect newVelo = Geometry.reflectWall(wallSegs.get(0), ballVelo, 1.0);
         double currentTime;
 
         for(int i=1; i<wallSegs.size(); i++){
-            currentTime = Geometry.timeUntilWallCollision(wallSegs.get(i), ballCircle, ballVelo);
+            currentTime = Geometry.timeUntilWallCollision(wallSegs.get(i), ballCircle, ballVelo) - (ball.getRadius()/getTotalVector(ball));
             if(shortestTime > currentTime){
                 shortestTime = currentTime;
                 newVelo = Geometry.reflectWall(wallSegs.get(i), ballVelo, 1.0);
@@ -66,7 +70,7 @@ public class Model extends Observable {
         }
 
         for(int i=0; i<gizmoSides.size(); i++){
-            currentTime = Geometry.timeUntilWallCollision(gizmoSides.get(i), ballCircle, ballVelo);
+            currentTime = Geometry.timeUntilWallCollision(gizmoSides.get(i), ballCircle, ballVelo) - (ball.getRadius()/getTotalVector(ball));
             if(shortestTime > currentTime){
                 shortestTime = currentTime;
                 newVelo = Geometry.reflectWall(gizmoSides.get(i), ballVelo, 1.0);
@@ -74,7 +78,7 @@ public class Model extends Observable {
         }
 
         for(int i=0; i<gizmoCorners.size(); i++){
-            currentTime = Geometry.timeUntilCircleCollision(gizmoCorners.get(i), ballCircle, ballVelo);
+            currentTime = Geometry.timeUntilCircleCollision(gizmoCorners.get(i), ballCircle, ballVelo) - (ball.getRadius()/getTotalVector(ball));
             if(shortestTime > currentTime){
                 shortestTime = currentTime;
                 newVelo = Geometry.reflectCircle(gizmoCorners.get(i).getCenter(), ball.getCircle().getCenter(), ball.getVelo(), 1.0);
@@ -108,12 +112,28 @@ public class Model extends Observable {
         return gizmoPos;
     }
     
-     public List<Gizmo> getGizmos(){
+    public List<Gizmo> getGizmos(){
     	return gizmoList;
     }
     
     public Ball getBall(){
         return ball;
+    }
+
+    public Vect getWallTL(){
+        return walls.getTL();
+    }
+
+    public Vect getWallBR(){
+        return walls.getBR();
+    }
+
+    public boolean getCollision(){
+        return collision;
+    }
+
+    private double getTotalVector(Ball ball){
+        return Math.sqrt((ball.getVelo().y()*ball.getVelo().y())+(ball.getVelo().x()*ball.getVelo().x()));
     }
 
 }

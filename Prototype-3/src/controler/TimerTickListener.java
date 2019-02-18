@@ -15,7 +15,13 @@ public class TimerTickListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(model.getCollision()==true){
+			try{
+				Thread.currentThread().sleep(1000);
+			} catch (InterruptedException ex){
+				ex.printStackTrace();
+			}
+		}
 		model.moveBall();
 	}
 
