@@ -11,14 +11,14 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
-
-import controler.AbsorberKeyListener;
+import controler.PauseButtonListener;
+import controler.StartButtonListener;
 import controler.TimerTickListener;
-
 import model.Model;
 
 public class GUI extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private Model model;
 	private Board board;
@@ -33,8 +33,8 @@ public class GUI extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		this.setVisible(true);
-		this.addKeyListener(new AbsorberKeyListener(model, this));
-		this.setFocusable(true);
+//		this.addKeyListener(new AbsorberKeyListener(model, this));
+//		this.setFocusable(true);
 		timer = new Timer(100, new TimerTickListener(model));
 		
 		JLabel lblWelcomeToGizmoball = new JLabel("Welcome to Gizmoball Prototype 3");
@@ -48,9 +48,9 @@ public class GUI extends JFrame {
 		JPanel buttonPanel = new JPanel(new GridLayout(1,1));
 		JButton button = new JButton("Start");
 
-//		button.addActionListener(new TickButtonListener(model));
-		JButton button2 = new JButton("Stop");
-//		button2.addActionListener(new PauseButtonListener(model));
+		button.addActionListener(new StartButtonListener(model, this));
+		JButton button2 = new JButton("Pause");
+		button2.addActionListener(new PauseButtonListener(this));
 		
 		buttonPanel.add(button);
 		buttonPanel.add(button2);
