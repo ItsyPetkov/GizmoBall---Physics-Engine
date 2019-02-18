@@ -45,17 +45,6 @@ public class GUI extends JFrame {
 		board = new Board(model);
 		contentPane.add(board, BorderLayout.CENTER);
 		
-		JPanel buttonPanel = new JPanel(new GridLayout(1,1));
-		JButton button = new JButton("Tick");
-		button.addActionListener(new TickButtonListener(model));
-		JButton button2 = new JButton("Pause");
-		button2.addActionListener(new PauseButtonListener(model));
-		
-		buttonPanel.add(button);
-		buttonPanel.add(button2);
-		contentPane.add(buttonPanel, BorderLayout.SOUTH);
-		
-		
 	}
 	
 	public Timer getTimer() {
