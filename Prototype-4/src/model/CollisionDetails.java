@@ -1,11 +1,13 @@
 package model;
 
+import physics.Vect;
+
 public class CollisionDetails {
 
     private double tuc;
-    private physics.Vect velo;
+    private Vect velo;
 
-    public CollisionDetails(double tuc, physics.Vect velo){
+    public CollisionDetails(double tuc, Vect velo){
         this.tuc = tuc;
         this.velo = velo;
     }
@@ -14,7 +16,7 @@ public class CollisionDetails {
         return tuc;
     }
 
-    public physics.Vect getVelo(){
+    public Vect getVelo(){
         return velo;
     }
 

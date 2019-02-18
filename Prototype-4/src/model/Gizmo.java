@@ -8,39 +8,39 @@ import java.util.List;
 
 public abstract class Gizmo {
 
+    private Coordinate pos;
     private String id;
-    private model.Coordinate pos;
 
-    public Gizmo( String id, int x, int y){
+    public Gizmo(String id, int x, int y){
         this.id = id;
-        pos = new model.Coordinate(x,y);
+        pos = new Coordinate(x,y);
     }
 
-    public model.Coordinate getPos(){
+    public Coordinate getPos(){
         return pos;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    abstract Color getColour();
+    abstract public Color getColour();
 
     abstract public List<LineSegment> getSides();
 
     abstract public List<Circle> getCorners();
+
+    public String getId() {
+        return id;
+    }
     abstract public String getType();
 
     public void rotate() {
-        System.out.println("Rotating.. :)");
+        System.out.println("Rotating..");
     }
 
     public void delete() {
-        System.out.println("Gizmo deleted.. :(");
+        System.out.println("Gizmo "+id+" deleted.");
     }
 
     public void move(double x, double y) {
-        System.out.println("Gizmo moved to: "+"("+x+", "+y+")");
+        System.out.println("Gizmo "+id+" moved to ("+x+""+y+")");
     }
 
 }
