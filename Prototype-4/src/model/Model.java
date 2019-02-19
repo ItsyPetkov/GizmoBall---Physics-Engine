@@ -139,8 +139,8 @@ public class Model extends Observable {
                     if (g.getType().equals(bumpers[i])) {
                         wr.write(g.getType()+ " ");
                         wr.write(g.getId() + " ");
-                        wr.write(Double.toString(g.getPos().getX())+ " ");
-                        wr.write(Double.toString(g.getPos().getY()));
+                        wr.write(Integer.toString((int) g.getPos().getX())+ " ");
+                        wr.write(Integer.toString((int) g.getPos().getY()));
                         wr.write("\n");
                         break;
                     }
