@@ -1,13 +1,12 @@
 package model;
 
-import java.util.Observable;
-import java.lang.Math.*;
 import java.util.List;
+import java.util.Observable;
 
+import physics.Circle;
 import physics.Geometry;
 import physics.LineSegment;
 import physics.Vect;
-import physics.Circle;
 
 public class Model extends Observable{
 
@@ -37,7 +36,6 @@ public class Model extends Observable{
             absCollision = false;
             absClosest = false;
         } else if(!(ball.getVelo().x() == 0 && ball.getVelo().y() == 0)) {
-            System.out.println(ball.getVelo().y()/25 + "L/sec");
             CollisionDetails cd = timeUntilCollision();
             double tuc = cd.getTuc();
             if (tuc > moveTime) {
