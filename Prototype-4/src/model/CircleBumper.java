@@ -9,7 +9,7 @@ import java.util.List;
 public class CircleBumper extends Gizmo {
 
     private Color colour;
-    private String type = "Triangle";
+    private String type = "Circle";
 
     public CircleBumper(String id, int x, int y) {
         super(id, x, y);

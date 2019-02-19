@@ -1,14 +1,17 @@
 package controller;
 
+import model.Model;
+import view.GUI;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class AbsorberKeyListener implements KeyListener {
 	
-	private model.Model model;
-	private view.GUI gui;
+	private Model model;
+	private GUI gui;
 	
-	public AbsorberKeyListener(model.Model m, view.GUI g) {
+	public AbsorberKeyListener(Model m, GUI g) {
 		model = m;
 		gui = g;
 	}

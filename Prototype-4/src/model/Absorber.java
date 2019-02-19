@@ -50,5 +50,4 @@ public class Absorber {
         ls.add(l4);
         return ls;
     }
-
 }

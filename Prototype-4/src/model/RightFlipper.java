@@ -9,8 +9,6 @@ import java.util.List;
 public class RightFlipper extends Gizmo {
     String name;
     String type = "RightFlipper";
-    int x;
-    int y;
     public RightFlipper(String id, int x, int y) {
         super (id, x, y);
     }

@@ -5,6 +5,7 @@ import physics.Geometry;
 import physics.LineSegment;
 import physics.Vect;
 
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +17,14 @@ public class Model extends Observable {
     private Ball ball;
     private Walls walls;
     private List<Gizmo> gizmoList;
+    private List<Flipper> flippersList;
     List<Ball> ballList = new ArrayList<>();
 
     public Model(){
         ball = new Ball("B1", 10,10,10,10);
         walls = new Walls(0,0,20,20);
         gizmoList = new ArrayList<Gizmo>();
+        flippersList = new ArrayList<>();
     }
 
     public void moveBall(){
@@ -37,7 +40,6 @@ public class Model extends Observable {
                 ball.setVelo(cd.getVelo());
             }
         }
-
     }
 
     public CollisionDetails timeUntilCollision(){
@@ -101,6 +103,11 @@ public class Model extends Observable {
         gizmoList.add(g);
     }
 
+    public void addFlipper(Flipper f) {
+        System.out.println(f.getId());
+        flippersList.add(f);
+    }
+
     public List<Coordinate> getGizmoPos(){
         List<Coordinate> gizmoPos = new ArrayList<Coordinate>();
         for(int i=0; i<gizmoList.size(); i++){
@@ -112,18 +119,22 @@ public class Model extends Observable {
      public List<Gizmo> getGizmos(){
     	return gizmoList;
     }
+
+    public List<Flipper> getFlippers() {
+        return flippersList;
+    }
     
     public Ball getBall(){
         return ball;
     }
 
-    public void saveFile() {
+    public void saveFile(String filename) {
         List<Gizmo> deletedGizmos = new ArrayList<>();
         List<Gizmo> movedGizmos = new ArrayList<>();
-        String[] bumpers = {"Square", "Triangle", "Circle", "LeftFlipper", "RightFlipper"};
+        String[] bumpers = {"Square", "Triangle", "Circle"};
 
         try {
-            Writer wr = new FileWriter("gizmo.txt");
+            Writer wr = new FileWriter(filename);
             for (Gizmo g : gizmoList) {
                 for (int i = 0; i < bumpers.length; i++) {
                     if (g.getType().equals(bumpers[i])) {
@@ -137,6 +148,16 @@ public class Model extends Observable {
                 }
             }
             wr.write("\n");
+            for (Flipper f : flippersList) {
+                if (f.getType().equals("Flipper")) {
+                    wr.write(f.getType() + " ");
+                    wr.write(f.getId() + " ");
+                    wr.write(f.getX()+ " ");
+                    wr.write(f.getY()+ " ");
+                    wr.write("\n");
+                }
+            }
+            wr.write("\n");
             for (Ball b : ballList) {
                 if (b.getType().equals("Ball")) {
                     wr.write(b.getType()+" ");
@@ -146,6 +167,7 @@ public class Model extends Observable {
                     wr.write(Double.toString(b.getVelo().x())+" ");
                     wr.write(Double.toString(b.getVelo().y()));
                     wr.write("\n");
+                    break;
                 }
             }
             wr.write("\n");
@@ -168,15 +190,13 @@ public class Model extends Observable {
             wr.flush();
             wr.close();
 
-
         } catch(IOException e) {
             System.out.println("Failed to write to file gizmo.txt");
-
         }
     }
 
-    public void loadFile() {
-        String[] bumpers = {"Square", "Triangle", "Circle", "LeftFlipper", "RightFlipper"};
+    public void loadFile(String fileName) {
+        String[] bumpers = {"Square", "Triangle", "Circle", "Flipper"};
         List<String[]> bumperCommands = new ArrayList<>();
         List<String[]> rotateCommands = new ArrayList<>();
         List<String[]> keyConnectCommands = new ArrayList<>();
@@ -216,12 +236,12 @@ public class Model extends Observable {
                     moveCommands.add(temp);
                 }
             }
-//            createBumpers(bumperCommands);
+            createBumpers(bumperCommands);
 //            keyConnectGizmos(keyConnectCommands);
 //            connectGizmos(connectCommands);
 //            deleteGizmos(deleteCommands);
 //            rotateGizmos(rotateCommands);
-//            createBall(ballCommands);
+            createBall(ballCommands);
 //            moveGizmos(moveCommands);
         } catch (FileNotFoundException e) {
             System.out.println("Error 404: File not found.");
@@ -238,7 +258,6 @@ public class Model extends Observable {
             id = comd[1];
             posX = Integer.parseInt(comd[2]);
             posY = Integer.parseInt(comd[3]);
-
             switch (shape) {
                 case "Triangle":
                     gizmoList.add(new TriangleBumper(id, posX, posY));
@@ -249,8 +268,8 @@ public class Model extends Observable {
                 case "Circle":
                     gizmoList.add(new CircleBumper(id, posX, posY));
                     break;
-                case "LeftFlipper":
-                    //gizmoList.add(new LeftFlipper(id, posX, posY));
+                case "Flipper":
+                    flippersList.add(new Flipper(id, posX, posY, true, Color.RED));
                     break;
                 case "RightFlipper":
                     //gizmoList.add(new RightFlipper(id, posX, posY));

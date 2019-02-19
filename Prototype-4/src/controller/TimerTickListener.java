@@ -1,13 +1,15 @@
 package controller;
 
+import model.Model;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TimerTickListener implements ActionListener {
 
-	private model.Model model;
+	private Model model;
 	
-	public TimerTickListener(model.Model m) {
+	public TimerTickListener(Model m) {
 		model = m;
 	}
 	
