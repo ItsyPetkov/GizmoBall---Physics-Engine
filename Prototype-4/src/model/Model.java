@@ -114,15 +114,15 @@ public class Model extends Observable {
         }
         return gizmoPos;
     }
-    
-     public List<Gizmo> getGizmos(){
-    	return gizmoList;
+
+    public List<Gizmo> getGizmos(){
+        return gizmoList;
     }
 
     public List<Flipper> getFlippers() {
         return flippersList;
     }
-    
+
     public Ball getBall(){
         return ball;
     }
@@ -238,7 +238,7 @@ public class Model extends Observable {
             createBumpers(bumperCommands);
 //            keyConnectGizmos(keyConnectCommands);
 //            connectGizmos(connectCommands);
-//            deleteGizmos(deleteCommands);
+            deleteGizmos(deleteCommands);
 //            rotateGizmos(rotateCommands);
             createBall(ballCommands);
 //            moveGizmos(moveCommands);
@@ -331,13 +331,19 @@ public class Model extends Observable {
 
     public void deleteGizmos(List<String[]> commands) {
         String id;
+        List<Gizmo> toRemove = new ArrayList<>();
         for (int i = 0; i < commands.size(); i++) {
             id = commands.get(i)[1];
             if (commands.get(i)[0].equals("Delete")) {
                 for (Gizmo g : gizmoList) {
                     if (g.getId().equals(id)) {
-                        g.delete();
+                        if (gizmoList.contains(g)) {
+                            toRemove.add(g);
+                        }
                     }
+                }
+                for (int j = 0; j < toRemove.size(); j++) {
+                    gizmoList.remove(toRemove.get(j));
                 }
             }
         }
