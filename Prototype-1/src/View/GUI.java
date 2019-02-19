@@ -2,16 +2,25 @@ package View;
 
 import javax.swing.*;
 
-import Controller.AddFlipperListener;
-import Model.Flipper;
 
+import Controller.AddLeftFlipperListener;
+import Controller.AddRightFlipperListener;
+
+import Model.LeftFlipper;
+import Model.RightFlipper;
 import java.awt.*;
 
 public class GUI {
     private static GUI gui;
     private JFrame frame;
-    private AddFlipperListener controller;
-    private Flipper flipper;
+
+    private AddLeftFlipperListener leftController;
+    private AddRightFlipperListener rightController;
+
+
+    private LeftFlipper leftFlipper;
+    private RightFlipper rightFlipper;
+
 
 
     public static void main(String[] args) {
@@ -20,10 +29,14 @@ public class GUI {
 
     }
 
-    //Create a Flipper and pass to controller
+    //Create a both flippers
     public GUI() {
-        flipper = new Flipper(2,3,false,new Color(0,0,0));
-        controller = new AddFlipperListener(gui, flipper);
+
+        leftFlipper = new LeftFlipper(12,3,new Color(0,0,0));
+        rightFlipper = new RightFlipper(7,3,new Color(0,0,0));
+
+        leftController = new AddLeftFlipperListener(gui,leftFlipper);
+        rightController = new AddRightFlipperListener(gui,rightFlipper);
 
         setUp();
     }
@@ -35,11 +48,13 @@ public class GUI {
         //Need to fix height
         frame.setBounds(150, 100, 407, 430);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.addKeyListener(controller);
+
+        frame.addKeyListener(leftController);
+        frame.addKeyListener(rightController);
 
 
-        //Set Up Board
-        JPanel panel = new Board(flipper);
+        //Set Up Board, give it flippers
+        JPanel panel = new Board(leftFlipper, rightFlipper);
         frame.getContentPane().add(panel);
     }
 }
