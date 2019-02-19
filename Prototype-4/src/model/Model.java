@@ -241,7 +241,7 @@ public class Model extends Observable {
             deleteGizmos(deleteCommands);
 //            rotateGizmos(rotateCommands);
             createBall(ballCommands);
-//            moveGizmos(moveCommands);
+            moveGizmos(moveCommands);
         } catch (FileNotFoundException e) {
             System.out.println("Error 404: File not found.");
         }
@@ -371,12 +371,12 @@ public class Model extends Observable {
 
     public void moveGizmos(List<String[]> commands) {
         String id;
-        double x = 0, y = 0;
+        int x = 0, y = 0;
         for (int i = 0; i < commands.size(); i++) {
             if (commands.get(i)[0].equals("Move")) {
                 id = commands.get(i)[1];
-                x = Double.parseDouble(commands.get(i)[2]);
-                y = Double.parseDouble(commands.get(i)[3]);
+                x = Integer.parseInt(commands.get(i)[2]);
+                y = Integer.parseInt(commands.get(i)[3]);
                 for (Gizmo g : gizmoList) {
                     if (g.getId().equals(id)) {
                         g.move(x, y);

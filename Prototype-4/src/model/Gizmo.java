@@ -39,8 +39,8 @@ public abstract class Gizmo {
         System.out.println("Gizmo "+id+" deleted.");
     }
 
-    public void move(double x, double y) {
-        System.out.println("Gizmo "+id+" moved to ("+x+""+y+")");
+    public void move(int x, int y) {
+        pos = new Coordinate(x, y);
     }
 
 }
