@@ -104,7 +104,6 @@ public class Model extends Observable {
     }
 
     public void addFlipper(Flipper f) {
-        System.out.println(f.getId());
         flippersList.add(f);
     }
 
