@@ -24,7 +24,7 @@ public class Main {
 		model.addFlipper(RF2);
 
 
-		model.loadFile("sample.txt");
+		model.loadFile("Prototype-4/sample.txt");
 		model.saveFile("savedGizmo.txt");
 		GUI gui = new GUI(model);
 	}

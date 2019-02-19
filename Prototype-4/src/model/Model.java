@@ -204,7 +204,7 @@ public class Model extends Observable {
         List<String[]> moveCommands = new ArrayList<>();
         List<String[]> deleteCommands = new ArrayList<>();
         try {
-            Scanner reader = new Scanner(new File("sample.txt"));
+            Scanner reader = new Scanner(new File("Prototype-4/sample.txt"));
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
                 String temp[] = line.split(" ");
