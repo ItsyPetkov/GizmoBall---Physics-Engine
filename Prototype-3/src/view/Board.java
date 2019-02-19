@@ -54,7 +54,7 @@ public class Board extends JPanel implements Observer {
 			g.setColor(model.getBall().getColour());
 			Coordinate ballPos = model.getBall().getPos();
 			double bRad = model.getBall().getRadius();
-			g.fillOval(((int) ballPos.getX()*LtoPx), ((int) ballPos.getY()*LtoPx), ((int) (bRad*2)*LtoPx), ((int) (bRad*2)*LtoPx));
+			g.fillOval((int) ((ballPos.getX()-model.getBall().getRadius())*LtoPx), (int) ((ballPos.getY()-model.getBall().getRadius())*LtoPx), (int) ((bRad*2)*LtoPx), (int) ((bRad*2)*LtoPx));
 
 			//drawing gizmos
 			List<Gizmo> gizmoList = model.getGizmos();
@@ -75,12 +75,11 @@ public class Board extends JPanel implements Observer {
 			}
 
 			//drawing the walls
-//			Graphics2D g2 = (Graphics2D) g;
-//			g2.setColor(Color.BLACK);
-//			g2.setStroke(new BasicStroke(3));
-//			g2.drawLine(0, 0, 500, 100);
-//			g2.drawLine(0, 100, 400, 200);
-			
+			g.setColor(Color.BLACK);
+			g.drawLine((int) (model.getWallTL().x()*LtoPx),(int) (model.getWallTL().y()*LtoPx),(int) (model.getWallBR().x()*LtoPx),(int) (model.getWallTL().y()*LtoPx));
+			g.drawLine((int) (model.getWallTL().x()*LtoPx),(int) (model.getWallTL().y()*LtoPx),(int) (model.getWallTL().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx));
+			g.drawLine((int) (model.getWallBR().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx),(int) (model.getWallBR().x()*LtoPx),(int) (model.getWallTL().y()*LtoPx));
+			g.drawLine((int) (model.getWallBR().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx),(int) (model.getWallTL().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx));
 		}
 	}
 	

@@ -35,7 +35,7 @@ public class GUI extends JFrame {
 		this.setVisible(true);
 //		this.addKeyListener(new AbsorberKeyListener(model, this));
 //		this.setFocusable(true);
-		timer = new Timer(100, new TimerTickListener(model));
+		timer = new Timer(50, new TimerTickListener(model));
 		
 		JLabel lblWelcomeToGizmoball = new JLabel("Welcome to Gizmoball Prototype 3");
 		lblWelcomeToGizmoball.setFont(new Font("Tahoma", Font.ITALIC, 25));

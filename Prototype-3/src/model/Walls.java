@@ -1,6 +1,8 @@
 package model;
 
 import physics.LineSegment;
+import physics.Vect;
+
 import java.util.ArrayList;
 
 public class Walls {
@@ -28,6 +30,14 @@ public class Walls {
         ls.add(l3);
         ls.add(l4);
         return ls;
+    }
+
+    public Vect getTL(){
+        return new Vect(xpos1, ypos1);
+    }
+
+    public Vect getBR(){
+        return new Vect(xpos2, ypos2);
     }
 
 }

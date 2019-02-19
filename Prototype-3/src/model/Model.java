@@ -14,11 +14,13 @@ public class Model extends Observable {
     private Ball ball;
     private Walls walls;
     private List<Gizmo> gizmoList;
+    private boolean collision;
 
     public Model(){
-        ball = new Ball(10,10,10,10);
+        ball = new Ball(10,10,20,-10);
         walls = new Walls(0,0,20,20);
         gizmoList = new ArrayList<Gizmo>();
+        collision = false;
     }
 
     public void moveBall(){
@@ -29,12 +31,16 @@ public class Model extends Observable {
             double tuc = cd.getTuc();
             if (tuc > moveTime) {
                 ball = moveBallForTime(ball, moveTime);
+                collision = false;
             } else {
                 ball = moveBallForTime(ball, tuc);
                 ball.setVelo(cd.getVelo());
+                collision = true;
             }
         }
 
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public CollisionDetails timeUntilCollision(){
@@ -106,12 +112,24 @@ public class Model extends Observable {
         return gizmoPos;
     }
     
-     public List<Gizmo> getGizmos(){
+    public List<Gizmo> getGizmos(){
     	return gizmoList;
     }
     
     public Ball getBall(){
         return ball;
+    }
+
+    public Vect getWallTL(){
+        return walls.getTL();
+    }
+
+    public Vect getWallBR(){
+        return walls.getBR();
+    }
+
+    public boolean getCollision(){
+        return collision;
     }
 
 }

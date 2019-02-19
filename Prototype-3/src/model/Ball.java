@@ -14,7 +14,7 @@ public class Ball {
     public Ball(double x, double y, double xv, double yv){
         pos = new Coordinate(x, y);
         velocity = new Vect(xv, yv);
-        radius = 0.5;
+        radius = 0.4;
         colour = Color.BLUE;
     }
 
