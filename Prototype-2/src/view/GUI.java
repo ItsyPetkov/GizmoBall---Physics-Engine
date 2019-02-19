@@ -1,12 +1,11 @@
 package view;
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
@@ -18,6 +17,7 @@ import model.Model;
 public class GUI extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField jField;
 	private Model model;
 	private Board board;
 	private Timer timer;
@@ -33,7 +33,7 @@ public class GUI extends JFrame {
 		this.setVisible(true);
 		this.addKeyListener(new AbsorberKeyListener(model, this));
 		this.setFocusable(true);
-		timer = new Timer(50, new TimerTickListener(model));
+		timer = new Timer(50, new TimerTickListener(model, this));
 		
 		JLabel lblWelcomeToGizmoball = new JLabel("Welcome to Gizmoball Prototype 2");
 		lblWelcomeToGizmoball.setFont(new Font("Tahoma", Font.ITALIC, 25));
@@ -43,9 +43,21 @@ public class GUI extends JFrame {
 		board = new Board(model);
 		contentPane.add(board, BorderLayout.CENTER);
 		
+		jField = new JTextField();
+		jField.setText("0.0 L/sec");
+		contentPane.add(jField, BorderLayout.SOUTH);
+		
+	}
+	
+	public String result(double d){
+		return d + " L/sec";
 	}
 	
 	public Timer getTimer() {
 		return timer;
+	}
+	
+	public JTextField getTextField() {
+		return jField;
 	}
 }
