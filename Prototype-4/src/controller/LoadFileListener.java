@@ -17,6 +17,8 @@ public class LoadFileListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
+        System.out.println("Loading file..");
         model.loadFile("sample.txt");
+        gui.repaint();
     }
 }

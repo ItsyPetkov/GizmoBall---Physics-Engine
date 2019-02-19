@@ -17,6 +17,7 @@ public class SaveFileListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
+        System.out.println("Saving file..");
         model.saveFile("savedGizmos.txt");
     }
 }
