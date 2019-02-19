@@ -1,9 +1,6 @@
 package view;
 
-import controller.AddFlipperListener;
-import controller.PauseButtonListener;
-import controller.StartButtonListener;
-import controller.TimerTickListener;
+import controller.*;
 import model.Flipper;
 import model.Model;
 
@@ -51,7 +48,15 @@ public class GUI extends JFrame {
 		
 		buttonPanel.add(button);
 		buttonPanel.add(button2);
-		flipper = new Flipper("LF5",2,3,false,new Color(0,0,0));
+
+		JButton saveButton = new JButton("Save File");
+		JButton loadButton = new JButton("Load File");
+
+		saveButton.addActionListener(new SaveFileListener(model, this));
+		loadButton.addActionListener(new LoadFileListener(model, this));
+
+		buttonPanel.add(saveButton);
+		buttonPanel.add(loadButton);
 
 		contentPane.add(buttonPanel, BorderLayout.SOUTH);
 		
