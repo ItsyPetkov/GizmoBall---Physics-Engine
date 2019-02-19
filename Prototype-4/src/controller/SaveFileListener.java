@@ -19,5 +19,6 @@ public class SaveFileListener implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         System.out.println("Saving file..");
         model.saveFile("savedGizmos.txt");
+        System.out.println("File saved to savedGizmos.txt");
     }
 }
