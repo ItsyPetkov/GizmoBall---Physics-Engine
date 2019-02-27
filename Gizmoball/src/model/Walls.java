@@ -22,10 +22,10 @@ public class Walls {
 
     public List<LineSegment> getLineSegments(){
         List<LineSegment> ls = new ArrayList<>();
-        ls.add(new LineSegment(x1, y1, x2, y1));
-        ls.add(new LineSegment(x1, y1, x1, y2));
-        ls.add(new LineSegment(x2, y2, x2, y1));
-        ls.add(new LineSegment(x2, y2, x1, y2));
+        ls.add(new LineSegment(x1, y1, x2, y1)); //top
+        ls.add(new LineSegment(x1, y1, x1, y2)); //left
+        ls.add(new LineSegment(x2, y2, x2, y1)); //right
+        ls.add(new LineSegment(x2, y2, x1, y2)); //bottom
         return ls;
     }
 
