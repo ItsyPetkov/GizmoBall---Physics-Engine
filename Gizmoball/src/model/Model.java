@@ -14,10 +14,12 @@ public class Model extends Observable {
 
     private Walls walls;
     private Ball ball;
+    private List<Gizmo> gizmoList;
 
     public Model(){
         walls = new Walls(0,0,20,20);
         ball = new Ball(10,10,20, -10);
+        gizmoList = new ArrayList<Gizmo>();
     }
 
     public void moveBall(){
@@ -71,4 +73,31 @@ public class Model extends Observable {
         return ball;
     }
 
+    public Ball getBall(){
+        return ball;
+    }
+
+    public Vect getWallTL(){
+        return walls.getTL();
+    }
+
+    public Vect getWallBR(){
+        return walls.getBR();
+    }
+
+    public List<Gizmo> getGizmos(){
+        return gizmoList;
+    }
+
+    public void addGizmo(Gizmo g){
+        gizmoList.add(g);
+    }
+
+    public List<Vect> getGizmoPos(){
+        List<Vect> gizmoPos = new ArrayList<Vect>();
+        for(int i=0; i<gizmoList.size(); i++){
+            gizmoPos.add(gizmoList.get(i).getPos());
+        }
+        return gizmoPos;
+    }
 }
