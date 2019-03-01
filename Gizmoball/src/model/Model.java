@@ -58,6 +58,33 @@ public class Model extends Observable {
             }
         }
 
+        //search gizmoList getSides and getCorners
+        List<LineSegment> gizmoSides = new ArrayList<LineSegment>();
+        List<physics.Circle> gizmoCorners = new ArrayList<Circle>();
+        for(int i=0; i<gizmoList.size(); i++){
+            gizmoSides.addAll(gizmoList.get(i).getSides());
+            gizmoCorners.addAll(gizmoList.get(i).getCorners());
+        }
+
+        //collisions with gizmoSides
+        for(int i=0; i<gizmoSides.size(); i++){
+            double currentTime = Geometry.timeUntilWallCollision(gizmoSides.get(i), ballCircle, ballVelo);
+            if(shortestTime > currentTime){
+                shortestTime = currentTime;
+                newVelo = Geometry.reflectWall(gizmoSides.get(i), ballVelo, 1.0);
+            }
+        }
+
+        //collisions with gizmoCorners
+        for(int i=0; i<gizmoCorners.size(); i++){
+            double currentTime = Geometry.timeUntilCircleCollision(gizmoCorners.get(i), ballCircle, ballVelo);
+            if(shortestTime > currentTime){
+                shortestTime = currentTime;
+                newVelo = Geometry.reflectCircle(gizmoCorners.get(i).getCenter(), ball.getCircle().getCenter(), ball.getVelo(), 1.0);
+            }
+        }
+
+        //return time until closest collision, with velocity after bouncing off
         return new CollisionDetails(shortestTime, newVelo);
     }
 
