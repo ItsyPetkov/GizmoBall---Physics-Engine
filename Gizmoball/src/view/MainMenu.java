@@ -12,20 +12,16 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import controller.ExitFrameButtonListener;
-import controller.MainMenuButtonListener;
+import controler.ExitFrameButtonListener;
+import controler.MainMenuButtonListener;
 
 public class MainMenu {
 	
-	private JPanel contentPane;
-	JFrame exitFrame;
-	JFrame mainMenuFrame;
-	
-	public MainMenu() {
-		
-	}
+	private static JPanel contentPane;
+	static JFrame exitFrame;
+	static JFrame mainMenuFrame;
 
-	public void mainMenuFrame() {
+	public static void mainMenuFrame() {
 		mainMenuFrame = new JFrame("Gizmoball - Main Menu");
 		mainMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainMenuFrame.setBounds(100,100,640,480);
@@ -64,7 +60,7 @@ public class MainMenu {
 		mainMenuFrame.setLocationRelativeTo(null);
 	}
 
-	public void exitGameFrame() {
+	public static void exitGameFrame() {
 		exitFrame = new JFrame("Exit?");
 		Container content = exitFrame.getContentPane();
 		JLabel label = new JLabel("Are you sure you want to exit?");
@@ -86,6 +82,13 @@ public class MainMenu {
 		exitFrame.setVisible(true);
 	}
 	
+	public static JFrame getExitFrame() {
+		return exitFrame;
+	}
+	
+	public static JFrame getMainMenuFrame() {
+		return mainMenuFrame;
+	}
 	
 }
 	
