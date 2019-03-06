@@ -50,16 +50,20 @@ public class RunMode extends JFrame {
 		
 		JPanel buttonPanel = new JPanel(new GridLayout(1,1));
 		JButton btnTick = new JButton("Tick");
-		btnTick.addActionListener(new RunModeButtonListener());
+		btnTick.addActionListener(new RunModeButtonListener(model, this));
 		JButton btnRun = new JButton("Run");
-		btnRun.addActionListener(new RunModeButtonListener());
+		btnRun.addActionListener(new RunModeButtonListener(model, this));
 		JButton btnPause = new JButton("Pause");
-		btnPause.addActionListener(new RunModeButtonListener());
+		btnPause.addActionListener(new RunModeButtonListener(model, this));
 		
 		buttonPanel.add(btnTick);
 		buttonPanel.add(btnRun);
 		buttonPanel.add(btnPause);
 		contentPane.add(buttonPanel, BorderLayout.SOUTH);
+	}
+
+	public Timer getTimer(){
+		return timer;
 	}
 	
 	public static String state() {

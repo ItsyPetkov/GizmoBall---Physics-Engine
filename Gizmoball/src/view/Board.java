@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import model.Ball;
 import model.Gizmo;
 import model.Model;
+import physics.Vect;
 
 public class Board extends JPanel implements Observer {
 
@@ -48,12 +49,41 @@ public class Board extends JPanel implements Observer {
 			g.setColor(Color.BLACK);
 			for(int i = 0; i < 20; i++) {
 				for(int j = 0; j < 20; j++) {
-					g.drawRect(i*25, j*25, 25, 25); 
+					g.drawRect(i*LtoPx, j*LtoPx, LtoPx, LtoPx);
 				}
 			}
 		}else {
 			//drawing the objects and setting up the scene for the game
-			
+			//drawing the ball
+			g.setColor(model.getBall().getColour());
+			Vect ballPos = model.getBall().getPos();
+			double bRad = model.getBall().getRadius();
+			g.fillOval((int) ((ballPos.x()-model.getBall().getRadius())*LtoPx), (int) ((ballPos.y()-model.getBall().getRadius())*LtoPx), (int) ((bRad*2)*LtoPx), (int) ((bRad*2)*LtoPx));
+
+			//drawing gizmos
+			List<Gizmo> gizmoList = model.getGizmos();
+			for(int i=0; i<gizmoList.size(); i++){
+				g.setColor(gizmoList.get(i).getColour());
+				Vect gPos = gizmoList.get(i).getPos();
+
+				if(gizmoList.get(i).getSides().size() == 4){
+					g.fillRect((int) (gPos.x()*LtoPx), (int) (gPos.y()*LtoPx), LtoPx, LtoPx);
+				} else if(gizmoList.get(i).getSides().size() == 3){
+					int[] xP = {(int) (gPos.x()*LtoPx), (int) ((gPos.x()+1)*LtoPx), (int) (gPos.x()*LtoPx)};
+					int[] yP = {(int) (gPos.y()*LtoPx), (int) (gPos.y()*LtoPx), (int) ((gPos.y()+1)*LtoPx)};
+					g.fillPolygon(xP, yP, 3);
+				} else {
+					g.fillOval((int) (gPos.x()*LtoPx), (int) (gPos.y()*LtoPx), LtoPx, LtoPx);
+				}
+
+			}
+
+			//drawing the walls
+			g.setColor(Color.BLACK);
+			g.drawLine((int) (model.getWallTL().x()*LtoPx),(int) (model.getWallTL().y()*LtoPx),(int) (model.getWallBR().x()*LtoPx),(int) (model.getWallTL().y()*LtoPx));
+			g.drawLine((int) (model.getWallTL().x()*LtoPx),(int) (model.getWallTL().y()*LtoPx),(int) (model.getWallTL().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx));
+			g.drawLine((int) (model.getWallBR().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx),(int) (model.getWallBR().x()*LtoPx),(int) (model.getWallTL().y()*LtoPx));
+			g.drawLine((int) (model.getWallBR().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx),(int) (model.getWallTL().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx));
 		}
 	}
 
