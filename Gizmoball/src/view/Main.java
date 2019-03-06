@@ -1,4 +1,5 @@
 package view;
+import model.Ball;
 import model.Model;
 
 public class Main {

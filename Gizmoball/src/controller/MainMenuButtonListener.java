@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import model.Ball;
 import model.Model;
 import view.BuildMode;
 import view.MainMenu;
@@ -27,6 +28,8 @@ public class MainMenuButtonListener implements ActionListener {
 			bm = new BuildMode(model);
 			//need to make the frame disappear here
 		}else if(arg0.getActionCommand().equals("Load Game")) {
+			model.addBall(new Ball(10,10,20,10));
+			model.addBall(new Ball(8,9,-20,5));
 			rm = new RunMode(model);
 			//need to make the frame disappear here
 		}else if(arg0.getActionCommand().equals("Exit Game")) {

@@ -18,7 +18,6 @@ public class Board extends JPanel implements Observer {
 	private static final long serialVersionUID = 1L;
 	private boolean running;
 	private Model model;
-	private Ball ball;
 	private int LtoPx = 25;
 	
 	public Board(Model m) {
@@ -54,11 +53,15 @@ public class Board extends JPanel implements Observer {
 			}
 		}else {
 			//drawing the objects and setting up the scene for the game
-			//drawing the ball
-			g.setColor(model.getBall().getColour());
-			Vect ballPos = model.getBall().getPos();
-			double bRad = model.getBall().getRadius();
-			g.fillOval((int) ((ballPos.x()-model.getBall().getRadius())*LtoPx), (int) ((ballPos.y()-model.getBall().getRadius())*LtoPx), (int) ((bRad*2)*LtoPx), (int) ((bRad*2)*LtoPx));
+
+			//drawing the balls
+			List<Ball> ballList = model.getBalls();
+			for(int i=0; i<ballList.size(); i++){
+				g.setColor(ballList.get(i).getColour());
+				Vect ballPos = ballList.get(i).getPos();
+				double bRad = ballList.get(i).getRadius();
+				g.fillOval((int) ((ballPos.x()-ballList.get(i).getRadius())*LtoPx), (int) ((ballPos.y()-ballList.get(i).getRadius())*LtoPx), (int) ((bRad*2)*LtoPx), (int) ((bRad*2)*LtoPx));
+			}
 
 			//drawing gizmos
 			List<Gizmo> gizmoList = model.getGizmos();

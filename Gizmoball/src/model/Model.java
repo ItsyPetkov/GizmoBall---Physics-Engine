@@ -13,28 +13,30 @@ import java.util.Observable;
 public class Model extends Observable {
 
     private Walls walls;
-    private Ball ball;
     private List<Gizmo> gizmoList;
+    private List<Ball> ballList;
 
     public Model(){
         walls = new Walls(0,0,20,20);
-        ball = new Ball(10,10,20, -10);
         gizmoList = new ArrayList<Gizmo>();
+        ballList = new ArrayList<Ball>();
     }
 
     public void moveBall(){
         double moveTime = 0.05;
 
-        if(!(ball.getVelo().x() == 0 && ball.getVelo().y() == 0)){
-            CollisionDetails cd = timeUntilCollision();
-            double tuc = cd.getTuc();
-            if(tuc > moveTime){
-                //no collision
-                ball = moveBallForTime(ball, moveTime);
-            } else {
-                //collision
-                ball = moveBallForTime(ball, tuc);
-                ball.setVelo(cd.getVelo().x(), cd.getVelo().y());
+        for(int i=0; i<ballList.size(); i++) {
+            if (!(ballList.get(i).getVelo().x() == 0 && ballList.get(i).getVelo().y() == 0)) {
+                CollisionDetails cd = timeUntilCollision(ballList.get(i));
+                double tuc = cd.getTuc();
+                if (tuc > moveTime) {
+                    //no collision
+                    moveBallForTime(ballList.get(i), moveTime);
+                } else {
+                    //collision
+                    moveBallForTime(ballList.get(i), tuc);
+                    ballList.get(i).setVelo(cd.getVelo().x(), cd.getVelo().y());
+                }
             }
         }
 
@@ -42,7 +44,7 @@ public class Model extends Observable {
         this.notifyObservers();
     }
 
-    public CollisionDetails timeUntilCollision(){
+    public CollisionDetails timeUntilCollision(Ball ball){
         Circle ballCircle = ball.getCircle();
         Vect ballVelo = ball.getVelo();
 
@@ -100,10 +102,6 @@ public class Model extends Observable {
         return ball;
     }
 
-    public Ball getBall(){
-        return ball;
-    }
-
     public Vect getWallTL(){
         return walls.getTL();
     }
@@ -116,8 +114,16 @@ public class Model extends Observable {
         return gizmoList;
     }
 
+    public List<Ball> getBalls(){
+        return ballList;
+    }
+
     public void addGizmo(Gizmo g){
         gizmoList.add(g);
+    }
+
+    public void addBall(Ball b){
+        ballList.add(b);
     }
 
     public List<Vect> getGizmoPos(){
@@ -126,5 +132,13 @@ public class Model extends Observable {
             gizmoPos.add(gizmoList.get(i).getPos());
         }
         return gizmoPos;
+    }
+
+    public List<Vect> getBallPos(){
+        List<Vect> ballPos = new ArrayList<Vect>();
+        for(int i=0; i<ballList.size(); i++){
+            ballPos.add(ballList.get(i).getPos());
+        }
+        return ballPos;
     }
 }
