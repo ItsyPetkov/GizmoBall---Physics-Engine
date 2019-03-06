@@ -84,12 +84,13 @@ public class BuildMode extends JFrame {
 		setJMenuBar(jmb);
 		setTitle("Gizmoball - Build Mode");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setBounds(100, 100, 530, 660);
+		setBounds(100, 100, 518, 679);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		this.setVisible(true);
+		this.setResizable(false);
 		
 		this.addKeyListener(new EscapeKeyListener(state()));
 		this.setFocusable(true);
