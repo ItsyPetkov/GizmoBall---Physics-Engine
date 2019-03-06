@@ -11,9 +11,9 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
-import controler.EscapeKeyListener;
-import controler.RunModeButtonListener;
-import controler.TimerTickListener;
+import controller.EscapeKeyListener;
+import controller.RunModeButtonListener;
+import controller.TimerTickListener;
 import model.Model;
 
 public class RunMode extends JFrame {

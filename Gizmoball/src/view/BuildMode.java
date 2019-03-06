@@ -13,10 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import controler.BuildModeButtonListener;
-import controler.EscapeKeyListener;
-import controler.FileMenuActionListener;
-import controler.InsertMenuActionListener;
+import controller.BuildModeButtonListener;
+import controller.EscapeKeyListener;
+import controller.FileMenuActionListener;
+import controller.InsertMenuActionListener;
 import model.Model;
 
 public class BuildMode extends JFrame {
