@@ -12,18 +12,17 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import controller.InGameMenuButtonListener;
+import controler.ExitFrameButtonListener;
+import controler.InGameMenuButtonListener;
 
 public class InGameMenuRunMode {
 	
-	private JPanel contentPane;
+	private static JPanel contentPane;
+	private static JFrame inGameMenuFrame;
+	private static JFrame exitFrame;
 	
-	public InGameMenuRunMode() {
-		inGameMenuFrame();
-	}
-	
-	private void inGameMenuFrame() {
-		JFrame inGameMenuFrame = new JFrame("Gizmoball - In - Game Menu");
+	public static void inGameMenuFrame() {
+		inGameMenuFrame = new JFrame("Gizmoball - In - Game Menu");
 		inGameMenuFrame.setBounds(100,100,640,560);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -65,23 +64,33 @@ public class InGameMenuRunMode {
 		inGameMenuFrame.setLocationRelativeTo(null);
 	}
 	
-	private void inGameMenuExitGameFrame() {
-		JFrame exitFrame = new JFrame("Exit?");
+	public static void inGameMenuExitGameFrame() {
+		exitFrame = new JFrame("Exit?");
 		Container content = exitFrame.getContentPane();
 		JLabel label = new JLabel("Are you sure you want to exit?");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		JPanel panel = new JPanel(new GridLayout(1,1));
 		panel.add(label);
-		JButton btnLeave = new JButton("To Main Menu");
-		JButton btnStay = new JButton("To Desktop");
+		JButton btnLeave = new JButton("Quit Game");
+		btnLeave.addActionListener(new ExitFrameButtonListener());
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ExitFrameButtonListener());
 		JPanel btnPanel = new JPanel(new GridLayout(1,1));
 		btnPanel.add(btnLeave);
-		btnPanel.add(btnStay);
+		btnPanel.add(btnCancel);
 		content.add(panel, BorderLayout.CENTER);
 		content.add(btnPanel, BorderLayout.SOUTH);
 		exitFrame.setSize(420,120);
 		exitFrame.setLocationRelativeTo(null);
 		exitFrame.setVisible(true);
+	}
+	
+	public static JFrame getInGameMenuFrame() {
+		return inGameMenuFrame;
+	}
+	
+	public static JFrame getInGameMenuExitFrame() {
+		return exitFrame;
 	}
 }
