@@ -8,8 +8,6 @@ import view.InGameMenuRunMode;
 
 public class EscapeKeyListener implements KeyListener {
 	
-	private InGameMenuBuildMode igmbm;
-	private InGameMenuRunMode igmrm;
 	private String gameState;
 	
 	public EscapeKeyListener(String state) {
@@ -21,9 +19,9 @@ public class EscapeKeyListener implements KeyListener {
 		// TODO Auto-generated method stub
 		int key = arg0.getKeyCode();
 		if(key == KeyEvent.VK_ESCAPE && gameState.equals("running")) {
-			igmrm = new InGameMenuRunMode();
+			InGameMenuRunMode.inGameMenuFrame();
 		}else if(key == KeyEvent.VK_ESCAPE && gameState.equals("not running")){
-			igmbm = new InGameMenuBuildMode();
+			InGameMenuBuildMode.inGameMenuFrame();
 		}
 	}
 
