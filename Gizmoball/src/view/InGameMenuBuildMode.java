@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import controler.ExitFrameButtonListener;
-import controler.InGameMenuButtonListener;
+import controller.ExitFrameButtonListener;
+import controller.InGameMenuButtonListener;
 
 public class InGameMenuBuildMode {
 	

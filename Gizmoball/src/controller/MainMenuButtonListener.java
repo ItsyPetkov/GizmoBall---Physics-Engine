@@ -26,8 +26,8 @@ public class MainMenuButtonListener implements ActionListener {
 			bm = new BuildMode(model);
 			MainMenu.getMainMenuFrame().dispose();
 		}else if(arg0.getActionCommand().equals("Load Game")) {
-			model.addBall(new Ball(10,10,20,10));
-			model.addBall(new Ball(8,9,-20,5));
+			model.addBall(new Ball(4,10,10,0));
+			model.addBall(new Ball(14,10,-10,0));
 			rm = new RunMode(model);
 			MainMenu.getMainMenuFrame().dispose();
 		}else if(arg0.getActionCommand().equals("Exit Game")) {

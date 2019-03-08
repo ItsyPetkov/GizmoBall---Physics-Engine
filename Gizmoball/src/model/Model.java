@@ -27,7 +27,7 @@ public class Model extends Observable {
 
         for(int i=0; i<ballList.size(); i++) {
             if (!(ballList.get(i).getVelo().x() == 0 && ballList.get(i).getVelo().y() == 0)) {
-                CollisionDetails cd = timeUntilCollision(ballList.get(i));
+                CollisionDetails cd = timeUntilCollision(ballList.get(i), i);
                 double tuc = cd.getTuc();
                 if (tuc > moveTime) {
                     //no collision
@@ -44,7 +44,7 @@ public class Model extends Observable {
         this.notifyObservers();
     }
 
-    public CollisionDetails timeUntilCollision(Ball ball){
+    public CollisionDetails timeUntilCollision(Ball ball, int ballNo){
         Circle ballCircle = ball.getCircle();
         Vect ballVelo = ball.getVelo();
 
@@ -83,6 +83,17 @@ public class Model extends Observable {
             if(shortestTime > currentTime){
                 shortestTime = currentTime;
                 newVelo = Geometry.reflectCircle(gizmoCorners.get(i).getCenter(), ball.getCircle().getCenter(), ball.getVelo(), 1.0);
+            }
+        }
+
+        //collisions with other balls
+        for(int i=0; i<ballList.size(); i++){
+            if(!(i==ballNo)){
+                double currentTime = Geometry.timeUntilCircleCollision(ballList.get(i).getCircle(), ballCircle, ballVelo);
+                if(shortestTime > currentTime){
+                    shortestTime = currentTime;
+                    newVelo = Geometry.reflectCircle(ballList.get(i).getCircle().getCenter(), ball.getCircle().getCenter(), ball.getVelo(), 1.0);
+                }
             }
         }
 

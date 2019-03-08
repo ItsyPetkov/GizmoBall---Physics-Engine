@@ -28,7 +28,7 @@ public class RunMode extends JFrame {
 		this.model = model;
 		setTitle("Gizmoball - Run Mode");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setBounds(100, 100, 510, 590);
+		setBounds(100, 100, 510, 596);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
