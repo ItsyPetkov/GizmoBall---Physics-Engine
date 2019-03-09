@@ -8,6 +8,7 @@ import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import model.Absorber;
 import model.Ball;
 import model.Gizmo;
 import model.Model;
@@ -65,20 +66,17 @@ public class Board extends JPanel implements Observer {
 
 			//drawing gizmos
 			List<Gizmo> gizmoList = model.getGizmos();
-			for(int i=0; i<gizmoList.size(); i++){
-				g.setColor(gizmoList.get(i).getColour());
-				Vect gPos = gizmoList.get(i).getPos();
-
-				if(gizmoList.get(i).getSides().size() == 4){
-					g.fillRect((int) (gPos.x()*LtoPx), (int) (gPos.y()*LtoPx), LtoPx, LtoPx);
-				} else if(gizmoList.get(i).getSides().size() == 3){
-					int[] xP = {(int) (gPos.x()*LtoPx), (int) ((gPos.x()+1)*LtoPx), (int) (gPos.x()*LtoPx)};
-					int[] yP = {(int) (gPos.y()*LtoPx), (int) (gPos.y()*LtoPx), (int) ((gPos.y()+1)*LtoPx)};
-					g.fillPolygon(xP, yP, 3);
-				} else {
-					g.fillOval((int) (gPos.x()*LtoPx), (int) (gPos.y()*LtoPx), LtoPx, LtoPx);
+			for(int i=0; i<gizmoList.size(); i++) {
+				switch (gizmoList.get(i).type()) {
+					case "absorber":
+						drawAbsorber(g, (Absorber) gizmoList.get(i));
+					case "square":
+						drawSquare(g, gizmoList.get(i));
+					case "triangle":
+						drawTriangle(g, gizmoList.get(i));
+					case "circle":
+						drawCircle(g, gizmoList.get(i));
 				}
-
 			}
 
 			//drawing the walls
@@ -88,6 +86,33 @@ public class Board extends JPanel implements Observer {
 			g.drawLine((int) (model.getWallBR().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx),(int) (model.getWallBR().x()*LtoPx),(int) (model.getWallTL().y()*LtoPx));
 			g.drawLine((int) (model.getWallBR().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx),(int) (model.getWallTL().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx));
 		}
+	}
+
+	private void drawAbsorber(Graphics g, Absorber abs){
+		Vect gPos1 = abs.getPos();
+		Vect gPos2 = abs.getPos2();
+		g.setColor(abs.getColour());
+		g.fillRect((int) (gPos1.x()*LtoPx), (int) (gPos1.y()*LtoPx), (int) ((gPos2.x()-gPos1.x())*LtoPx), (int) ((gPos2.y()-gPos1.y())*LtoPx));
+	}
+
+	private void drawSquare(Graphics g, Gizmo gizmo){
+		Vect gPos = gizmo.getPos();
+		g.setColor(gizmo.getColour());
+		g.fillRect((int) (gPos.x()*LtoPx), (int) (gPos.y()*LtoPx), LtoPx, LtoPx);
+	}
+
+	private void drawCircle(Graphics g, Gizmo gizmo){
+		Vect gPos = gizmo.getPos();
+		g.setColor(gizmo.getColour());
+		g.fillOval((int) (gPos.x()*LtoPx), (int) (gPos.y()*LtoPx), LtoPx, LtoPx);
+	}
+
+	private void drawTriangle(Graphics g, Gizmo gizmo){
+		Vect gPos = gizmo.getPos();
+		g.setColor(gizmo.getColour());
+		int[] xP = {(int) (gPos.x()*LtoPx), (int) ((gPos.x()+1)*LtoPx), (int) (gPos.x()*LtoPx)};
+		int[] yP = {(int) (gPos.y()*LtoPx), (int) (gPos.y()*LtoPx), (int) ((gPos.y()+1)*LtoPx)};
+		g.fillPolygon(xP, yP, 3);
 	}
 
 	@Override

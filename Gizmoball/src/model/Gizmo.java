@@ -19,7 +19,11 @@ public abstract class Gizmo {
         return pos;
     }
 
+    abstract public String type();
+
     abstract public Color getColour();
+
+    abstract public void setColour(Color c);
 
     abstract public List<LineSegment> getSides();
 
