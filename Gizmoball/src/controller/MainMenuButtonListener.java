@@ -27,7 +27,7 @@ public class MainMenuButtonListener implements ActionListener {
 		}else if(arg0.getActionCommand().equals("Load Game")) {
 			model.addBall(new Ball(4,10,10,20));
 			model.addBall(new Ball(14,10,-10,5));
-			model.addGizmo(new Absorber(5, 5, 8, 8));
+			model.addGizmo(new Absorber(0, 18, 20, 20));
 			model.addGizmo(new SquareBumper(10,1));
 			model.addGizmo(new TriangleBumper(3,12));
 			model.addGizmo(new LeftFlipper(3,3));

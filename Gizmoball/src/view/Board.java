@@ -68,17 +68,25 @@ public class Board extends JPanel implements Observer {
 			for(int i=0; i<gizmoList.size(); i++) {
 				switch (gizmoList.get(i).type()) {
 					case "absorber":
+                        System.out.println("drawing abs");
 						drawAbsorber(g, (Absorber) gizmoList.get(i));
+						break;
 					case "square":
-						drawSquare(g, gizmoList.get(i));
+                        System.out.println("drawing square");
+						drawSquare(g, (SquareBumper) gizmoList.get(i));
+						break;
 					case "triangle":
-						drawTriangle(g, gizmoList.get(i));
+						drawTriangle(g, (TriangleBumper) gizmoList.get(i));
+						break;
 					case "circle":
 						drawCircle(g, gizmoList.get(i));
+						break;
 					case "leftflipper":
-						//drawFlipper(g, gizmoList.get(i));
+						drawFlipper(g, gizmoList.get(i));
+						break;
 					case "rightflipper":
-						//drawFlipper(g,gizmoList.get(i));
+						drawFlipper(g, gizmoList.get(i));
+						break;
 				}
 			}
 
@@ -98,9 +106,9 @@ public class Board extends JPanel implements Observer {
 		g.fillRect((int) (gPos1.x()*LtoPx), (int) (gPos1.y()*LtoPx), (int) ((gPos2.x()-gPos1.x())*LtoPx), (int) ((gPos2.y()-gPos1.y())*LtoPx));
 	}
 
-	private void drawSquare(Graphics g, Gizmo gizmo){
-		Vect gPos = gizmo.getPos();
-		g.setColor(gizmo.getColour());
+	private void drawSquare(Graphics g, SquareBumper sq){
+		Vect gPos = sq.getPos();
+		g.setColor(sq.getColour());
 		g.fillRect((int) (gPos.x()*LtoPx), (int) (gPos.y()*LtoPx), LtoPx, LtoPx);
 	}
 
@@ -110,63 +118,57 @@ public class Board extends JPanel implements Observer {
 		g.fillOval((int) (gPos.x()*LtoPx), (int) (gPos.y()*LtoPx), LtoPx, LtoPx);
 	}
 
-	private void drawTriangle(Graphics g, Gizmo gizmo){
-		Vect gPos = gizmo.getPos();
-		g.setColor(gizmo.getColour());
+	private void drawTriangle(Graphics g, TriangleBumper tr){
+		Vect gPos = tr.getPos();
+		g.setColor(tr.getColour());
 		int[] xP = {(int) (gPos.x()*LtoPx), (int) ((gPos.x()+1)*LtoPx), (int) (gPos.x()*LtoPx)};
 		int[] yP = {(int) (gPos.y()*LtoPx), (int) (gPos.y()*LtoPx), (int) ((gPos.y()+1)*LtoPx)};
 		g.fillPolygon(xP, yP, 3);
 	}
 
 	private void drawFlipper(Graphics g, Gizmo gizmo){    //drawing the flippers
+	    List<LineSegment> ls = gizmo.getSides();
+	    List<Circle> cs = gizmo.getCorners();
+	    Circle topCircle = cs.get(0);
+	    Circle bottomCircle = cs.get(1);
 
+	    LineSegment topSideLine = ls.get(0);
+	    LineSegment bottomSideLine = ls.get(1);
+	    LineSegment rightSideLine = ls.get(2);
+	    LineSegment leftSideLine = ls.get(3);
 
-			List<LineSegment> ls = gizmo.getSides();
-			List<Circle> cs = gizmo.getCorners();
-			System.out.println("there are apparently "+ cs.size() + " circles");
-			System.out.println("there are apparently " + ls.size() + " sides");
-			Circle topCircle = cs.get(0);
-			Circle bottomCircle = cs.get(1);
+	    g.setColor(gizmo.getColour());
+	    g.fillOval((int) ((topCircle.getCenter().x() - 0.25) * LtoPx), (int) ((topCircle.getCenter().y() - 0.25) * LtoPx), 10, 10);
+	    g.fillOval((int) ((bottomCircle.getCenter().x() - 0.25) * LtoPx), (int) ((bottomCircle.getCenter().y() - 0.25) * LtoPx), 10, 10);
 
-			LineSegment topSideLine = ls.get(0);
-			LineSegment bottomSideLine = ls.get(1);
-			LineSegment rightSideLine = ls.get(2);
-			LineSegment leftSideLine = ls.get(3);
+	    //Make middle of flipper with a polynomial, rectangle doesn't work
+        int[] X = new int[4];
+        int[] Y = new int[4];
+        int[] X1 = new int[4];
+        int[] Y1 = new int[4];
 
-			g.setColor(gizmo.getColour());
-			g.fillOval((int) ((topCircle.getCenter().x() - 0.25) * 20), (int) ((topCircle.getCenter().y() - 0.25) * 20), 10, 10);
-			g.fillOval((int) ((bottomCircle.getCenter().x() - 0.25) * 20), (int) ((bottomCircle.getCenter().y() - 0.25) * 20), 10, 10);
+        X[0] = (int) (topSideLine.p1().x() * LtoPx);
+        X[1] = (int) (topSideLine.p2().x() * LtoPx);
+        X[2] = (int) (bottomSideLine.p1().x() * LtoPx);
+        X[3] = (int) (bottomSideLine.p2().x() * LtoPx);
 
-			//Make middle of flipper with a polynomial, rectangle doesn't work
-			int[] X = new int[4];
-			int[] Y = new int[4];
-			int[] X1 = new int[4];
-			int[] Y1 = new int[4];
+        Y[0] = (int) (topSideLine.p1().y() * LtoPx);
+        Y[1] = (int) (topSideLine.p2().y() * LtoPx);
+        Y[2] = (int) (bottomSideLine.p1().y() * LtoPx);
+        Y[3] = (int) (bottomSideLine.p2().y() * LtoPx);
 
-			X[0] = (int) (topSideLine.p1().x() * 20);
-			X[1] = (int) (topSideLine.p2().x() * 20);
-			X[2] = (int) (bottomSideLine.p1().x() * 20);
-			X[3] = (int) (bottomSideLine.p2().x() * 20);
+        X1[0] = (int) (rightSideLine.p1().x() * LtoPx);
+        X1[1] = (int) (rightSideLine.p2().x() * LtoPx);
+        X1[2] = (int) (leftSideLine.p1().x() * LtoPx);
+        X1[3] = (int) (leftSideLine.p2().x() * LtoPx);
 
-			Y[0] = (int) (topSideLine.p1().y() * 20);
-			Y[1] = (int) (topSideLine.p2().y() * 20);
-			Y[2] = (int) (bottomSideLine.p1().y() * 20);
-			Y[3] = (int) (bottomSideLine.p2().y() * 20);
+        Y1[0] = (int) (rightSideLine.p1().y() * LtoPx);
+        Y1[1] = (int) (rightSideLine.p2().y() * LtoPx);
+        Y1[2] = (int) (leftSideLine.p1().y() * LtoPx);
+        Y1[3] = (int) (leftSideLine.p2().y() * LtoPx);
 
-			X1[0] = (int) (rightSideLine.p1().x() * 20);
-			X1[1] = (int) (rightSideLine.p2().x() * 20);
-			X1[2] = (int) (leftSideLine.p1().x() * 20);
-			X1[3] = (int) (leftSideLine.p2().x() * 20);
-
-			Y1[0] = (int) (rightSideLine.p1().y() * 20);
-			Y1[1] = (int) (rightSideLine.p2().y() * 20);
-			Y1[2] = (int) (leftSideLine.p1().y() * 20);
-			Y1[3] = (int) (leftSideLine.p2().y() * 20);
-
-
-			g.fillPolygon(X, Y, 4);
-			g.fillPolygon(X1, Y1, 4);
-
+        g.fillPolygon(X, Y, 4);
+        g.fillPolygon(X1, Y1, 4);
 	}
 
 	@Override
