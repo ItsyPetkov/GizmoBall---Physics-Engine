@@ -25,6 +25,7 @@ public class Model extends Observable {
         ballList = new ArrayList<Ball>();
         leftFlipperList = new ArrayList<>();
         rightFlipperList = new ArrayList<>();
+        absList = new ArrayList<>();
 
     }
 
