@@ -71,11 +71,12 @@ public class SaveFile {
                 wr.write("\n");
             }
             wr.write("\n");
+            //Saving Absorbers
             for (Absorber abs : absList) {
                 wr.write(abs.getType()+" ");
                 wr.write(abs.getId()+" ");
-                wr.write(abs.getPos().x()+" ");
-                wr.write(abs.getPos().y()+" ");
+                wr.write((int)abs.getPos().x()+" ");
+                wr.write((int)abs.getPos().y()+" ");
                 wr.write(Integer.toString((int)abs.getPos2().x())+" ");
                 wr.write(Integer.toString((int)abs.getPos2().y())+" ");
                 wr.write("\n");

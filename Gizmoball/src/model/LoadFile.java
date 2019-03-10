@@ -28,6 +28,7 @@ public class LoadFile {
         List<String[]> ballCommands = new ArrayList<>();
         List<String[]> moveCommands = new ArrayList<>();
         List<String[]> deleteCommands = new ArrayList<>();
+        List<String[]> absCommands = new ArrayList<>();
 
         try {
             Scanner reader = new Scanner(new File(filename));
@@ -59,6 +60,8 @@ public class LoadFile {
                     //Move Command
                 } else if (line.startsWith("Move")) {
                     moveCommands.add(temp);
+                } else if (line.startsWith("Absorber")) {
+                    absCommands.add(temp);
                 }
             }
         } catch(FileNotFoundException ex) {
@@ -68,6 +71,7 @@ public class LoadFile {
         createBall(ballCommands);
         moveGizmos(moveCommands);
         deleteGizmos(deleteCommands);
+        createAbsorbers(absCommands);
     }
 
     public void createBumpers(List<String[]> commands) {
