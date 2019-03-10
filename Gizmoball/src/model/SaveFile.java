@@ -30,33 +30,36 @@ public class SaveFile {
                     if (g.getType().equals(bumpers[i])) {
                         wr.write(g.getType()+ " ");
                         wr.write(g.getId() + " ");
-                        wr.write(Double.toString(g.getPos().x())+ " ");
-                        wr.write(Double.toString(g.getPos().y()));
+                        wr.write(Integer.toString((int)g.getPos().x())+ " ");
+                        wr.write(Integer.toString((int)g.getPos().y()));
                         break;
                     }
                 }
                 wr.write("\n");
             }
+            wr.write("\n");
             //Saving LeftFlippers
             for (LeftFlipper lf : leftFlipperList) {
                 if (lf.getType().equals("LeftFlipper")) {
                     wr.write(lf.getType()+ " ");
                     wr.write(lf.getId()+ " ");
-                    wr.write(Double.toString(lf.getPos().x())+ " ");
-                    wr.write(Double.toString(lf.getPos().y()));
+                    wr.write(Integer.toString((int)lf.getPos().x())+ " ");
+                    wr.write(Integer.toString((int)lf.getPos().y()));
                     wr.write("\n");
                 }
             }
+            wr.write("\n");
             //Saving RightFlippers
             for (RightFlipper rf : rightFlipperList) {
                 if (rf.getType().equals("RightFlipper")) {
                     wr.write(rf.getType()+ " ");
                     wr.write(rf.getId()+ " ");
-                    wr.write(Double.toString(rf.getPos().x())+ " ");
-                    wr.write(Double.toString(rf.getPos().y()));
+                    wr.write(Integer.toString((int)rf.getPos().x())+ " ");
+                    wr.write(Integer.toString((int)rf.getPos().y()));
                     wr.write("\n");
                 }
             }
+            wr.write("\n");
             //Saving Balls
             for (Ball b : ballList) {
                 wr.write(b.getType()+" ");
@@ -67,15 +70,17 @@ public class SaveFile {
                 wr.write(Double.toString(b.getVelo().y()));
                 wr.write("\n");
             }
+            wr.write("\n");
             for (Absorber abs : absList) {
                 wr.write(abs.getType()+" ");
                 wr.write(abs.getId()+" ");
                 wr.write(abs.getPos().x()+" ");
                 wr.write(abs.getPos().y()+" ");
-                wr.write(Double.toString(abs.getPos2().x())+" ");
-                wr.write(Double.toString(abs.getPos2().y())+" ");
+                wr.write(Integer.toString((int)abs.getPos2().x())+" ");
+                wr.write(Integer.toString((int)abs.getPos2().y())+" ");
                 wr.write("\n");
             }
+            wr.write("\n");
 
             wr.flush();
             wr.close();
