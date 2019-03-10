@@ -142,8 +142,8 @@ public class Board extends JPanel implements Observer {
 				g.fillPolygon(x1, y1, 3);
 				break;
 			case 2:
-				int[] x2 = {(int) ((gPos.x()*LtoPx)+1), (int) ((gPos.x()+1)*LtoPx), (int) (gPos.x()*LtoPx)};
-				int[] y2 = {(int) ((gPos.y()*LtoPx)+1), (int) (gPos.y()*LtoPx), (int) ((gPos.y()+1)*LtoPx)};
+				int[] x2 = {(int) ((gPos.x()+1)*LtoPx), (int) ((gPos.x()+1)*LtoPx), (int) (gPos.x()*LtoPx)};
+				int[] y2 = {(int) ((gPos.y()+1)*LtoPx), (int) (gPos.y()*LtoPx), (int) ((gPos.y()+1)*LtoPx)};
 				g.fillPolygon(x2, y2, 3);
 				break;
 			case 3:
