@@ -10,8 +10,11 @@ public class Ball {
     private Vect pos;
     private double radius;
     private Color colour;
+    private String type = "Ball";
+    private String id;
 
-    public Ball(double x, double y, double xv, double yv){
+    public Ball(String id, double x, double y, double xv, double yv){
+        this.id = id;
         pos = new Vect(x, y);
         velo = new Vect(xv, yv);
         radius = 0.25;
@@ -44,6 +47,14 @@ public class Ball {
 
     public Color getColour(){
         return colour;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getId() {
+        return id;
     }
 
 }

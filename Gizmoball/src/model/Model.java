@@ -17,6 +17,7 @@ public class Model extends Observable {
     private List<Ball> ballList;
     private List<LeftFlipper> leftFlipperList;
     private List<RightFlipper> rightFlipperList;
+    private List<Absorber> absList;
 
     public Model(){
         walls = new Walls(0,0,20,20);
@@ -180,5 +181,17 @@ public class Model extends Observable {
 
     public void setRightFlippers(List<RightFlipper> rightFlipperList) {
         this.rightFlipperList = rightFlipperList;
+    }
+
+    public List<Absorber> getAbsorbers() {
+        return absList;
+    }
+    
+    public void setAbsorbersList(List<Absorber> absList) {
+        this.absList = absList;
+    }
+
+    public void addAbsorber(Absorber abs) {
+        absList.add(abs);
     }
 }

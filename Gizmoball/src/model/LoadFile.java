@@ -13,6 +13,7 @@ public class LoadFile {
     private List<Ball> ballList = new ArrayList<>();
     private List<LeftFlipper> leftFlipperList = new ArrayList<>();
     private List<RightFlipper> rightFlipperList = new ArrayList<>();
+    private List<Absorber> absList = new ArrayList<>();
 
     public LoadFile(Model m) {
         model = m;
@@ -106,7 +107,7 @@ public class LoadFile {
     }
     public void moveGizmos(List<String[]> commands) {
         String id;
-        int x = 0, y = 0;
+        int x, y;
         for (int i = 0; i < commands.size(); i++) {
             if (commands.get(i)[0].equals("Move")) {
                 id = commands.get(i)[1];
@@ -122,7 +123,7 @@ public class LoadFile {
     }
     public void createBall(List<String[]> commands) {
         String id = "";
-        double x = 0, y = 0, velX = 0, velY = 0;
+        double x, y, velX, velY;
 
         for (int i = 0; i < commands.size(); i++) {
             if (commands.get(i)[0].equals("Ball")) {
@@ -131,11 +132,26 @@ public class LoadFile {
                 y = Double.parseDouble(commands.get(i)[3]);
                 velX = Double.parseDouble(commands.get(i)[4]);
                 velY = Double.parseDouble(commands.get(i)[5]);
-                ballList.add(new Ball(x, y, velX, velY));
+                ballList.add(new Ball(id, x, y, velX, velY));
 
             }
         }
         model.setBallList(ballList);
+    }
+
+    public void createAbsorbers(List<String[]> commands) {
+        String id = "";
+        double x1, y1, x2, y2;
+
+        for (int i = 0; i < commands.size(); i++) {
+            id = commands.get(i)[1];
+            x1 = Double.parseDouble(commands.get(i)[2]);
+            y1 = Double.parseDouble(commands.get(i)[3]);
+            x2 = Double.parseDouble(commands.get(i)[4]);
+            y2 = Double.parseDouble(commands.get(i)[5]);
+            absList.add(new Absorber(id, x1, y1, x2, y2));
+        }
+        model.setAbsorbersList(absList);
     }
     public void deleteGizmos(List<String[]> commands) {
         String id;
