@@ -11,10 +11,12 @@ public abstract class Gizmo {
 
     Vect pos;
     String id;
+    int rotation;
 
     public Gizmo(String id, double x, double y){
         pos = new Vect(x, y);
         this.id = id;
+        rotation = 0;
     }
 
     public Vect getPos(){
@@ -35,9 +37,15 @@ public abstract class Gizmo {
         return id;
     }
 
-    abstract public void rotate();
+    public void rotate(){
+        if(rotation == 3){
+            rotation = 0;
+        } else {
+            rotation++;
+        }
+    }
+
     public void move(int x, int y) {
         pos = new Vect(x,y);
     }
-
 }

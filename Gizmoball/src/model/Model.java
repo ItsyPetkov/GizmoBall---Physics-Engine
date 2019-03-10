@@ -15,17 +15,11 @@ public class Model extends Observable {
     private Walls walls;
     private List<Gizmo> gizmoList;
     private List<Ball> ballList;
-    private List<LeftFlipper> leftFlipperList;
-    private List<RightFlipper> rightFlipperList;
-    private List<Absorber> absList;
 
     public Model(){
         walls = new Walls(0,0,20,20);
         gizmoList = new ArrayList<Gizmo>();
         ballList = new ArrayList<Ball>();
-        leftFlipperList = new ArrayList<>();
-        rightFlipperList = new ArrayList<>();
-        absList = new ArrayList<>();
 
     }
 
@@ -129,20 +123,11 @@ public class Model extends Observable {
     }
 
     public List<Gizmo> getGizmos(){
-        System.out.println(gizmoList.get(0));
         return gizmoList;
-    }
-
-    public void setGizmos(List<Gizmo> gizmoList) {
-        this.gizmoList = gizmoList;
     }
 
     public List<Ball> getBalls(){
         return ballList;
-    }
-
-    public void setBallList(List<Ball> ballList) {
-        this.ballList = ballList;
     }
 
     public void addGizmo(Gizmo g){
@@ -151,48 +136,5 @@ public class Model extends Observable {
 
     public void addBall(Ball b){
         ballList.add(b);
-    }
-
-    public List<Vect> getGizmoPos(){
-        List<Vect> gizmoPos = new ArrayList<Vect>();
-        for(int i=0; i<gizmoList.size(); i++){
-            gizmoPos.add(gizmoList.get(i).getPos());
-        }
-        return gizmoPos;
-    }
-
-    public List<Vect> getBallPos(){
-        List<Vect> ballPos = new ArrayList<Vect>();
-        for(int i=0; i<ballList.size(); i++){
-            ballPos.add(ballList.get(i).getPos());
-        }
-        return ballPos;
-    }
-    public List<LeftFlipper> getLeftFlippers() {
-        return leftFlipperList;
-    }
-
-    public void setLeftFlippers(List<LeftFlipper> leftFlipperList) {
-        this.leftFlipperList = leftFlipperList;
-    }
-
-    public List<RightFlipper> getRightFlippers() {
-        return rightFlipperList;
-    }
-
-    public void setRightFlippers(List<RightFlipper> rightFlipperList) {
-        this.rightFlipperList = rightFlipperList;
-    }
-
-    public List<Absorber> getAbsorbers() {
-        return absList;
-    }
-    
-    public void setAbsorbersList(List<Absorber> absList) {
-        this.absList = absList;
-    }
-
-    public void addAbsorber(Absorber abs) {
-        absList.add(abs);
     }
 }

@@ -65,7 +65,6 @@ public class Board extends JPanel implements Observer {
 
 			//drawing gizmos
 			List<Gizmo> gizmoList = model.getGizmos();
-			System.out.println(gizmoList.get(0));
 			for(int i=0; i<gizmoList.size(); i++) {
 				switch (gizmoList.get(i).type()) {
 					case "Absorber":

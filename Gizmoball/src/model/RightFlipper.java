@@ -125,22 +125,7 @@ public class RightFlipper extends Gizmo {
         //notifyObservers();
     }
 
-
-    @Override
-    public String type() {
-        return type;
-    }
-
     //Getters and Setters
-    @Override
-    public Color getColour() {
-        return colour;
-    }
-
-    @Override
-    public void setColour(Color c) {
-            colour = c;
-    }
 
     public Circle getTopCircle(){
         return topCircle;
@@ -174,26 +159,18 @@ public class RightFlipper extends Gizmo {
         this.position = position;
     }
 
-    public LineSegment getTopSideLine(){
-        return topSideLine;
-
-    }
-
-    public LineSegment getRightSideLine(){
-
-        return rightSideLine;
-    }
-
-    public LineSegment getBottomSideLine(){
-        return bottomSideLine;
-    }
-
-    public LineSegment getLeftSideLine(){
-        return leftSideLine;
+    @Override
+    public Color getColour(){
+        return colour;
     }
 
     @Override
-    public List<LineSegment> getSides() {
+    public void setColour(Color c){
+        colour = c;
+    }
+
+    @Override
+    public List<LineSegment> getSides(){
         List<LineSegment> ls = new ArrayList<LineSegment>();
         ls.add(topSideLine);
         ls.add(bottomSideLine);
@@ -203,7 +180,7 @@ public class RightFlipper extends Gizmo {
     }
 
     @Override
-    public List<Circle> getCorners() {
+    public List<Circle> getCorners(){
         List<Circle> cs = new ArrayList<Circle>();
         cs.add(topCircle);
         cs.add(bottomCircle);
@@ -211,7 +188,7 @@ public class RightFlipper extends Gizmo {
     }
 
     @Override
-    public void rotate() {
-
+    public String type(){
+        return type;
     }
 }

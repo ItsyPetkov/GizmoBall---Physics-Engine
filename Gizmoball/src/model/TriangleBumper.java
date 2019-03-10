@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TriangleBumper extends Gizmo {
-
     private Color colour;
-    private String type = "Triangle";
+    private String type;
 
     public TriangleBumper(String id,int x, int y){
         super(id,x,y);
         colour = Color.GREEN;
+        type = "Triangle";
     }
 
     @Override
@@ -22,13 +22,14 @@ public class TriangleBumper extends Gizmo {
         return type;
     }
 
+    @Override
     public Color getColour(){
         return colour;
     }
 
     @Override
     public void setColour(Color c) {
-            colour = c;
+        colour = c;
     }
 
     public List<LineSegment> getSides(){
@@ -46,10 +47,4 @@ public class TriangleBumper extends Gizmo {
         cs.add(new Circle(super.getPos().x(), super.getPos().y()+1, 0));
         return cs;
     }
-
-    @Override
-    public void rotate() {
-
-    }
-
 }

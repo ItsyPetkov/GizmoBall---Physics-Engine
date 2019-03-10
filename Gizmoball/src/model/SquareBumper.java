@@ -9,11 +9,12 @@ import java.util.List;
 
 public class SquareBumper extends Gizmo {
     private Color colour;
-    private String type = "Square";
+    private String type;
 
     public SquareBumper(String id, int x, int y){
         super(id,x,y);
         colour = Color.BLUE;
+        type = "Square";
     }
 
     @Override
@@ -21,6 +22,7 @@ public class SquareBumper extends Gizmo {
         return type;
     }
 
+    @Override
     public Color getColour(){
         return colour;
     }
@@ -46,10 +48,5 @@ public class SquareBumper extends Gizmo {
         cs.add(new Circle(super.getPos().x(), super.getPos().y()+1, 0));
         cs.add(new Circle(super.getPos().x()+1, super.getPos().y()+1, 0));
         return cs;
-    }
-
-    @Override
-    public void rotate() {
-
     }
 }

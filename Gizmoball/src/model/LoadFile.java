@@ -9,8 +9,6 @@ import java.util.Scanner;
 
 public class LoadFile {
     Model model;
-    private List<Gizmo> gizmoList = new ArrayList<>();
-    private List<Ball> ballList = new ArrayList<>();
 
     public LoadFile(Model m) {
         model = m;
@@ -79,33 +77,32 @@ public class LoadFile {
             posY = Integer.parseInt(comd[3]);
             switch(shape) {
                 case "Triangle":
-                    gizmoList.add(new TriangleBumper(id, posX, posY));
+                    model.addGizmo(new TriangleBumper(id, posX, posY));
                     break;
                 case "Square":
-                    gizmoList.add(new SquareBumper(id, posX, posY));
+                    model.addGizmo(new SquareBumper(id, posX, posY));
                     break;
                 case "Circle":
-                    gizmoList.add(new CircleBumper(id, posX, posY));
+                    model.addGizmo(new CircleBumper(id, posX, posY));
                     break;
                 case "LeftFlipper":
-                    gizmoList.add(new LeftFlipper(id, posX, posY));
+                    model.addGizmo(new LeftFlipper(id, posX, posY));
                     break;
                 case "RightFlipper":
-                    gizmoList.add(new RightFlipper(id, posX, posY));
+                    model.addGizmo(new RightFlipper(id, posX, posY));
                     break;
                 case "Absorber":
-                    System.out.println("asb");
                     double x2 = Double.parseDouble(commands.get(i)[4]);
                     double y2 = Double.parseDouble(commands.get(i)[5]);
-                    gizmoList.add(new Absorber(id, posX, posY, x2, y2));
+                    model.addGizmo(new Absorber(id, posX, posY, x2, y2));
                     break;
                 default:
                     System.out.println("Shape unrecognized.");
                     break;
             }
         }
-        model.setGizmos(gizmoList);
     }
+
     public void moveGizmos(List<String[]> commands) {
         String id;
         int x, y;
@@ -114,7 +111,7 @@ public class LoadFile {
                 id = commands.get(i)[1];
                 x = Integer.parseInt(commands.get(i)[2]);
                 y = Integer.parseInt(commands.get(i)[3]);
-                for (Gizmo g : gizmoList) {
+                for (Gizmo g : model.getGizmos()) {
                     if (g.getId().equals(id)) {
                         g.move(x, y);
                     }
@@ -133,11 +130,10 @@ public class LoadFile {
                 y = Double.parseDouble(commands.get(i)[3]);
                 velX = Double.parseDouble(commands.get(i)[4]);
                 velY = Double.parseDouble(commands.get(i)[5]);
-                ballList.add(new Ball(id, x, y, velX, velY));
+                model.addBall(new Ball(id, x, y, velX, velY));
 
             }
         }
-        model.setBallList(ballList);
     }
 
     public void deleteGizmos(List<String[]> commands) {
@@ -146,15 +142,15 @@ public class LoadFile {
         for (int i = 0; i < commands.size(); i++) {
             id = commands.get(i)[1];
             if (commands.get(i)[0].equals("Delete")) {
-                for (Gizmo g : gizmoList) {
+                for (Gizmo g : model.getGizmos()) {
                     if (g.getId().equals(id)) {
-                        if (gizmoList.contains(g)) {
+                        if (model.getGizmos().contains(g)) {
                             toRemove.add(g);
                         }
                     }
                 }
                 for (int j = 0; j < toRemove.size(); j++) {
-                    gizmoList.remove(toRemove.get(j));
+                    model.getGizmos().remove(toRemove.get(j));
                 }
             }
         }
@@ -175,7 +171,7 @@ public class LoadFile {
             if (commands.get(i)[0].equals("Rotate")) {
                 id = commands.get(i)[1];
                 System.out.println(id);
-                for (Gizmo g : gizmoList) {
+                for (Gizmo g : model.getGizmos()) {
                     if (g.getId().equals(id)) {
                         g.rotate();
                     }
@@ -192,7 +188,7 @@ public class LoadFile {
             if (commands.get(i)[0].equals("Connect")) {
                 id1 = commands.get(i)[1];
                 id2 = commands.get(i)[2];
-                for (Gizmo g : gizmoList) {
+                for (Gizmo g : model.getGizmos()) {
                     if (g.getId().equals(id1)) {
                         g1 = g;
                     }
