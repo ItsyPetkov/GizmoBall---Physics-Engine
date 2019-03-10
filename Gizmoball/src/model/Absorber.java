@@ -12,9 +12,10 @@ public class Absorber extends Gizmo{
 
     private Color colour;
     private Vect pos2;
+    private String type = "Absorber";
 
-    public Absorber(double x1, double y1, double x2, double y2){
-        super(x1,y1);
+    public Absorber(String id,double x1, double y1, double x2, double y2){
+        super(id,x1,y1);
         pos2 = new Vect(x2, y2);
         colour = Color.MAGENTA;
     }
@@ -56,5 +57,15 @@ public class Absorber extends Gizmo{
         cs.add(new Circle(pos2.x(), super.getPos().y(),0));
         cs.add(new Circle(pos2.x(), pos2.y(),0));
         return cs;
+    }
+
+    @Override
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public void rotate() {
+
     }
 }

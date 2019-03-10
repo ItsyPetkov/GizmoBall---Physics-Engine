@@ -10,9 +10,10 @@ import java.util.List;
 public class TriangleBumper extends Gizmo {
 
     private Color colour;
+    private String type = "Triangle";
 
-    public TriangleBumper(int x, int y){
-        super(x,y);
+    public TriangleBumper(String id,int x, int y){
+        super(id,x,y);
         colour = Color.GREEN;
     }
 
@@ -44,6 +45,16 @@ public class TriangleBumper extends Gizmo {
         cs.add(new Circle(super.getPos().x()+1, super.getPos().y(), 0));
         cs.add(new Circle(super.getPos().x(), super.getPos().y()+1, 0));
         return cs;
+    }
+
+    @Override
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public void rotate() {
+
     }
 
 }

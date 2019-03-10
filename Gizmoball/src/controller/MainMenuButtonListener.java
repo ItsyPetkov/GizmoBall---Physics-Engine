@@ -27,11 +27,11 @@ public class MainMenuButtonListener implements ActionListener {
 		}else if(arg0.getActionCommand().equals("Load Game")) {
 			model.addBall(new Ball(4,10,10,20));
 			model.addBall(new Ball(14,10,-10,5));
-			model.addGizmo(new Absorber(0, 18, 20, 20));
-			model.addGizmo(new SquareBumper(10,1));
-			model.addGizmo(new TriangleBumper(3,12));
-			model.addGizmo(new LeftFlipper(3,3));
-			model.addGizmo(new RightFlipper(6,6));
+			model.addGizmo(new Absorber("AB1",0, 18, 20, 20));
+			model.addGizmo(new SquareBumper("S1",10,1));
+			model.addGizmo(new TriangleBumper("T1",3,12));
+			model.addGizmo(new LeftFlipper("LF1",3,3));
+			model.addGizmo(new RightFlipper("RF1",6,6));
 			rm = new RunMode(model);
 			MainMenu.getMainMenuFrame().dispose();
 		}else if(arg0.getActionCommand().equals("Exit Game")) {

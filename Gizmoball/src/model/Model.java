@@ -15,11 +15,16 @@ public class Model extends Observable {
     private Walls walls;
     private List<Gizmo> gizmoList;
     private List<Ball> ballList;
+    private List<LeftFlipper> leftFlipperList;
+    private List<RightFlipper> rightFlipperList;
 
     public Model(){
         walls = new Walls(0,0,20,20);
         gizmoList = new ArrayList<Gizmo>();
         ballList = new ArrayList<Ball>();
+        leftFlipperList = new ArrayList<>();
+        rightFlipperList = new ArrayList<>();
+
     }
 
     public void moveBall(){
@@ -62,7 +67,7 @@ public class Model extends Observable {
 
         //search gizmoList getSides and getCorners
         List<LineSegment> gizmoSides = new ArrayList<LineSegment>();
-        List<physics.Circle> gizmoCorners = new ArrayList<Circle>();
+        List<Circle> gizmoCorners = new ArrayList<Circle>();
         for(int i=0; i<gizmoList.size(); i++){
             gizmoSides.addAll(gizmoList.get(i).getSides());
             gizmoCorners.addAll(gizmoList.get(i).getCorners());
@@ -125,8 +130,16 @@ public class Model extends Observable {
         return gizmoList;
     }
 
+    public void setGizmos(List<Gizmo> gizmoList) {
+        this.gizmoList = gizmoList;
+    }
+
     public List<Ball> getBalls(){
         return ballList;
+    }
+
+    public void setBallList(List<Ball> ballList) {
+        this.ballList = ballList;
     }
 
     public void addGizmo(Gizmo g){
@@ -151,5 +164,20 @@ public class Model extends Observable {
             ballPos.add(ballList.get(i).getPos());
         }
         return ballPos;
+    }
+    public List<LeftFlipper> getLeftFlippers() {
+        return leftFlipperList;
+    }
+
+    public void setLeftFlippers(List<LeftFlipper> leftFlipperList) {
+        this.leftFlipperList = leftFlipperList;
+    }
+
+    public List<RightFlipper> getRightFlippers() {
+        return rightFlipperList;
+    }
+
+    public void setRightFlippers(List<RightFlipper> rightFlipperList) {
+        this.rightFlipperList = rightFlipperList;
     }
 }

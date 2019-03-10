@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RightFlipper extends Gizmo {
+    String type = "RightFlipper";
     //An enumerated type to keep track of how the flipper is moving
     public enum StateOfMotion {
         UPWARDS, DOWNWARDS, STATIONARY
@@ -34,8 +35,8 @@ public class RightFlipper extends Gizmo {
     private Position position;
 
     //Creates a flipper, represented by circles, lines and vectors
-    public RightFlipper(int x, int y) {
-        super(x,y);
+    public RightFlipper(String id,int x, int y) {
+        super(id,x,y);
 
         //centre created with the x and y coordinates
         center = new Vect((double)x, (double)y);
@@ -207,5 +208,15 @@ public class RightFlipper extends Gizmo {
         cs.add(topCircle);
         cs.add(bottomCircle);
         return cs;
+    }
+
+    @Override
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public void rotate() {
+
     }
 }
