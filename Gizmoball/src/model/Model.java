@@ -127,6 +127,7 @@ public class Model extends Observable {
     }
 
     public List<Gizmo> getGizmos(){
+        System.out.println(gizmoList.get(0));
         return gizmoList;
     }
 

@@ -22,7 +22,7 @@ public class CircleBumper extends Gizmo {
 
     @Override
     public String type() {
-        return type;
+        return "circle";
     }
 
     @Override
@@ -43,18 +43,13 @@ public class CircleBumper extends Gizmo {
     @Override
     public List<Circle> getCorners() {
         List<Circle> cs = new ArrayList<>();
-        //cs.add(new physics.Circle((int)(super.getPos().getX()+0.5), super.getPos().getY()+0.5, 0.5));
+        cs.add(new Circle((int)(super.getPos().x()+0.5), super.getPos().y()+0.5, 0.5));
         return cs;
     }
 
     @Override
     public String getType() {
         return type;
-    }
-
-    @Override
-    public String getId() {
-        return null;
     }
 
     public void rotate() {

@@ -26,7 +26,8 @@ public class LoadFileButtonListener implements ActionListener {
         if (filename != null) {
             loadfile.load(filename);
             System.out.println(filename + " has been loaded.");
-            gui.repaint();
+//            gui.repaint();
+            gui = new BuildMode(model);
         }
     }
 }

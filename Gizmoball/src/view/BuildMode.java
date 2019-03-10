@@ -13,10 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import controller.BuildModeButtonListener;
-import controller.EscapeKeyListener;
-import controller.FileMenuActionListener;
-import controller.InsertMenuActionListener;
+import controller.*;
 import model.Model;
 
 public class BuildMode extends JFrame {
@@ -43,10 +40,12 @@ public class BuildMode extends JFrame {
 		clear.addActionListener(new FileMenuActionListener());
 		
 		JMenuItem save = new JMenuItem("Save Board");
-		save.addActionListener(new FileMenuActionListener());
+		//save.addActionListener(new FileMenuActionListener());
+		save.addActionListener(new SaveFileButtonListener(model, this));
 		
 		JMenuItem load = new JMenuItem("Load Board");
-		load.addActionListener(new FileMenuActionListener());
+		//load.addActionListener(new FileMenuActionListener());
+		load.addActionListener(new LoadFileButtonListener(model, this));
 		
 		file.add(clear);
 		file.add(save);

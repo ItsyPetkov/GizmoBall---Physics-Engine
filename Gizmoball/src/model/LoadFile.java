@@ -40,9 +40,10 @@ public class LoadFile {
                         bumperCommands.add(temp);
                     }
                 }
-                //Rotate Commands
+                //Rotate Command
                 if(line.startsWith("Rotate")) {
                     rotateCommands.add(temp);
+                    //KeyConnect Command
                 } else if (line.startsWith("KeyConnect")) {
                     keyConnectCommands.add(temp);
                     //Connect Command
@@ -99,7 +100,6 @@ public class LoadFile {
                     break;
             }
         }
-        System.out.println(gizmoList);
         model.setGizmos(gizmoList);
         model.setRightFlippers(rightFlipperList);
         model.setLeftFlippers(leftFlipperList);

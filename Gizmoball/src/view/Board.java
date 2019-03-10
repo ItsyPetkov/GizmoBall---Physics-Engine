@@ -65,6 +65,7 @@ public class Board extends JPanel implements Observer {
 
 			//drawing gizmos
 			List<Gizmo> gizmoList = model.getGizmos();
+			System.out.println(gizmoList.get(0));
 			for(int i=0; i<gizmoList.size(); i++) {
 				switch (gizmoList.get(i).type()) {
 					case "absorber":
@@ -88,6 +89,16 @@ public class Board extends JPanel implements Observer {
 						drawFlipper(g, gizmoList.get(i));
 						break;
 				}
+			}
+
+			//Drawing flippers
+			List<LeftFlipper> leftFlipperList = model.getLeftFlippers();
+			List<RightFlipper> rightFlipperList = model.getRightFlippers();
+			for (LeftFlipper lf : leftFlipperList) {
+				drawFlipper(g, lf);
+			}
+			for (RightFlipper rf : rightFlipperList) {
+				drawFlipper(g, rf);
 			}
 
 			//drawing the walls
