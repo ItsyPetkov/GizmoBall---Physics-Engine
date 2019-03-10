@@ -70,10 +70,10 @@ public class SaveFile {
             for (Absorber abs : absList) {
                 wr.write(abs.getType()+" ");
                 wr.write(abs.getId()+" ");
-                wr.write("x1 ");
-                wr.write("y1 ");
-                wr.write("x2 ");
-                wr.write("y2");
+                wr.write(abs.getPos().x()+" ");
+                wr.write(abs.getPos().y()+" ");
+                wr.write(Double.toString(abs.getPos2().x())+" ");
+                wr.write(Double.toString(abs.getPos2().y())+" ");
                 wr.write("\n");
             }
 
