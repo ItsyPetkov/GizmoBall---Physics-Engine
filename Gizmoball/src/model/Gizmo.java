@@ -45,6 +45,10 @@ public abstract class Gizmo {
         }
     }
 
+    public int getRotation(){
+        return rotation;
+    }
+
     public void move(int x, int y) {
         pos = new Vect(x,y);
     }

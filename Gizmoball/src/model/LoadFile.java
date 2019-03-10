@@ -60,6 +60,7 @@ public class LoadFile {
             System.out.println("File "+filename+" failed to load.");
         }
         createBumpers(bumperCommands);
+        rotateGizmos(rotateCommands);
         createBall(ballCommands);
         moveGizmos(moveCommands);
         deleteGizmos(deleteCommands);
@@ -173,6 +174,7 @@ public class LoadFile {
                 System.out.println(id);
                 for (Gizmo g : model.getGizmos()) {
                     if (g.getId().equals(id)) {
+
                         g.rotate();
                     }
                 }

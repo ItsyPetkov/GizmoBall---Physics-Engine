@@ -129,9 +129,29 @@ public class Board extends JPanel implements Observer {
 	private void drawTriangle(Graphics g, TriangleBumper tr){
 		Vect gPos = tr.getPos();
 		g.setColor(tr.getColour());
-		int[] xP = {(int) (gPos.x()*LtoPx), (int) ((gPos.x()+1)*LtoPx), (int) (gPos.x()*LtoPx)};
-		int[] yP = {(int) (gPos.y()*LtoPx), (int) (gPos.y()*LtoPx), (int) ((gPos.y()+1)*LtoPx)};
-		g.fillPolygon(xP, yP, 3);
+		int rotation = tr.getRotation();
+		switch(rotation){
+			case 0:
+				int[] x0 = {(int) (gPos.x()*LtoPx), (int) ((gPos.x()+1)*LtoPx), (int) (gPos.x()*LtoPx)};
+				int[] y0 = {(int) (gPos.y()*LtoPx), (int) (gPos.y()*LtoPx), (int) ((gPos.y()+1)*LtoPx)};
+				g.fillPolygon(x0, y0, 3);
+				break;
+			case 1:
+				int[] x1 = {(int) (gPos.x()*LtoPx), (int) ((gPos.x()+1)*LtoPx), (int) ((gPos.x()+1)*LtoPx)};
+				int[] y1 = {(int) (gPos.y()*LtoPx), (int) (gPos.y()*LtoPx), (int) ((gPos.y()+1)*LtoPx)};
+				g.fillPolygon(x1, y1, 3);
+				break;
+			case 2:
+				int[] x2 = {(int) ((gPos.x()*LtoPx)+1), (int) ((gPos.x()+1)*LtoPx), (int) (gPos.x()*LtoPx)};
+				int[] y2 = {(int) ((gPos.y()*LtoPx)+1), (int) (gPos.y()*LtoPx), (int) ((gPos.y()+1)*LtoPx)};
+				g.fillPolygon(x2, y2, 3);
+				break;
+			case 3:
+				int[] x3 = {(int) (gPos.x()*LtoPx), (int) ((gPos.x()+1)*LtoPx), (int) (gPos.x()*LtoPx)};
+				int[] y3 = {(int) (gPos.y()*LtoPx), (int) ((gPos.y()+1)*LtoPx), (int) ((gPos.y()+1)*LtoPx)};
+				g.fillPolygon(x3, y3, 3);
+				break;
+		}
 	}
 
 	private void drawFlipper(Graphics g, Gizmo gizmo){    //drawing the flippers
