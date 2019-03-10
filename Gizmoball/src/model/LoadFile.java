@@ -11,8 +11,6 @@ public class LoadFile {
     Model model;
     private List<Gizmo> gizmoList = new ArrayList<>();
     private List<Ball> ballList = new ArrayList<>();
-    private List<LeftFlipper> leftFlipperList = new ArrayList<>();
-    private List<RightFlipper> rightFlipperList = new ArrayList<>();
     private List<Absorber> absList = new ArrayList<>();
 
     public LoadFile(Model m) {
@@ -95,10 +93,10 @@ public class LoadFile {
                     gizmoList.add(new CircleBumper(id, posX, posY));
                     break;
                 case "LeftFlipper":
-                    leftFlipperList.add(new LeftFlipper(id, posX, posY));
+                    gizmoList.add(new LeftFlipper(id, posX, posY));
                     break;
                 case "RightFlipper":
-                    rightFlipperList.add(new RightFlipper(id, posX, posY));
+                    gizmoList.add(new RightFlipper(id, posX, posY));
                     break;
                 default:
                     System.out.println("Shape unrecognized.");
@@ -106,8 +104,6 @@ public class LoadFile {
             }
         }
         model.setGizmos(gizmoList);
-        model.setRightFlippers(rightFlipperList);
-        model.setLeftFlippers(leftFlipperList);
     }
     public void moveGizmos(List<String[]> commands) {
         String id;

@@ -128,7 +128,7 @@ public class RightFlipper extends Gizmo {
 
     @Override
     public String type() {
-        return "rightflipper";
+        return type;
     }
 
     //Getters and Setters
@@ -208,11 +208,6 @@ public class RightFlipper extends Gizmo {
         cs.add(topCircle);
         cs.add(bottomCircle);
         return cs;
-    }
-
-    @Override
-    public String getType() {
-        return type;
     }
 
     @Override

@@ -26,7 +26,7 @@ public class Absorber extends Gizmo{
 
     @Override
     public String type() {
-        return "absorber";
+        return type;
     }
 
     @Override
@@ -57,11 +57,6 @@ public class Absorber extends Gizmo{
         cs.add(new Circle(pos2.x(), super.getPos().y(),0));
         cs.add(new Circle(pos2.x(), pos2.y(),0));
         return cs;
-    }
-
-    @Override
-    public String getType() {
-        return type;
     }
 
     @Override

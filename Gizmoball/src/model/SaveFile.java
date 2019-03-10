@@ -27,8 +27,8 @@ public class SaveFile {
             //Saving Gizmos
             for (Gizmo g : gizmoList) {
                 for (int i = 0; i < bumpers.length; i++) {
-                    if (g.getType().equals(bumpers[i])) {
-                        wr.write(g.getType()+ " ");
+                    if (g.type().equals(bumpers[i])) {
+                        wr.write(g.type()+ " ");
                         wr.write(g.getId() + " ");
                         wr.write(Integer.toString((int)g.getPos().x())+ " ");
                         wr.write(Integer.toString((int)g.getPos().y()));
@@ -40,8 +40,8 @@ public class SaveFile {
             wr.write("\n");
             //Saving LeftFlippers
             for (LeftFlipper lf : leftFlipperList) {
-                if (lf.getType().equals("LeftFlipper")) {
-                    wr.write(lf.getType()+ " ");
+                if (lf.type().equals("LeftFlipper")) {
+                    wr.write(lf.type()+ " ");
                     wr.write(lf.getId()+ " ");
                     wr.write(Integer.toString((int)lf.getPos().x())+ " ");
                     wr.write(Integer.toString((int)lf.getPos().y()));
@@ -51,8 +51,8 @@ public class SaveFile {
             wr.write("\n");
             //Saving RightFlippers
             for (RightFlipper rf : rightFlipperList) {
-                if (rf.getType().equals("RightFlipper")) {
-                    wr.write(rf.getType()+ " ");
+                if (rf.type().equals("RightFlipper")) {
+                    wr.write(rf.type()+ " ");
                     wr.write(rf.getId()+ " ");
                     wr.write(Integer.toString((int)rf.getPos().x())+ " ");
                     wr.write(Integer.toString((int)rf.getPos().y()));
@@ -73,7 +73,7 @@ public class SaveFile {
             wr.write("\n");
             //Saving Absorbers
             for (Absorber abs : absList) {
-                wr.write(abs.getType()+" ");
+                wr.write(abs.type()+" ");
                 wr.write(abs.getId()+" ");
                 wr.write((int)abs.getPos().x()+" ");
                 wr.write((int)abs.getPos().y()+" ");

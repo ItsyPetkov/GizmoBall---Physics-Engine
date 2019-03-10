@@ -31,8 +31,6 @@ public abstract class Gizmo {
 
     abstract public List<Circle> getCorners();
 
-    abstract public String getType();
-
     public String getId() {
         return id;
     }

@@ -124,12 +124,6 @@ public class LeftFlipper extends Gizmo {
         //notifyObservers();
     }
 
-
-    @Override
-    public String type() {
-        return "leftflipper";
-    }
-
     //Getters and Setters
     public Color getColour() {
         return colour;
@@ -210,7 +204,7 @@ public class LeftFlipper extends Gizmo {
     }
 
     @Override
-    public String getType() {
+    public String type() {
         return type;
     }
 

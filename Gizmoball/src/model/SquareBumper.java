@@ -18,7 +18,7 @@ public class SquareBumper extends Gizmo {
 
     @Override
     public String type() {
-        return "square";
+        return type;
     }
 
     public Color getColour(){
@@ -46,11 +46,6 @@ public class SquareBumper extends Gizmo {
         cs.add(new Circle(super.getPos().x(), super.getPos().y()+1, 0));
         cs.add(new Circle(super.getPos().x()+1, super.getPos().y()+1, 0));
         return cs;
-    }
-
-    @Override
-    public String getType() {
-        return type;
     }
 
     @Override

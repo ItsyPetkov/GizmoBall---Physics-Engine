@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class BallTest {
 
-    Ball ball = new Ball(10, 10, 20, -10);
+    Ball ball = new Ball("B1",10, 10, 20, -10);
 
     @Test
     void getPosTest(){

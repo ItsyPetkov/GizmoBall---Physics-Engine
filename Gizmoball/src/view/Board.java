@@ -68,38 +68,36 @@ public class Board extends JPanel implements Observer {
 			System.out.println(gizmoList.get(0));
 			for(int i=0; i<gizmoList.size(); i++) {
 				switch (gizmoList.get(i).type()) {
-					case "absorber":
-                        System.out.println("drawing abs");
+					case "Absorber":
 						drawAbsorber(g, (Absorber) gizmoList.get(i));
 						break;
-					case "square":
-                        System.out.println("drawing square");
+					case "Square":
 						drawSquare(g, (SquareBumper) gizmoList.get(i));
 						break;
-					case "triangle":
+					case "Triangle":
 						drawTriangle(g, (TriangleBumper) gizmoList.get(i));
 						break;
-					case "circle":
+					case "Circle":
 						drawCircle(g, gizmoList.get(i));
 						break;
-					case "leftflipper":
+					case "LeftFlipper":
 						drawFlipper(g, gizmoList.get(i));
 						break;
-					case "rightflipper":
+					case "RightFlipper":
 						drawFlipper(g, gizmoList.get(i));
 						break;
 				}
 			}
 
 			//Drawing flippers
-			List<LeftFlipper> leftFlipperList = model.getLeftFlippers();
-			List<RightFlipper> rightFlipperList = model.getRightFlippers();
-			for (LeftFlipper lf : leftFlipperList) {
-				drawFlipper(g, lf);
-			}
-			for (RightFlipper rf : rightFlipperList) {
-				drawFlipper(g, rf);
-			}
+//			List<LeftFlipper> leftFlipperList = model.getLeftFlippers();
+//			List<RightFlipper> rightFlipperList = model.getRightFlippers();
+//			for (LeftFlipper lf : leftFlipperList) {
+//				drawFlipper(g, lf);
+//			}
+//			for (RightFlipper rf : rightFlipperList) {
+//				drawFlipper(g, rf);
+//			}
 
 			//drawing the walls
 			g.setColor(Color.BLACK);
