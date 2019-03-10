@@ -11,14 +11,13 @@ public class LoadFile {
     Model model;
     private List<Gizmo> gizmoList = new ArrayList<>();
     private List<Ball> ballList = new ArrayList<>();
-    private List<Absorber> absList = new ArrayList<>();
 
     public LoadFile(Model m) {
         model = m;
     }
 
     public void load(String filename) {
-        String[] bumpers = {"Square","Triangle","Circle","LeftFlipper","RightFlipper"};
+        String[] bumpers = {"Square","Triangle","Circle","LeftFlipper","RightFlipper", "Absorber"};
         List<String[]> bumperCommands = new ArrayList<>();
         List<String[]> rotateCommands = new ArrayList<>();
         List<String[]> keyConnectCommands = new ArrayList<>();
@@ -26,7 +25,6 @@ public class LoadFile {
         List<String[]> ballCommands = new ArrayList<>();
         List<String[]> moveCommands = new ArrayList<>();
         List<String[]> deleteCommands = new ArrayList<>();
-        List<String[]> absCommands = new ArrayList<>();
 
         try {
             Scanner reader = new Scanner(new File(filename));
@@ -58,8 +56,6 @@ public class LoadFile {
                     //Move Command
                 } else if (line.startsWith("Move")) {
                     moveCommands.add(temp);
-                } else if (line.startsWith("Absorber")) {
-                    absCommands.add(temp);
                 }
             }
         } catch(FileNotFoundException ex) {
@@ -69,7 +65,6 @@ public class LoadFile {
         createBall(ballCommands);
         moveGizmos(moveCommands);
         deleteGizmos(deleteCommands);
-        createAbsorbers(absCommands);
     }
 
     public void createBumpers(List<String[]> commands) {
@@ -97,6 +92,12 @@ public class LoadFile {
                     break;
                 case "RightFlipper":
                     gizmoList.add(new RightFlipper(id, posX, posY));
+                    break;
+                case "Absorber":
+                    System.out.println("asb");
+                    double x2 = Double.parseDouble(commands.get(i)[4]);
+                    double y2 = Double.parseDouble(commands.get(i)[5]);
+                    gizmoList.add(new Absorber(id, posX, posY, x2, y2));
                     break;
                 default:
                     System.out.println("Shape unrecognized.");
@@ -139,20 +140,6 @@ public class LoadFile {
         model.setBallList(ballList);
     }
 
-    public void createAbsorbers(List<String[]> commands) {
-        String id = "";
-        double x1, y1, x2, y2;
-
-        for (int i = 0; i < commands.size(); i++) {
-            id = commands.get(i)[1];
-            x1 = Double.parseDouble(commands.get(i)[2]);
-            y1 = Double.parseDouble(commands.get(i)[3]);
-            x2 = Double.parseDouble(commands.get(i)[4]);
-            y2 = Double.parseDouble(commands.get(i)[5]);
-            absList.add(new Absorber(id, x1, y1, x2, y2));
-        }
-        model.setAbsorbersList(absList);
-    }
     public void deleteGizmos(List<String[]> commands) {
         String id;
         List<Gizmo> toRemove = new ArrayList<>();
