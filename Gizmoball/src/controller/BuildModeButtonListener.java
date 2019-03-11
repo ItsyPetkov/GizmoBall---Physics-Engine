@@ -1,6 +1,7 @@
 package controller;
 
 import model.Model;
+import view.Board;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,17 +10,19 @@ import java.awt.event.MouseListener;
 public class BuildModeButtonListener implements ActionListener {
 
 	Model model;
+	Board board;
 
-	public BuildModeButtonListener(Model m) {
+	public BuildModeButtonListener(Model m, Board b) {
 		this.model = m;
+		this.board = b;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getActionCommand().equals("Move")) {
-			MouseListener ms = new BuildModeMouseListener(model);
-			System.out.println("bro");
+			board.addMouseListener(new BuildModeMouseListener(model));
+			System.out.println("Click an object to move");
 		}else if(e.getActionCommand().equals("Rotate")) {
 			System.out.println("Rotating object...");
 		}else if(e.getActionCommand().equals("Delete")) {

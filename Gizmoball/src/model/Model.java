@@ -132,9 +132,27 @@ public class Model extends Observable {
 
     public void addGizmo(Gizmo g){
         gizmoList.add(g);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void addBall(Ball b){
         ballList.add(b);
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    public void nob(){
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    public void moveGizmo(Gizmo g, int x, int y){
+        if(gizmoList.contains(g)){
+            gizmoList.get(gizmoList.indexOf(g)).move(x,y);
+        }
+
+        this.setChanged();
+        this.notifyObservers();
     }
 }

@@ -3,15 +3,11 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.Timer;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import controller.EscapeKeyListener;
+import controller.ModeMenuActionListener;
 import controller.RunModeButtonListener;
 import controller.TimerTickListener;
 import model.Model;

@@ -12,7 +12,6 @@ import java.util.List;
 public class BuildModeMouseListener implements MouseInputListener {
 
     Model model;
-    boolean stage = false;
     Gizmo target;
     int LtoPx = 25;
 
@@ -22,18 +21,16 @@ public class BuildModeMouseListener implements MouseInputListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println(e.getX());
-        if(!stage){
+        if(target == null){
             List<Gizmo> gizmoList = model.getGizmos();
             for(int i=0; i<gizmoList.size(); i++){
                 if(gizmoList.get(i).getPos().x() == (e.getX()/LtoPx) && gizmoList.get(i).getPos().y() == (e.getY()/LtoPx)){
                     target = gizmoList.get(i);
                 }
             }
-            stage = true;
         } else {
-            target.setPos((e.getX()/LtoPx), (e.getY()/LtoPx));
-            stage = false;
+            model.moveGizmo(target, (e.getX() / LtoPx), (e.getY() / LtoPx));
+            target = null;
         }
     }
 

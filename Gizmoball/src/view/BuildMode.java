@@ -113,25 +113,25 @@ public class BuildMode extends JFrame {
 		
 		JPanel buttonPanel = new JPanel(new GridLayout(3,1));
 		JButton btnMove = new JButton("Move");
-		btnMove.addActionListener(new BuildModeButtonListener(model));
+		btnMove.addActionListener(new BuildModeButtonListener(model, board));
 		
 		JButton btnRotate = new JButton("Rotate");
-		btnRotate.addActionListener(new BuildModeButtonListener(model));
+		btnRotate.addActionListener(new BuildModeButtonListener(model, board));
 		
 		JButton btnDelete = new JButton("Delete");
-		btnDelete.addActionListener(new BuildModeButtonListener(model));
+		btnDelete.addActionListener(new BuildModeButtonListener(model, board));
 		
 		JButton btnConnect = new JButton("Connect");
-		btnConnect.addActionListener(new BuildModeButtonListener(model));
+		btnConnect.addActionListener(new BuildModeButtonListener(model, board));
 		
 		JButton btnDisconnect = new JButton("Disconnect");
-		btnDisconnect.addActionListener(new BuildModeButtonListener(model));
+		btnDisconnect.addActionListener(new BuildModeButtonListener(model, board));
 		
 		JButton btnKeyConnect = new JButton("Key Connect");
-		btnKeyConnect.addActionListener(new BuildModeButtonListener(model));
+		btnKeyConnect.addActionListener(new BuildModeButtonListener(model, board));
 		
 		JButton btnKeyDisconnect = new JButton("Key Disconnect");
-		btnKeyDisconnect.addActionListener(new BuildModeButtonListener(model));
+		btnKeyDisconnect.addActionListener(new BuildModeButtonListener(model, board));
 		
 		buttonPanel.add(btnMove);
 		buttonPanel.add(btnRotate);
