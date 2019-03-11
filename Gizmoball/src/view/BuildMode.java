@@ -23,6 +23,7 @@ public class BuildMode extends JFrame {
 	private JMenuBar jmb;
 	private JMenu file;
 	private JMenu insert;
+	private JMenu mode;
 	private Board board;
 	private Model model;
 	
@@ -32,9 +33,11 @@ public class BuildMode extends JFrame {
 		jmb = new JMenuBar();
 		file = new JMenu("File");
 		insert = new JMenu("Insert");
+		mode = new JMenu("Mode");
 		
 		jmb.add(file);
 		jmb.add(insert);
+		jmb.add(mode);
 		
 		JMenuItem clear = new JMenuItem("Clear Board");
 		clear.addActionListener(new FileMenuActionListener());
@@ -79,6 +82,11 @@ public class BuildMode extends JFrame {
 		insert.add(rightFlipper);
 		insert.add(absorber);
 		insert.add(ball);
+		
+		JMenuItem runMode = new JMenuItem("Enter Run Mode");
+		runMode.addActionListener(new ModeMenuActionListener(model));
+		
+		mode.add(runMode);
 		
 		setJMenuBar(jmb);
 		setTitle("Gizmoball - Build Mode");
