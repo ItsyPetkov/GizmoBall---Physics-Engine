@@ -52,25 +52,25 @@ public class BuildMode extends JFrame {
 		file.add(load);
 		
 		JMenuItem square = new JMenuItem("Square");
-		square.addActionListener(new InsertMenuActionListener());
+		square.addActionListener(new InsertMenuActionListener(model));
 		
 		JMenuItem triangle = new JMenuItem("Triangle");
-		triangle.addActionListener(new InsertMenuActionListener());
+		triangle.addActionListener(new InsertMenuActionListener(model));
 		
 		JMenuItem circle = new JMenuItem("Circle");
-		circle.addActionListener(new InsertMenuActionListener());
+		circle.addActionListener(new InsertMenuActionListener(model));
 		
 		JMenuItem leftFlipper = new JMenuItem("Left Flipper");
-		leftFlipper.addActionListener(new InsertMenuActionListener());
+		leftFlipper.addActionListener(new InsertMenuActionListener(model));
 		
 		JMenuItem rightFlipper = new JMenuItem("Right Flipper");
-		rightFlipper.addActionListener(new InsertMenuActionListener());
+		rightFlipper.addActionListener(new InsertMenuActionListener(model));
 		
 		JMenuItem absorber = new JMenuItem("Absorber");
-		absorber.addActionListener(new InsertMenuActionListener());
+		absorber.addActionListener(new InsertMenuActionListener(model));
 		
 		JMenuItem ball = new JMenuItem("Ball");
-		ball.addActionListener(new InsertMenuActionListener());
+		ball.addActionListener(new InsertMenuActionListener(model));
 		
 		insert.add(square);
 		insert.add(triangle);
@@ -105,25 +105,25 @@ public class BuildMode extends JFrame {
 		
 		JPanel buttonPanel = new JPanel(new GridLayout(3,1));
 		JButton btnMove = new JButton("Move");
-		btnMove.addActionListener(new BuildModeButtonListener());
+		btnMove.addActionListener(new BuildModeButtonListener(model));
 		
 		JButton btnRotate = new JButton("Rotate");
-		btnRotate.addActionListener(new BuildModeButtonListener());
+		btnRotate.addActionListener(new BuildModeButtonListener(model));
 		
 		JButton btnDelete = new JButton("Delete");
-		btnDelete.addActionListener(new BuildModeButtonListener());
+		btnDelete.addActionListener(new BuildModeButtonListener(model));
 		
 		JButton btnConnect = new JButton("Connect");
-		btnConnect.addActionListener(new BuildModeButtonListener());
+		btnConnect.addActionListener(new BuildModeButtonListener(model));
 		
 		JButton btnDisconnect = new JButton("Disconnect");
-		btnDisconnect.addActionListener(new BuildModeButtonListener());
+		btnDisconnect.addActionListener(new BuildModeButtonListener(model));
 		
 		JButton btnKeyConnect = new JButton("Key Connect");
-		btnKeyConnect.addActionListener(new BuildModeButtonListener());
+		btnKeyConnect.addActionListener(new BuildModeButtonListener(model));
 		
 		JButton btnKeyDisconnect = new JButton("Key Disconnect");
-		btnKeyDisconnect.addActionListener(new BuildModeButtonListener());
+		btnKeyDisconnect.addActionListener(new BuildModeButtonListener(model));
 		
 		buttonPanel.add(btnMove);
 		buttonPanel.add(btnRotate);

@@ -1,19 +1,25 @@
 package controller;
 
+import model.Model;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 public class BuildModeButtonListener implements ActionListener {
 
-	public BuildModeButtonListener() {
-		
+	Model model;
+
+	public BuildModeButtonListener(Model m) {
+		this.model = m;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getActionCommand().equals("Move")) {
-			System.out.println("Moving object...");
+			MouseListener ms = new BuildModeMouseListener(model);
+			System.out.println("bro");
 		}else if(e.getActionCommand().equals("Rotate")) {
 			System.out.println("Rotating object...");
 		}else if(e.getActionCommand().equals("Delete")) {

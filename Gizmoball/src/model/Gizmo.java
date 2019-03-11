@@ -23,6 +23,10 @@ public abstract class Gizmo {
         return pos;
     }
 
+    public void setPos(int x, int y){
+        pos = new Vect(x, y);
+    }
+
     abstract public String type();
 
     abstract public Color getColour();
