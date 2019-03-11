@@ -51,7 +51,7 @@ public class Board extends JPanel implements Observer {
 					g.drawRect(i*LtoPx, j*LtoPx, LtoPx, LtoPx);
 				}
 			}
-		}else {
+		}
 			//drawing the objects and setting up the scene for the game
 
 			//drawing the balls
@@ -105,7 +105,6 @@ public class Board extends JPanel implements Observer {
 			g.drawLine((int) (model.getWallBR().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx),(int) (model.getWallBR().x()*LtoPx),(int) (model.getWallTL().y()*LtoPx));
 			g.drawLine((int) (model.getWallBR().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx),(int) (model.getWallTL().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx));
 		}
-	}
 
 	private void drawAbsorber(Graphics g, Absorber abs){
 		Vect gPos1 = abs.getPos();
