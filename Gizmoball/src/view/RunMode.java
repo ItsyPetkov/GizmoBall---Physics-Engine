@@ -20,12 +20,26 @@ public class RunMode extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JMenuBar jmb;
+	private JMenu mode;
 	private Model model;
 	private Board board;
 	private Timer timer;
 	
 	public RunMode(Model model) {
 		this.model = model;
+		
+		jmb = new JMenuBar();
+		mode = new JMenu("Mode");
+		
+		jmb.add(mode);
+		
+		JMenuItem buildMode = new JMenuItem("Enter Build Mode");
+		buildMode.addActionListener(new ModeMenuActionListener(model));
+		
+		mode.add(buildMode);
+		
+		setJMenuBar(jmb);
 		setTitle("Gizmoball - Run Mode");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(100, 100, 510, 596);
