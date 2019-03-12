@@ -13,6 +13,8 @@ public class BuildModeInsertListener implements MouseInputListener {
     String type;
     String id;
 
+    private int sx, sy, ex, ey; //used for absorber
+
     public BuildModeInsertListener(Model m, int LtoPx, String type, String id){
         this.model = m;
         this.LtoPx = LtoPx;
@@ -39,9 +41,6 @@ public class BuildModeInsertListener implements MouseInputListener {
             case "RightFlipper":
                 model.addGizmo(new RightFlipper(id, e.getX()/LtoPx, e.getY()/LtoPx));
                 break;
-            case "Absorber":
-                System.out.println("add abs");
-                break;
             case "Ball":
                 model.addBall(new Ball(id, e.getX()/LtoPx, e.getY()/LtoPx, 0,0));
                 break;
@@ -52,14 +51,22 @@ public class BuildModeInsertListener implements MouseInputListener {
     @Override
     public void mousePressed(MouseEvent e) {
         if(type.equals("Absorber")){
-
+            sx = e.getX();
+            sy = e.getY();
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         if(type.equals("Absorber")){
-
+            ex = e.getX();
+            ey = e.getY();
+            int x1, x2, y1, y2;
+            x1 = Math.min(sx, ex);
+            x2 = Math.max(sx, ex);
+            y1 = Math.min(sy, ey);
+            y2 = Math.max(sy, ey);
+            model.addGizmo(new Absorber(id, x1/LtoPx, y1/LtoPx, x2/LtoPx + 1, y2/LtoPx + 1));
         }
     }
 
@@ -75,9 +82,7 @@ public class BuildModeInsertListener implements MouseInputListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        if(type.equals("Absorber")){
 
-        }
     }
 
     @Override
