@@ -25,18 +25,15 @@ public class BuildModeButtonListener implements ActionListener {
 			board.removeMouseListener(mss[i]);
 		}
 
+		MouseListener ml = new BuildModeMouseListener(model, e.getActionCommand(),board.getLtoPx());
+		board.addMouseListener(ml);
+
 		if(e.getActionCommand().equals("Move")) {
 			System.out.println("Click an object to move, then click a position to move to");
-			MouseListener ml = new BuildModeMoveGizmoListener(model, board.getLtoPx());
-			board.addMouseListener(ml);
 		} else if(e.getActionCommand().equals("Rotate")) {
 			System.out.println("Click an object to rotate");
-			MouseListener rl = new BuildModeRotateGizmoListener(model, board.getLtoPx());
-			board.addMouseListener(rl);
 		} else if(e.getActionCommand().equals("Delete")) {
 			System.out.println("Click an object to delete");
-			MouseListener dl = new BuildModeDeleteListener(model, board.getLtoPx());
-			board.addMouseListener(dl);
 		} else if(e.getActionCommand().equals("Connect")) {
 			System.out.println("Connecting...");
 		} else if(e.getActionCommand().equals("Disconnect")) {

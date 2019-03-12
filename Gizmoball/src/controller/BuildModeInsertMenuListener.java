@@ -7,12 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
-public class InsertMenuActionListener implements ActionListener {
+public class BuildModeInsertMenuListener implements ActionListener {
 
 	Model model;
 	Board board;
 
-	public InsertMenuActionListener(Model m, Board b) {
+	public BuildModeInsertMenuListener(Model m, Board b) {
 		this.model = m;
 		this.board = b;
 	}
@@ -79,7 +79,7 @@ public class InsertMenuActionListener implements ActionListener {
 				idGen = "B" + i;
 			}
 		}
-		board.addMouseListener(new BuildModeInsertListener(model, board.getLtoPx(), e.getActionCommand().replaceAll("\\s+",""), idGen));
+		board.addMouseListener(new BuildModeInsertMouseListener(model, board.getLtoPx(), e.getActionCommand().replaceAll("\\s+",""), idGen));
 	}
 
 }

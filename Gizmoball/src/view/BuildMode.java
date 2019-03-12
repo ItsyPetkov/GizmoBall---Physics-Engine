@@ -85,7 +85,7 @@ public class BuildMode extends JFrame {
 		file.add(load);
 
 		JMenuItem square = new JMenuItem("Square");
-		ActionListener il = new InsertMenuActionListener(model, board);
+		ActionListener il = new BuildModeInsertMenuListener(model, board);
 		square.addActionListener(il);
 
 		JMenuItem triangle = new JMenuItem("Triangle");
