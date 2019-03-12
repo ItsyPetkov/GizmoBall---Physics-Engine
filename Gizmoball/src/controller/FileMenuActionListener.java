@@ -27,11 +27,16 @@ public class FileMenuActionListener implements ActionListener {
 		// TODO Auto-generated method stub
 		if(e.getActionCommand().equals("Clear Board")) {
 			System.out.println("Clearing board..");
-			int size = model.getGizmos().size();
-			for(int i=0; i<size; i++){
+			int gsize = model.getGizmos().size();
+			for(int i=0; i<gsize; i++){
 				model.deleteGizmo(model.getGizmos().get(0));
-				gui.repaint();
 			}
+
+			int bsize = model.getBalls().size();
+			for(int i=0; i<bsize; i++){
+				model.deleteBall(model.getBalls().get(0));
+			}
+
 		}else if(e.getActionCommand().equals("Save Board")) {
 			savefile = new SaveFile(model);
 			System.out.println("Saving file..");

@@ -190,4 +190,9 @@ public class Model extends Observable {
         gizmoList.remove(g);
         nob();
     }
+
+    public void deleteBall(Ball b){
+        ballList.remove(b);
+        nob();
+    }
 }
