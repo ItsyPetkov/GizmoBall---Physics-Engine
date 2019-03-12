@@ -22,12 +22,7 @@ public class BuildModeMoveGizmoListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(target == null){
-            List<Gizmo> gizmoList = model.getGizmos();
-            for(int i=0; i<gizmoList.size(); i++){
-                if(gizmoList.get(i).getPos().x() == (e.getX()/LtoPx) && gizmoList.get(i).getPos().y() == (e.getY()/LtoPx)){
-                    target = gizmoList.get(i);
-                }
-            }
+            target = model.gizmoSearch(e.getX()/LtoPx, e.getY()/LtoPx);
         } else {
             model.moveGizmo(target, (e.getX() / LtoPx), (e.getY() / LtoPx));
             target = null;

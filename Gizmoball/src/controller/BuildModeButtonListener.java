@@ -1,12 +1,15 @@
 package controller;
 
+import model.Gizmo;
 import model.Model;
 import view.Board;
 
 import javax.swing.event.MouseInputListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 
 public class BuildModeButtonListener implements ActionListener {
 
@@ -27,17 +30,20 @@ public class BuildModeButtonListener implements ActionListener {
 		}
 
 		if(e.getActionCommand().equals("Move")) {
+			System.out.println("Click an object to move, then click a position to move to");
 			MouseListener ml = new BuildModeMoveGizmoListener(model, board.getLtoPx());
 			lastUsed = ml;
 			board.addMouseListener(ml);
-			System.out.println("Click an object to move, then click a position to move to");
 		} else if(e.getActionCommand().equals("Rotate")) {
+			System.out.println("Click an object to rotate");
 			MouseListener rl = new BuildModeRotateGizmoListener(model, board.getLtoPx());
 			lastUsed = rl;
 			board.addMouseListener(rl);
-			System.out.println("Click an object to rotate");
 		} else if(e.getActionCommand().equals("Delete")) {
-			System.out.println("Deleting object...");
+			System.out.println("Click an object to delete");
+			MouseListener dl = new BuildModeDeleteListener(model, board.getLtoPx());
+			lastUsed = dl;
+			board.addMouseListener(dl);
 		} else if(e.getActionCommand().equals("Connect")) {
 			System.out.println("Connecting...");
 		} else if(e.getActionCommand().equals("Disconnect")) {

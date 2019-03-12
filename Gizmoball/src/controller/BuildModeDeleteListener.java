@@ -8,13 +8,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 
-public class BuildModeRotateGizmoListener implements MouseListener {
+public class BuildModeDeleteListener implements MouseListener {
 
     Model model;
     Gizmo target;
     int LtoPx;
 
-    public BuildModeRotateGizmoListener(Model m, int LtoPx){
+    public BuildModeDeleteListener(Model m, int LtoPx){
         this.model = m;
         this.LtoPx = LtoPx;
     }
@@ -23,7 +23,7 @@ public class BuildModeRotateGizmoListener implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         target = model.gizmoSearch(e.getX()/LtoPx, e.getY()/LtoPx);
         if(!(target == null)){
-            model.rotateGizmo(target);
+            model.deleteGizmo(target);
             target = null;
         }
     }

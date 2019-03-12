@@ -147,6 +147,15 @@ public class Model extends Observable {
         this.notifyObservers();
     }
 
+    public Gizmo gizmoSearch(int x, int y){
+        for(int i=0; i<gizmoList.size(); i++){
+            if(gizmoList.get(i).getPos().x() == x && gizmoList.get(i).getPos().y() == y){
+                return gizmoList.get(i);
+            }
+        }
+        return null;
+    }
+
     public void moveGizmo(Gizmo g, int x, int y){
         if(gizmoList.contains(g)){
             gizmoList.get(gizmoList.indexOf(g)).move(x,y);
@@ -158,6 +167,11 @@ public class Model extends Observable {
         if(gizmoList.contains(g)){
             gizmoList.get(gizmoList.indexOf(g)).rotate();
         }
+        nob();
+    }
+
+    public void deleteGizmo(Gizmo g){
+        gizmoList.remove(g);
         nob();
     }
 }
