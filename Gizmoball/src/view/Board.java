@@ -198,6 +198,10 @@ public class Board extends JPanel implements Observer {
         g.fillPolygon(X1, Y1, 4);
 	}
 
+	public int getLtoPx(){
+		return LtoPx;
+	}
+
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub

@@ -2,21 +2,21 @@ package controller;
 
 import model.Gizmo;
 import model.Model;
-import view.BuildMode;
 
 import javax.swing.event.MouseInputListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 
-public class BuildModeMouseListener implements MouseInputListener {
+public class BuildModeMoveGizmoListener implements MouseListener {
 
     Model model;
     Gizmo target;
-    int LtoPx = 25;
+    int LtoPx;
 
-    public BuildModeMouseListener(Model m){
+    public BuildModeMoveGizmoListener(Model m, int LtoPx){
         this.model = m;
+        this.LtoPx = LtoPx;
     }
 
     @Override
@@ -51,16 +51,6 @@ public class BuildModeMouseListener implements MouseInputListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
 
     }
 }

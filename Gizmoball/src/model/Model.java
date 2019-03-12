@@ -151,8 +151,13 @@ public class Model extends Observable {
         if(gizmoList.contains(g)){
             gizmoList.get(gizmoList.indexOf(g)).move(x,y);
         }
+        nob();
+    }
 
-        this.setChanged();
-        this.notifyObservers();
+    public void rotateGizmo(Gizmo g){
+        if(gizmoList.contains(g)){
+            gizmoList.get(gizmoList.indexOf(g)).rotate();
+        }
+        nob();
     }
 }
