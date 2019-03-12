@@ -1,41 +1,85 @@
 package controller;
 
 import model.Model;
-import model.SquareBumper;
+import view.Board;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 public class InsertMenuActionListener implements ActionListener {
 
 	Model model;
-	int counter = 0;
+	Board board;
 
-	public InsertMenuActionListener(Model m) {
+	public InsertMenuActionListener(Model m, Board b) {
 		this.model = m;
-
+		this.board = b;
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(arg0.getActionCommand().equals("Square")) {
-			model.addGizmo(new SquareBumper("S" + counter, 0,0));
-			counter++;
-		}else if(arg0.getActionCommand().equals("Triangle")) {
-			System.out.println("Adding a triangle...");
-		}else if(arg0.getActionCommand().equals("Circle")) {
-			System.out.println("Adding a circle...");
-		}else if(arg0.getActionCommand().equals("Left Flipper")) {
-			System.out.println("Adding a left flipper...");
-		}else if(arg0.getActionCommand().equals("Right Flipper")) {
-			System.out.println("Adding a right flipper...");
-		}else if(arg0.getActionCommand().equals("Absorber")) {
-			System.out.println("Adding an absorber...");
-		}else if(arg0.getActionCommand().equals("Ball")) {
-			System.out.println("Adding a ball...");
+		MouseListener[] mss = board.getMouseListeners();
+		for(int i=0; i<mss.length; i++){
+			board.removeMouseListener(mss[i]);
 		}
+
+		String idGen = "";
+
+
+		if(e.getActionCommand().equals("Square")) {
+			int i = 1;
+			idGen = "S" + i;
+			while(!model.checkGizmoId(idGen)){
+				i++;
+				idGen = "S" + i;
+			}
+		}else if(e.getActionCommand().equals("Triangle")) {
+			int i = 1;
+			idGen = "T" + i;
+			while(!model.checkGizmoId(idGen)){
+				i++;
+				idGen = "T" + i;
+			}
+		}else if(e.getActionCommand().equals("Circle")) {
+			int i = 1;
+			idGen = "C" + i;
+			while(!model.checkGizmoId(idGen)){
+				i++;
+				idGen = "C" + i;
+			}
+		}else if(e.getActionCommand().equals("Left Flipper")) {
+			int i = 1;
+			idGen = "LF" + i;
+			while(!model.checkGizmoId(idGen)){
+				i++;
+				idGen = "LF" + i;
+			}
+		}else if(e.getActionCommand().equals("Right Flipper")) {
+			int i = 1;
+			idGen = "RF" + i;
+			while(!model.checkGizmoId(idGen)){
+				i++;
+				idGen = "RF" + i;
+			}
+		}else if(e.getActionCommand().equals("Absorber")) {
+			int i = 1;
+			idGen = "A" + i;
+			while(!model.checkGizmoId(idGen)){
+				i++;
+				idGen = "A" + i;
+			}
+			System.out.println("Adding an absorber...");
+		}else if(e.getActionCommand().equals("Ball")) {
+			int i = 1;
+			idGen = "B" + i;
+			while(!model.checkGizmoId(idGen)){
+				i++;
+				idGen = "B" + i;
+			}
+		}
+		board.addMouseListener(new BuildModeInsertListener(model, board.getLtoPx(), e.getActionCommand().replaceAll("\\s+",""), idGen));
 	}
 
 }

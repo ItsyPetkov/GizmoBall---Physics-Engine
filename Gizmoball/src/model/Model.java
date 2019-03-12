@@ -130,21 +130,19 @@ public class Model extends Observable {
         return ballList;
     }
 
-    public void addGizmo(Gizmo g){
-        gizmoList.add(g);
+    public void nob(){
         this.setChanged();
         this.notifyObservers();
+    }
+
+    public void addGizmo(Gizmo g){
+        gizmoList.add(g);
+        nob();
     }
 
     public void addBall(Ball b){
         ballList.add(b);
-        this.setChanged();
-        this.notifyObservers();
-    }
-
-    public void nob(){
-        this.setChanged();
-        this.notifyObservers();
+        nob();
     }
 
     public Gizmo gizmoSearch(int x, int y){
@@ -154,6 +152,24 @@ public class Model extends Observable {
             }
         }
         return null;
+    }
+
+    public boolean checkGizmoId(String id){
+        for(int i=0; i<gizmoList.size(); i++){
+            if(gizmoList.get(i).getId().equals(id)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkBallId(String id){
+        for(int i=0; i<ballList.size(); i++){
+            if(ballList.get(i).getId().equals(id)){
+                return false;
+            }
+        }
+        return true;
     }
 
     public void moveGizmo(Gizmo g, int x, int y){

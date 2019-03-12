@@ -40,50 +40,6 @@ public class BuildMode extends JFrame {
 		jmb.add(insert);
 		jmb.add(mode);
 		
-		JMenuItem clear = new JMenuItem("Clear Board");
-		clear.addActionListener(new FileMenuActionListener());
-		
-		JMenuItem save = new JMenuItem("Save Board");
-		//save.addActionListener(new FileMenuActionListener());
-		save.addActionListener(new SaveFileButtonListener(model, this));
-		
-		JMenuItem load = new JMenuItem("Load Board");
-		//load.addActionListener(new FileMenuActionListener());
-		load.addActionListener(new LoadFileButtonListener(model, this));
-		
-		file.add(clear);
-		file.add(save);
-		file.add(load);
-		
-		JMenuItem square = new JMenuItem("Square");
-		square.addActionListener(new InsertMenuActionListener(model));
-		
-		JMenuItem triangle = new JMenuItem("Triangle");
-		triangle.addActionListener(new InsertMenuActionListener(model));
-		
-		JMenuItem circle = new JMenuItem("Circle");
-		circle.addActionListener(new InsertMenuActionListener(model));
-		
-		JMenuItem leftFlipper = new JMenuItem("Left Flipper");
-		leftFlipper.addActionListener(new InsertMenuActionListener(model));
-		
-		JMenuItem rightFlipper = new JMenuItem("Right Flipper");
-		rightFlipper.addActionListener(new InsertMenuActionListener(model));
-		
-		JMenuItem absorber = new JMenuItem("Absorber");
-		absorber.addActionListener(new InsertMenuActionListener(model));
-		
-		JMenuItem ball = new JMenuItem("Ball");
-		ball.addActionListener(new InsertMenuActionListener(model));
-		
-		insert.add(square);
-		insert.add(triangle);
-		insert.add(circle);
-		insert.add(leftFlipper);
-		insert.add(rightFlipper);
-		insert.add(absorber);
-		insert.add(ball);
-		
 		JMenuItem runMode = new JMenuItem("Enter Run Mode");
 		runMode.addActionListener(new ModeMenuActionListener(model));
 		
@@ -107,10 +63,56 @@ public class BuildMode extends JFrame {
 		lblWelcomeToGizmoball.setFont(new Font("Tahoma", Font.ITALIC, 25));
 		lblWelcomeToGizmoball.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblWelcomeToGizmoball, BorderLayout.NORTH);
-		
+
 		board = new Board(model);
 		board.setRunningState(false);
 		contentPane.add(board, BorderLayout.CENTER);
+
+		ActionListener fm = new FileMenuActionListener(model, this);
+		JMenuItem clear = new JMenuItem("Clear Board");
+		clear.addActionListener(fm);
+
+		JMenuItem save = new JMenuItem("Save Board");
+		//save.addActionListener(new FileMenuActionListener());
+		save.addActionListener(fm);
+
+		JMenuItem load = new JMenuItem("Load Board");
+		//load.addActionListener(new FileMenuActionListener());
+		load.addActionListener(fm);
+
+		file.add(clear);
+		file.add(save);
+		file.add(load);
+
+		JMenuItem square = new JMenuItem("Square");
+		ActionListener il = new InsertMenuActionListener(model, board);
+		square.addActionListener(il);
+
+		JMenuItem triangle = new JMenuItem("Triangle");
+		triangle.addActionListener(il);
+
+		JMenuItem circle = new JMenuItem("Circle");
+		circle.addActionListener(il);
+
+		JMenuItem leftFlipper = new JMenuItem("Left Flipper");
+		leftFlipper.addActionListener(il);
+
+		JMenuItem rightFlipper = new JMenuItem("Right Flipper");
+		rightFlipper.addActionListener(il);
+
+		JMenuItem absorber = new JMenuItem("Absorber");
+		absorber.addActionListener(il);
+
+		JMenuItem ball = new JMenuItem("Ball");
+		ball.addActionListener(il);
+
+		insert.add(square);
+		insert.add(triangle);
+		insert.add(circle);
+		insert.add(leftFlipper);
+		insert.add(rightFlipper);
+		insert.add(absorber);
+		insert.add(ball);
 		
 		JPanel buttonPanel = new JPanel(new GridLayout(3,1));
 		JButton btnMove = new JButton("Move");
