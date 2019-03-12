@@ -6,14 +6,14 @@ import javax.swing.event.MouseInputListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class BuildModeInsertListener implements MouseInputListener {
+public class BuildModeInsertMouseListener implements MouseInputListener {
 
     Model model;
     int LtoPx;
     String type;
     String id;
 
-    public BuildModeInsertListener(Model m, int LtoPx, String type, String id){
+    public BuildModeInsertMouseListener(Model m, int LtoPx, String type, String id){
         this.model = m;
         this.LtoPx = LtoPx;
         this.type= type;
