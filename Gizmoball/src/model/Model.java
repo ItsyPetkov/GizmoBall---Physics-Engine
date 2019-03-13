@@ -195,4 +195,19 @@ public class Model extends Observable {
         ballList.remove(b);
         nob();
     }
+
+    public boolean isOccupied(int x, int y){
+        for(int i=0; i<gizmoList.size(); i++){
+            if(gizmoList.get(i).getPos().x() == x && gizmoList.get(i).getPos().y() == y){
+                return true;
+            }
+        }
+
+        for(int i=0; i<ballList.size(); i++){
+            if(ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() == y){
+                return true;
+            }
+        }
+        return false;
+    }
 }

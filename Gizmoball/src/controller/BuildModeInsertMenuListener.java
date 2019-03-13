@@ -74,7 +74,7 @@ public class BuildModeInsertMenuListener implements ActionListener {
 		}else if(e.getActionCommand().equals("Ball")) {
 			int i = 1;
 			idGen = "B" + i;
-			while(!model.checkGizmoId(idGen)){
+			while(!model.checkBallId(idGen)){
 				i++;
 				idGen = "B" + i;
 			}
