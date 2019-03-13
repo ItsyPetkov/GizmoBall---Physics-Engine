@@ -43,7 +43,6 @@ public class RunMode extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		this.setVisible(true);
-		this.addKeyListener(new AbsorberKeyListener(model));
 		this.addKeyListener(new EscapeKeyListener(state()));
 		this.setFocusable(true);
 		timer = new Timer(50, new TimerTickListener(model));
@@ -55,6 +54,8 @@ public class RunMode extends JFrame {
 		
 		board = new Board(model);
 		contentPane.add(board, BorderLayout.CENTER);
+
+		this.addKeyListener(new AbsorberKeyListener(model));
 		
 		JPanel buttonPanel = new JPanel(new GridLayout(1,1));
 		JButton btnTick = new JButton("Tick");

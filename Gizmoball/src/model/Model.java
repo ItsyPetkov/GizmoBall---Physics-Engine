@@ -39,23 +39,30 @@ public class Model extends Observable {
                 if (tuc > moveTime) {
                     //no collision
                     moveBallForTime(ballList.get(i), moveTime);
+                    ballList.get(i).release();
                 } else {
-                    //collision
-                    moveBallForTime(ballList.get(i), tuc);
-                    ballList.get(i).setVelo(cd.getVelo().x(), cd.getVelo().y());
-                    switch(collisionType){
-                        case 0:
-                            System.out.println("wall");
-                            break;
-                        case 1:
-                            System.out.println(collidingG.type());
-                            if(collidingG.type().equals("Absorber")){
-                                absorberCapture(ballList.get(i), (Absorber) collidingG);
-                            }
-                            break;
-                        case 2:
-                            System.out.println("ball");
-                            break;
+                    if(!(ballList.get(i).isCaptured())){
+                        //collision
+                        moveBallForTime(ballList.get(i), tuc);
+                        ballList.get(i).setVelo(cd.getVelo().x(), cd.getVelo().y());
+                        switch(collisionType){
+                            case 0:
+                                System.out.println("wall");
+                                break;
+                            case 1:
+                                System.out.println(collidingG.type());
+                                if(collidingG.type().equals("Absorber")){
+                                    absorberCapture(ballList.get(i), (Absorber) collidingG);
+                                    ballList.get(i).capture();
+                                }
+                                break;
+                            case 2:
+                                System.out.println("ball");
+                                break;
+                        }
+                    } else {
+                        //captured ball
+                        moveBallForTime(ballList.get(i), moveTime);
                     }
                 }
             }
@@ -84,6 +91,11 @@ public class Model extends Observable {
 
         //collisions with gizmos
         for(int i=0; i<gizmoList.size(); i++){
+
+            if(ball.isCaptured() && gizmoList.get(i).getId().equals(collidingG.getId())){
+                System.out.println("abs detected");
+            }
+
             List<LineSegment> gizmoSides = gizmoList.get(i).getSides();
             List<Circle> gizmoCorners = gizmoList.get(i).getCorners();
 
@@ -156,12 +168,12 @@ public class Model extends Observable {
         Vect bottomRight = abs.getPos2();
         ball.setPos( bottomRight.x() - (ball.getRadius()) - 0.25, bottomRight.y() - (ball.getRadius()) - 0.25);
         ball.setVelo(0.0,0.0);
-        ball.capture();
     }
 
     public void absorberShoot(Ball ball){
         if(ball.isCaptured()){
             ball.setVelo(0.0, -50);
+
         }
     }
 
