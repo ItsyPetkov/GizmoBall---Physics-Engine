@@ -2,6 +2,7 @@ package model;
 
 import view.MainMenu;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -60,6 +61,10 @@ public class LoadFile {
             }
         } catch(FileNotFoundException ex) {
             System.out.println("File "+filename+" failed to load.");
+            JOptionPane.showMessageDialog(null,
+                    filename+" does not exist.",
+                    "Error 404 - File not found",
+                    JOptionPane.WARNING_MESSAGE);
             return false;
         }
         createBumpers(bumperCommands);
