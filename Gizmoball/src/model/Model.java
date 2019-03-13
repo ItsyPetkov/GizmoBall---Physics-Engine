@@ -21,6 +21,7 @@ public class Model extends Observable {
     private int collisionType = 0;
     private Gizmo collidingG;
     private Ball collidingB;
+    private boolean absCaptured;
 
     public Model(){
         walls = new Walls(0,0,20,20);
@@ -49,6 +50,9 @@ public class Model extends Observable {
                             break;
                         case 1:
                             System.out.println(collidingG.type());
+                            if(collidingG.type().equals("Absorber")){
+                                absorberCapture(ballList.get(i), (Absorber) collidingG);
+                            }
                             break;
                         case 2:
                             System.out.println("ball");
@@ -147,6 +151,19 @@ public class Model extends Observable {
         double x = (old.x()*(1-mu*moveTime-mu2*(Math.abs(old.x()))*moveTime));
         double y = (old.y()*(1-mu*moveTime-mu2*(Math.abs(old.y()))*moveTime));
         return new Vect(x,y);
+    }
+
+    private void absorberCapture(Ball ball, Absorber abs){
+        Vect bottomRight = abs.getPos2();
+        ball.setPos( bottomRight.x() - (ball.getRadius()) - 0.25, bottomRight.y() - (ball.getRadius()) - 0.25);
+        ball.setVelo(0.0,0.0);
+        absCaptured = true;
+    }
+
+    public void absorberShoot(Ball ball){
+        if(absCaptured){
+            ball.setVelo(0.0, -50);
+        }
     }
 
     public Vect getWallTL(){

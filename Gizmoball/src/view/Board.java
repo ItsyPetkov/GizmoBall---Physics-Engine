@@ -44,15 +44,6 @@ public class Board extends JPanel implements Observer {
 		super.paintComponent(g);
 		//drawing the objects and setting up the scene for the game
 
-		//drawing the balls
-		List<Ball> ballList = model.getBalls();
-		for(int i=0; i<ballList.size(); i++){
-			g.setColor(ballList.get(i).getColour());
-			Vect ballPos = ballList.get(i).getPos();
-			double bRad = ballList.get(i).getRadius();
-			g.fillOval((int) ((ballPos.x()-ballList.get(i).getRadius())*LtoPx), (int) ((ballPos.y()-ballList.get(i).getRadius())*LtoPx), (int) ((bRad*2)*LtoPx), (int) ((bRad*2)*LtoPx));
-		}
-
 		//drawing gizmos
 		List<Gizmo> gizmoList = model.getGizmos();
 		for(int i=0; i<gizmoList.size(); i++) {
@@ -76,6 +67,15 @@ public class Board extends JPanel implements Observer {
 					drawFlipper(g, gizmoList.get(i));
 					break;
 			}
+		}
+
+		//drawing the balls
+		List<Ball> ballList = model.getBalls();
+		for(int i=0; i<ballList.size(); i++){
+			g.setColor(ballList.get(i).getColour());
+			Vect ballPos = ballList.get(i).getPos();
+			double bRad = ballList.get(i).getRadius();
+			g.fillOval((int) ((ballPos.x()-ballList.get(i).getRadius())*LtoPx), (int) ((ballPos.y()-ballList.get(i).getRadius())*LtoPx), (int) ((bRad*2)*LtoPx), (int) ((bRad*2)*LtoPx));
 		}
 
 		//drawing the walls
