@@ -69,7 +69,15 @@ public class BuildModeMouseListener implements MouseInputListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-
+        switch (action) {
+            case "Move":
+                if (target == null) {
+                    target = model.gizmoSearch(e.getX() / LtoPx, e.getY() / LtoPx);
+                } else {
+                    model.moveGizmo(target, (e.getX() / LtoPx), (e.getY() / LtoPx));
+                    target = null;
+                }
+        }
     }
 
     @Override

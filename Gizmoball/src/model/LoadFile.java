@@ -1,5 +1,7 @@
 package model;
 
+import view.MainMenu;
+
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +16,7 @@ public class LoadFile {
         model = m;
     }
 
-    public void load(String filename) {
+    public boolean load(String filename) {
         String[] bumpers = {"Square","Triangle","Circle","LeftFlipper","RightFlipper", "Absorber"};
         List<String[]> bumperCommands = new ArrayList<>();
         List<String[]> rotateCommands = new ArrayList<>();
@@ -58,12 +60,14 @@ public class LoadFile {
             }
         } catch(FileNotFoundException ex) {
             System.out.println("File "+filename+" failed to load.");
+            return false;
         }
         createBumpers(bumperCommands);
         rotateGizmos(rotateCommands);
         createBall(ballCommands);
         moveGizmos(moveCommands);
         deleteGizmos(deleteCommands);
+        return true;
     }
 
     public void createBumpers(List<String[]> commands) {

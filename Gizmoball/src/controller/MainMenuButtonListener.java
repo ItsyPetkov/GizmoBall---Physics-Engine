@@ -37,13 +37,18 @@ public class MainMenuButtonListener implements ActionListener {
 //			model.addGizmo(new LeftFlipper("LF1",3,3));
 //			model.addGizmo(new RightFlipper("RF1",6,6));
 //			loadfile.load("test.txt");
+			boolean found = false;
 			String filename = JOptionPane.showInputDialog("Load File Name?");
 			if (filename != null) {
-				loadfile.load(filename);
-				System.out.println(filename + " has been loaded.");
-				rm = new RunMode(model);
-				MainMenu.getMainMenuFrame().dispose();
+				if (loadfile.load(filename)) {
+					System.out.println(filename + " has been loaded.");
+					rm = new RunMode(model);
+					MainMenu.getMainMenuFrame().dispose();
+				}
+
 			}
+
+
 		}else if(arg0.getActionCommand().equals("Exit Game")) {
 			MainMenu.exitGameFrame();
 		}
