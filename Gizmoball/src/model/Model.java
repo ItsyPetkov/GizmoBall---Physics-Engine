@@ -50,7 +50,7 @@ public class Model extends Observable {
                                 System.out.println("wall");
                                 break;
                             case 1:
-                                System.out.println(collidingG.type());
+                                System.out.println(collidingG.type() + " " + collidingG.getId());
                                 if(collidingG.type().equals("Absorber")){
                                     absorberCapture(ballList.get(i), (Absorber) collidingG);
                                     ballList.get(i).capture();
@@ -91,11 +91,6 @@ public class Model extends Observable {
 
         //collisions with gizmos
         for(int i=0; i<gizmoList.size(); i++){
-
-            if(ball.isCaptured() && gizmoList.get(i).getId().equals(collidingG.getId())){
-                System.out.println("abs detected");
-            }
-
             List<LineSegment> gizmoSides = gizmoList.get(i).getSides();
             List<Circle> gizmoCorners = gizmoList.get(i).getCorners();
 
