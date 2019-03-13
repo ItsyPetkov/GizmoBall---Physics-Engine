@@ -20,7 +20,7 @@ public class RunMode extends JFrame {
 	private JMenu mode;
 	private Model model;
 	private Board board;
-	private Timer timer;
+	private static Timer timer;
 	
 	public RunMode(Model model) {
 		this.model = model;
@@ -72,7 +72,7 @@ public class RunMode extends JFrame {
 		contentPane.add(buttonPanel, BorderLayout.SOUTH);
 	}
 
-	public Timer getTimer(){
+	public static Timer getTimer(){
 		return timer;
 	}
 	

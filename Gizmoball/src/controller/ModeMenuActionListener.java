@@ -9,9 +9,9 @@ import view.BuildMode;
 import view.RunMode;
 
 public class ModeMenuActionListener implements ActionListener {
-	
+
 	Model model;
-	
+
 	public ModeMenuActionListener(Model m) {
 		this.model = m;
 	}
@@ -25,6 +25,7 @@ public class ModeMenuActionListener implements ActionListener {
 			}
 			new RunMode(model);
 		}else if(arg0.getActionCommand().equals("Enter Build Mode")) {
+			RunMode.getTimer().stop();
 			for(Frame f: RunMode.getFrames()) {
 				f.dispose();
 			}
