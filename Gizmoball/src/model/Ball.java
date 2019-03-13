@@ -12,6 +12,7 @@ public class Ball {
     private Color colour;
     private String type = "Ball";
     private String id;
+    private boolean absCaptured;
 
     public Ball(String id, double x, double y, double xv, double yv){
         this.id = id;
@@ -19,6 +20,7 @@ public class Ball {
         velo = new Vect(xv, yv);
         radius = 0.25;
         colour = Color.BLUE;
+        absCaptured = false;
     }
 
     public Vect getVelo(){
@@ -55,6 +57,18 @@ public class Ball {
 
     public String getId() {
         return id;
+    }
+
+    public boolean isCaptured(){
+        return absCaptured;
+    }
+
+    public void capture(){
+        absCaptured = true;
+    }
+
+    public void release(){
+        absCaptured = false;
     }
 
 }

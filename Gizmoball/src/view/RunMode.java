@@ -6,10 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import controller.EscapeKeyListener;
-import controller.ModeMenuActionListener;
-import controller.RunModeButtonListener;
-import controller.TimerTickListener;
+import controller.*;
 import model.Model;
 
 public class RunMode extends JFrame {
@@ -27,10 +24,12 @@ public class RunMode extends JFrame {
 		
 		jmb = new JMenuBar();
 		mode = new JMenu("Mode");
+		mode.setFocusable(false);
 		
 		jmb.add(mode);
 		
 		JMenuItem buildMode = new JMenuItem("Enter Build Mode");
+		buildMode.setFocusable(false);
 		buildMode.addActionListener(new ModeMenuActionListener(model));
 		
 		mode.add(buildMode);
@@ -44,8 +43,7 @@ public class RunMode extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		this.setVisible(true);
-//		this.addKeyListener(new AbsorberKeyListener(model, this));
-//		this.setFocusable(true);
+		this.addKeyListener(new AbsorberKeyListener(model));
 		this.addKeyListener(new EscapeKeyListener(state()));
 		this.setFocusable(true);
 		timer = new Timer(50, new TimerTickListener(model));
@@ -60,10 +58,13 @@ public class RunMode extends JFrame {
 		
 		JPanel buttonPanel = new JPanel(new GridLayout(1,1));
 		JButton btnTick = new JButton("Tick");
+		btnTick.setFocusable(false);
 		btnTick.addActionListener(new RunModeButtonListener(model, this));
 		JButton btnRun = new JButton("Run");
+		btnRun.setFocusable(false);
 		btnRun.addActionListener(new RunModeButtonListener(model, this));
 		JButton btnPause = new JButton("Pause");
+		btnPause.setFocusable(false);
 		btnPause.addActionListener(new RunModeButtonListener(model, this));
 		
 		buttonPanel.add(btnTick);

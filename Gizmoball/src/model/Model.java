@@ -21,7 +21,6 @@ public class Model extends Observable {
     private int collisionType = 0;
     private Gizmo collidingG;
     private Ball collidingB;
-    private boolean absCaptured;
 
     public Model(){
         walls = new Walls(0,0,20,20);
@@ -157,11 +156,11 @@ public class Model extends Observable {
         Vect bottomRight = abs.getPos2();
         ball.setPos( bottomRight.x() - (ball.getRadius()) - 0.25, bottomRight.y() - (ball.getRadius()) - 0.25);
         ball.setVelo(0.0,0.0);
-        absCaptured = true;
+        ball.capture();
     }
 
     public void absorberShoot(Ball ball){
-        if(absCaptured){
+        if(ball.isCaptured()){
             ball.setVelo(0.0, -50);
         }
     }
