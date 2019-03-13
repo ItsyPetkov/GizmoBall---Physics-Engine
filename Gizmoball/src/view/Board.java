@@ -42,71 +42,61 @@ public class Board extends JPanel implements Observer {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
+		//drawing the objects and setting up the scene for the game
+
+		//drawing the balls
+		List<Ball> ballList = model.getBalls();
+		for(int i=0; i<ballList.size(); i++){
+			g.setColor(ballList.get(i).getColour());
+			Vect ballPos = ballList.get(i).getPos();
+			double bRad = ballList.get(i).getRadius();
+			g.fillOval((int) ((ballPos.x()-ballList.get(i).getRadius())*LtoPx), (int) ((ballPos.y()-ballList.get(i).getRadius())*LtoPx), (int) ((bRad*2)*LtoPx), (int) ((bRad*2)*LtoPx));
+		}
+
+		//drawing gizmos
+		List<Gizmo> gizmoList = model.getGizmos();
+		for(int i=0; i<gizmoList.size(); i++) {
+			switch (gizmoList.get(i).type()) {
+				case "Absorber":
+					drawAbsorber(g, (Absorber) gizmoList.get(i));
+					break;
+				case "Square":
+					drawSquare(g, (SquareBumper) gizmoList.get(i));
+					break;
+				case "Triangle":
+					drawTriangle(g, (TriangleBumper) gizmoList.get(i));
+					break;
+				case "Circle":
+					drawCircle(g, gizmoList.get(i));
+					break;
+				case "LeftFlipper":
+					drawFlipper(g, gizmoList.get(i));
+					break;
+				case "RightFlipper":
+					drawFlipper(g, gizmoList.get(i));
+					break;
+			}
+		}
+
+		//drawing the walls
+		g.setColor(Color.BLACK);
+		g.drawLine((int) (model.getWallTL().x()*LtoPx),(int) (model.getWallTL().y()*LtoPx),(int) (model.getWallBR().x()*LtoPx),(int) (model.getWallTL().y()*LtoPx));
+		g.drawLine((int) (model.getWallTL().x()*LtoPx),(int) (model.getWallTL().y()*LtoPx),(int) (model.getWallTL().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx));
+		g.drawLine((int) (model.getWallBR().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx),(int) (model.getWallBR().x()*LtoPx),(int) (model.getWallTL().y()*LtoPx));
+		g.drawLine((int) (model.getWallBR().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx),(int) (model.getWallTL().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx));
+
 		if(!isRunning()) {
 			//draw grid here
 			g.setColor(Color.BLACK);
-			for(int i = 0; i < 20; i++) {
-				for(int j = 0; j < 20; j++) {
-					g.drawRect(i*LtoPx, j*LtoPx, LtoPx, LtoPx);
+			for (int i = 0; i < 20; i++) {
+				for (int j = 0; j < 20; j++) {
+					g.drawRect(i * LtoPx, j * LtoPx, LtoPx, LtoPx);
 				}
 			}
 		}
-			//drawing the objects and setting up the scene for the game
+	}
 
-			//drawing the balls
-			List<Ball> ballList = model.getBalls();
-			for(int i=0; i<ballList.size(); i++){
-				g.setColor(ballList.get(i).getColour());
-				Vect ballPos = ballList.get(i).getPos();
-				double bRad = ballList.get(i).getRadius();
-				g.fillOval((int) ((ballPos.x()-ballList.get(i).getRadius())*LtoPx), (int) ((ballPos.y()-ballList.get(i).getRadius())*LtoPx), (int) ((bRad*2)*LtoPx), (int) ((bRad*2)*LtoPx));
-			}
-
-			//drawing gizmos
-			List<Gizmo> gizmoList = model.getGizmos();
-			for(int i=0; i<gizmoList.size(); i++) {
-				switch (gizmoList.get(i).type()) {
-					case "Absorber":
-						drawAbsorber(g, (Absorber) gizmoList.get(i));
-						break;
-					case "Square":
-						drawSquare(g, (SquareBumper) gizmoList.get(i));
-						break;
-					case "Triangle":
-						drawTriangle(g, (TriangleBumper) gizmoList.get(i));
-						break;
-					case "Circle":
-						drawCircle(g, gizmoList.get(i));
-						break;
-					case "LeftFlipper":
-						drawFlipper(g, gizmoList.get(i));
-						break;
-					case "RightFlipper":
-						drawFlipper(g, gizmoList.get(i));
-						break;
-				}
-			}
-
-			//Drawing flippers
-//			List<LeftFlipper> leftFlipperList = model.getLeftFlippers();
-//			List<RightFlipper> rightFlipperList = model.getRightFlippers();
-//			for (LeftFlipper lf : leftFlipperList) {
-//				drawFlipper(g, lf);
-//			}
-//			for (RightFlipper rf : rightFlipperList) {
-//				drawFlipper(g, rf);
-//			}
-
-			//drawing the walls
-			g.setColor(Color.BLACK);
-			g.drawLine((int) (model.getWallTL().x()*LtoPx),(int) (model.getWallTL().y()*LtoPx),(int) (model.getWallBR().x()*LtoPx),(int) (model.getWallTL().y()*LtoPx));
-			g.drawLine((int) (model.getWallTL().x()*LtoPx),(int) (model.getWallTL().y()*LtoPx),(int) (model.getWallTL().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx));
-			g.drawLine((int) (model.getWallBR().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx),(int) (model.getWallBR().x()*LtoPx),(int) (model.getWallTL().y()*LtoPx));
-			g.drawLine((int) (model.getWallBR().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx),(int) (model.getWallTL().x()*LtoPx),(int) (model.getWallBR().y()*LtoPx));
-		}
-
-	private void drawAbsorber(Graphics g, Absorber abs){
+	public void drawAbsorber(Graphics g, Absorber abs){
 		Vect gPos1 = abs.getPos();
 		Vect gPos2 = abs.getPos2();
 		g.setColor(abs.getColour());
