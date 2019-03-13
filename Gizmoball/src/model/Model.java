@@ -15,6 +15,9 @@ public class Model extends Observable {
     private Walls walls;
     private List<Gizmo> gizmoList;
     private List<Ball> ballList;
+    private double gravity = 25;
+    private double mu = 0.025;
+    private double mu2 = 0.025;
 
     public Model(){
         walls = new Walls(0,0,20,20);
@@ -106,12 +109,25 @@ public class Model extends Observable {
         Vect velo = ball.getVelo();
         Vect pos = ball.getPos();
 
+        Vect fv = friction(ball.getVelo(), time);
+        ball.setVelo(fv.x(), fv.y());
+
         double newX = pos.x() + (velo.x()*time);
-        double newY = pos.y() + (velo.y()*time);
+
+        double yDist = (velo.y() * time) + 0.5*(gravity*(time*time));
+        double newY = pos.y() + yDist;
+
+        ball.setVelo(ball.getVelo().x(), ball.getVelo().y()+(gravity*time));
 
         ball.setPos(newX, newY);
 
         return ball;
+    }
+
+    private Vect friction(Vect old, double moveTime){
+        double x = (old.x()*(1-mu*moveTime-mu2*(Math.abs(old.x()))*moveTime));
+        double y = (old.y()*(1-mu*moveTime-mu2*(Math.abs(old.y()))*moveTime));
+        return new Vect(x,y);
     }
 
     public Vect getWallTL(){
@@ -209,5 +225,14 @@ public class Model extends Observable {
             }
         }
         return false;
+    }
+
+    public void setGravity(double g){
+        gravity = g;
+    }
+
+    public void setFriction(double xf, double yf){
+        mu = xf;
+        mu2 = yf;
     }
 }
