@@ -42,7 +42,7 @@ public class BuildModeInsertMouseListener implements MouseInputListener {
                 model.addGizmo(new RightFlipper(id, e.getX()/LtoPx, e.getY()/LtoPx));
                 break;
             case "Ball":
-                model.addBall(new Ball(id, (double) e.getX()/LtoPx, (double) e.getY()/LtoPx, 0,0));
+                model.addBall(new Ball(id, e.getX()/LtoPx, e.getY()/LtoPx, 0,0));
                 break;
         }
 

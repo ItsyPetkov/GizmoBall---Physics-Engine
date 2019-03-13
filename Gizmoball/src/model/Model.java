@@ -18,6 +18,9 @@ public class Model extends Observable {
     private double gravity = 25;
     private double mu = 0.025;
     private double mu2 = 0.025;
+    private int collisionType = 0;
+    private Gizmo collidingG;
+    private Ball collidingB;
 
     public Model(){
         walls = new Walls(0,0,20,20);
@@ -40,6 +43,17 @@ public class Model extends Observable {
                     //collision
                     moveBallForTime(ballList.get(i), tuc);
                     ballList.get(i).setVelo(cd.getVelo().x(), cd.getVelo().y());
+                    switch(collisionType){
+                        case 0:
+                            System.out.println("wall");
+                            break;
+                        case 1:
+                            System.out.println(collidingG.type());
+                            break;
+                        case 2:
+                            System.out.println("ball");
+                            break;
+                    }
                 }
             }
         }
@@ -61,32 +75,35 @@ public class Model extends Observable {
             if(shortestTime > currentTime){
                 shortestTime = currentTime;
                 newVelo = Geometry.reflectWall(wallSegs.get(i), ballVelo, 1.0);
+                collisionType = 0;
             }
         }
 
-        //search gizmoList getSides and getCorners
-        List<LineSegment> gizmoSides = new ArrayList<LineSegment>();
-        List<Circle> gizmoCorners = new ArrayList<Circle>();
+        //collisions with gizmos
         for(int i=0; i<gizmoList.size(); i++){
-            gizmoSides.addAll(gizmoList.get(i).getSides());
-            gizmoCorners.addAll(gizmoList.get(i).getCorners());
-        }
+            List<LineSegment> gizmoSides = gizmoList.get(i).getSides();
+            List<Circle> gizmoCorners = gizmoList.get(i).getCorners();
 
-        //collisions with gizmoSides
-        for(int i=0; i<gizmoSides.size(); i++){
-            double currentTime = Geometry.timeUntilWallCollision(gizmoSides.get(i), ballCircle, ballVelo);
-            if(shortestTime > currentTime){
-                shortestTime = currentTime;
-                newVelo = Geometry.reflectWall(gizmoSides.get(i), ballVelo, 1.0);
+            //collisions with gizmoSides
+            for(int j=0; j<gizmoSides.size(); j++){
+                double currentTime = Geometry.timeUntilWallCollision(gizmoSides.get(j), ballCircle, ballVelo);
+                if(shortestTime > currentTime){
+                    shortestTime = currentTime;
+                    newVelo = Geometry.reflectWall(gizmoSides.get(j), ballVelo, 1.0);
+                    collisionType = 1;
+                    collidingG = gizmoList.get(i);
+                }
             }
-        }
 
-        //collisions with gizmoCorners
-        for(int i=0; i<gizmoCorners.size(); i++){
-            double currentTime = Geometry.timeUntilCircleCollision(gizmoCorners.get(i), ballCircle, ballVelo);
-            if(shortestTime > currentTime){
-                shortestTime = currentTime;
-                newVelo = Geometry.reflectCircle(gizmoCorners.get(i).getCenter(), ball.getCircle().getCenter(), ball.getVelo(), 1.0);
+            //collisions with gizmoCorners
+            for(int j=0; j<gizmoCorners.size(); j++){
+                double currentTime = Geometry.timeUntilCircleCollision(gizmoCorners.get(j), ballCircle, ballVelo);
+                if(shortestTime > currentTime){
+                    shortestTime = currentTime;
+                    newVelo = Geometry.reflectCircle(gizmoCorners.get(j).getCenter(), ball.getCircle().getCenter(), ball.getVelo(), 1.0);
+                    collisionType = 1;
+                    collidingG = gizmoList.get(i);
+                }
             }
         }
 
@@ -97,6 +114,8 @@ public class Model extends Observable {
                 if(shortestTime > currentTime){
                     shortestTime = currentTime;
                     newVelo = Geometry.reflectCircle(ballList.get(i).getCircle().getCenter(), ball.getCircle().getCenter(), ball.getVelo(), 1.0);
+                    collisionType = 2;
+                    collidingB = ballList.get(i);
                 }
             }
         }
