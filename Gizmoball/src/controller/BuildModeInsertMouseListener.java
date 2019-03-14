@@ -2,6 +2,7 @@ package controller;
 
 import model.*;
 
+import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -42,7 +43,26 @@ public class BuildModeInsertMouseListener implements MouseInputListener {
                 model.addGizmo(new RightFlipper(id, e.getX()/LtoPx, e.getY()/LtoPx));
                 break;
             case "Ball":
-                model.addBall(new Ball(id, e.getX()/LtoPx, e.getY()/LtoPx, 0,0));
+                JTextField fieldVelX = new JTextField();
+                JTextField fieldVelY = new JTextField();
+                String velX = "", velY="";
+                Object[] input = {
+                        "Velocity X: ",fieldVelX,
+                        "Velocity Y: ",fieldVelY,
+                };
+
+                int velDialog = JOptionPane.showConfirmDialog(null, input, "Input velocity: ", JOptionPane.OK_CANCEL_OPTION);
+                if (velDialog == JOptionPane.OK_OPTION) {
+                    velX = fieldVelX.getText();
+                    velY = fieldVelY.getText();
+
+                }
+
+                System.out.println(Double.parseDouble(velX));
+                System.out.println(Double.parseDouble(velY));
+
+
+                model.addBall(new Ball(id, e.getX()/LtoPx, e.getY()/LtoPx, Double.parseDouble(velX),Double.parseDouble(velY)));
                 break;
         }
 
