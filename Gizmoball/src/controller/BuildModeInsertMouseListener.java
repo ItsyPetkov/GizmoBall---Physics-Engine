@@ -43,29 +43,33 @@ public class BuildModeInsertMouseListener implements MouseInputListener {
                 model.addGizmo(new RightFlipper(id, e.getX()/LtoPx, e.getY()/LtoPx));
                 break;
             case "Ball":
-                JTextField fieldVelX = new JTextField();
-                JTextField fieldVelY = new JTextField();
-                String velX = "", velY="";
-                Object[] input = {
-                        "Velocity X: ",fieldVelX,
-                        "Velocity Y: ",fieldVelY,
-                };
-
-                int velDialog = JOptionPane.showConfirmDialog(null, input, "Input velocity: ", JOptionPane.OK_CANCEL_OPTION);
-                if (velDialog == JOptionPane.OK_OPTION) {
-                    velX = fieldVelX.getText();
-                    velY = fieldVelY.getText();
-
-                }
-
-                System.out.println(Double.parseDouble(velX));
-                System.out.println(Double.parseDouble(velY));
-
-
-                model.addBall(new Ball(id, e.getX()/LtoPx, e.getY()/LtoPx, Double.parseDouble(velX),Double.parseDouble(velY)));
+                Double[] velocities = getVelocity();
+                model.addBall(new Ball(id, e.getX()/LtoPx, e.getY()/LtoPx, velocities[0],velocities[1]));
                 break;
         }
 
+    }
+
+    public Double[] getVelocity() {
+        JTextField fieldVelX = new JTextField();
+        JTextField fieldVelY = new JTextField();
+        String velX = "", velY="";
+        Object[] input = {
+                "Velocity X: ",fieldVelX,
+                "Velocity Y: ",fieldVelY,
+        };
+
+        int velDialog = JOptionPane.showConfirmDialog(null, input, "Input velocity: ", JOptionPane.OK_CANCEL_OPTION);
+        if (velDialog == JOptionPane.OK_OPTION) {
+            velX = fieldVelX.getText();
+            velY = fieldVelY.getText();
+
+        }
+        Double[] velocities = new Double[2];
+        velocities[0] = Double.parseDouble(velX);
+        velocities[1] = Double.parseDouble(velY);
+
+        return velocities;
     }
 
     @Override
@@ -102,6 +106,8 @@ public class BuildModeInsertMouseListener implements MouseInputListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
+
+
 
     }
 
