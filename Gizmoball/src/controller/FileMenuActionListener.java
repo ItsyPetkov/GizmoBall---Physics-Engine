@@ -4,8 +4,11 @@ import model.LoadFile;
 import model.Model;
 import model.SaveFile;
 import view.BuildMode;
+import view.MainMenu;
+import view.RunMode;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,12 +19,13 @@ public class FileMenuActionListener implements ActionListener {
 	private SaveFile savefile;
 	private Model model;
 	private BuildMode gui;
+	private JFileChooser chooser;
 
 	public FileMenuActionListener(Model m, BuildMode g) {
 		model = m;
 		gui = g;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -48,18 +52,25 @@ public class FileMenuActionListener implements ActionListener {
 			}
 		}else if(e.getActionCommand().equals("Load Board")) {
 			loadfile = new LoadFile(model);
-			System.out.println("Loading file..");
-			String filename = JOptionPane.showInputDialog("Load File Name?");
-			if (filename != null) {
-				loadfile.load(filename);
-				System.out.println(filename + " has been loaded.");
-//            gui.repaint();
-				for(Frame f: BuildMode.getFrames()) {
-					f.dispose();
+//			System.out.println("Loading file..");
+//			String filename = JOptionPane.showInputDialog("Load File Name?");
+//			if (filename != null) {
+//				loadfile.load(filename);
+//				System.out.println(filename + " has been loaded.");
+			chooser = new JFileChooser();
+			FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt files","txt");
+			chooser.setFileFilter(filter);
+			int returnVal = chooser.showOpenDialog(null);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				if (loadfile.load(chooser.getSelectedFile().getName())) {
+					System.out.println(chooser.getSelectedFile().getName()+" loaded successfully");
 				}
-				gui = new BuildMode(model);
 			}
+//            gui.repaint();
+			for(Frame f: BuildMode.getFrames()) {
+				f.dispose();
+			}
+			gui = new BuildMode(model);
 		}
 	}
-
 }
