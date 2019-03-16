@@ -32,12 +32,10 @@ public class BuildModeButtonListener implements ActionListener {
             board.removeMouseMotionListener(mml[i]);
         }
 
-        MouseListener ml = new BuildModeMouseListener(model, e.getActionCommand(),board.getLtoPx());
-        board.addMouseListener(ml);
-        board.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent me) {
-                if (e.getActionCommand().equals("Move")) {
+        if (e.getActionCommand().equals("Move")){
+            board.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent me) {
                     target = model.gizmoSearch(me.getX() / LtoPx, me.getY() / LtoPx);
                     if (target != null) {
                         if (target.getPos().x() == me.getX() / LtoPx && target.getPos().y() == me.getY() / LtoPx) {
@@ -47,34 +45,21 @@ public class BuildModeButtonListener implements ActionListener {
                         }
                     }
                 }
-            }
-        });
-        board.addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent me) {
-                if (e.getActionCommand().equals("Move")) {
+            });
+
+            board.addMouseMotionListener(new MouseMotionAdapter() {
+                @Override
+                public void mouseDragged(MouseEvent me) {
                     if (target != null) {
                         if (!dragging) {
                             model.moveGizmo(target, me.getX() / LtoPx, me.getY() / LtoPx);
                         }
                     }
                 }
-            }
-        });
-        if(e.getActionCommand().equals("Move")) {
-            System.out.println("Click an object to move, then click a position to move to");
-        } else if(e.getActionCommand().equals("Rotate")) {
-            System.out.println("Click an object to rotate");
-        } else if(e.getActionCommand().equals("Delete")) {
-            System.out.println("Click an object to delete");
-        } else if(e.getActionCommand().equals("Connect")) {
-            System.out.println("Connecting...");
-        } else if(e.getActionCommand().equals("Disconnect")) {
-            System.out.println("Disconneecting...");
-        } else if(e.getActionCommand().equals("Key Connect")) {
-            System.out.println("Connecting Key...");
-        } else if(e.getActionCommand().equals("Key Disconnect")) {
-            System.out.println("Disconnecting Key...");
+            });
+        } else {
+            MouseListener ml = new BuildModeMouseListener(model, e.getActionCommand(),board.getLtoPx());
+            board.addMouseListener(ml);
         }
     }
 

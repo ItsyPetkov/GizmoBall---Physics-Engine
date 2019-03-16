@@ -194,14 +194,45 @@ public class Model extends Observable {
     }
 
     public void addGizmo(Gizmo g){
-       if(!isOccupied(g.getPos().x(), g.getPos().y())) {
-    		 gizmoList.add(g);
-    	}
+        if(g.type().equals("Absorber")){
+            boolean trigger = true;
+            Absorber abs = (Absorber) g;
+            double height = abs.getPos2().y() - abs.getPos().y();
+            double width = abs.getPos2().x() - abs.getPos().x();
+            for(int h=0; h<height; h++){
+                for(int w=0; w<width; w++){
+                    if(isOccupied(abs.getPos().x()+w, abs.getPos().y()+h)){
+                        trigger = false;
+                    }
+                }
+            }
+            if(trigger){
+                gizmoList.add(g);
+            }
+        } else if(g.type().equals("LeftFlipper") || g.type().equals("LeftFlipper")){
+            boolean trigger = true;
+            double height = 2;
+            double width = 2;
+            for(int h=0; h<height; h++){
+                for(int w=0; w<width; w++){
+                    if(isOccupied(g.getPos().x()+w, g.getPos().y()+h)){
+                        trigger = false;
+                    }
+                }
+            }
+            if(trigger){
+                gizmoList.add(g);
+            }
+        } else if(!isOccupied(g.getPos().x(), g.getPos().y())){
+            gizmoList.add(g);
+        }
         nob();
     }
 
     public void addBall(Ball b){
-        ballList.add(b);
+        if(!isOccupied(b.getPos().x(), b.getPos().y())) {
+            ballList.add(b);
+        }
         nob();
     }
 
@@ -233,7 +264,7 @@ public class Model extends Observable {
     }
 
     public void moveGizmo(Gizmo g, int x, int y){
-        if(gizmoList.contains(g)){
+        if(gizmoList.contains(g) && (!isOccupied(g.getPos().x(), g.getPos().y()))){
             gizmoList.get(gizmoList.indexOf(g)).move(x,y);
         }
         nob();
@@ -260,6 +291,31 @@ public class Model extends Observable {
         for(int i=0; i<gizmoList.size(); i++){
             if(gizmoList.get(i).getPos().x() == x && gizmoList.get(i).getPos().y() == y){
                 return true;
+            }
+
+            if(gizmoList.get(i).type().equals("Absorber")){
+                Absorber abs = (Absorber) gizmoList.get(i);
+                double height = abs.getPos2().y() - abs.getPos().y();
+                double width = abs.getPos2().x() - abs.getPos().x();
+                for(int h=0; h<height; h++){
+                    for(int w=0; w<width; w++){
+                        if(abs.getPos().x()+w == x && abs.getPos().y()+h == y){
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            if(gizmoList.get(i).type().equals("LeftFlipper") || gizmoList.get(i).type().equals("RightFlipper")){
+                int height = 2;
+                int width = 2;
+                for(int h=0; h<height; h++){
+                    for(int w=0; w<width; w++){
+                        if(gizmoList.get(i).getPos().x()+w == x && gizmoList.get(i).getPos().y()+h == y){
+                            return true;
+                        }
+                    }
+                }
             }
         }
 
