@@ -5,10 +5,12 @@ import java.awt.event.ActionListener;
 
 import model.*;
 import view.BuildMode;
+import view.Main;
 import view.MainMenu;
 import view.RunMode;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MainMenuButtonListener implements ActionListener {
 
@@ -16,12 +18,13 @@ public class MainMenuButtonListener implements ActionListener {
 	private BuildMode bm;
 	private Model model;
 	private LoadFile loadfile;
-	
+	private JFileChooser chooser;
+
 	public MainMenuButtonListener() {
 		model = new Model();
 		loadfile = new LoadFile(model);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
@@ -37,17 +40,26 @@ public class MainMenuButtonListener implements ActionListener {
 //			model.addGizmo(new LeftFlipper("LF1",3,3));
 //			model.addGizmo(new RightFlipper("RF1",6,6));
 //			loadfile.load("test.txt");
-			boolean found = false;
-			String filename = JOptionPane.showInputDialog("Load File Name?");
-			if (filename != null) {
-				if (loadfile.load(filename)) {
-					System.out.println(filename + " has been loaded.");
+//			String filename = JOptionPane.showInputDialog("Load File Name?");
+//			if (filename != null) {
+//				if (loadfile.load(filename)) {
+//					System.out.println(filename + " has been loaded.");
+//					rm = new RunMode(model);
+//					MainMenu.getMainMenuFrame().dispose();
+//				}
+//
+//			}
+			chooser = new JFileChooser();
+			FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt files","txt");
+			chooser.setFileFilter(filter);
+			int returnVal = chooser.showOpenDialog(null);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				if (loadfile.load(chooser.getSelectedFile().getName())) {
+					System.out.println(chooser.getSelectedFile().getName()+" loaded successfully");
 					rm = new RunMode(model);
 					MainMenu.getMainMenuFrame().dispose();
 				}
-
 			}
-
 
 		}else if(arg0.getActionCommand().equals("Exit Game")) {
 			MainMenu.exitGameFrame();
