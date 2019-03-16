@@ -193,7 +193,7 @@ public class Model extends Observable {
         this.notifyObservers();
     }
 
-    public void addGizmo(Gizmo g){
+    public boolean addGizmo(Gizmo g){
         if(g.type().equals("Absorber")){
             boolean trigger = true;
             Absorber abs = (Absorber) g;
@@ -208,6 +208,8 @@ public class Model extends Observable {
             }
             if(trigger){
                 gizmoList.add(g);
+                nob();
+                return true;
             }
         } else if(g.type().equals("LeftFlipper") || g.type().equals("LeftFlipper")){
             boolean trigger = true;
@@ -222,11 +224,16 @@ public class Model extends Observable {
             }
             if(trigger){
                 gizmoList.add(g);
+                nob();
+                return true;
             }
         } else if(!isOccupied(g.getPos().x(), g.getPos().y())){
             gizmoList.add(g);
+            nob();
+            return true;
         }
         nob();
+        return false;
     }
 
     public void addBall(Ball b){
@@ -325,6 +332,36 @@ public class Model extends Observable {
             }
         }
         return false;
+    }
+
+    public void dragAbs(Absorber abs, int x2, int y2){
+        double height = abs.getPos2().y()-abs.getPos().y();
+        double width = abs.getPos2().x()-abs.getPos().x();
+        double newHeight = y2-abs.getPos2().y();
+        double newWidth = x2-abs.getPos2().x();
+
+        boolean trigger = true;
+
+        for(int h=0; h<newHeight; h++){
+            for(int w=0; w<width; w++){
+                if(isOccupied(abs.getPos().x()+w, abs.getPos().y()+height+h)){
+                    trigger = false;
+                }
+            }
+        }
+
+        for(int w=0; w<newWidth; w++){
+            for(int h=0; h<height; h++){
+                if(isOccupied(abs.getPos().x()+width+w, abs.getPos().y()+h)){
+                    trigger = false;
+                }
+            }
+        }
+
+        if(trigger){
+            abs.setPos2(abs.getPos2().x()+(x2-abs.getPos2().x()), abs.getPos2().y()+(y2-abs.getPos2().y()));
+        }
+        nob();
     }
 
     public void setGravity(double g){

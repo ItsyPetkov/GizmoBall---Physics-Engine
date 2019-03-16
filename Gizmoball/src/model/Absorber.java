@@ -24,6 +24,10 @@ public class Absorber extends Gizmo{
         return pos2;
     }
 
+    public void setPos2(double x, double y){
+        pos2 = new Vect(x, y);
+    }
+
     @Override
     public String type() {
         return type;

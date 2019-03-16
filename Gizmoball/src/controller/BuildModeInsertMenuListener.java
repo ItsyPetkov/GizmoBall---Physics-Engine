@@ -1,17 +1,19 @@
 package controller;
 
+import model.Absorber;
+import model.Gizmo;
 import model.Model;
 import view.Board;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 
 public class BuildModeInsertMenuListener implements ActionListener {
 
 	Model model;
 	Board board;
+	String idGen = "";
+	Gizmo newAbs = null;
+	boolean avail = false;
 
 	public BuildModeInsertMenuListener(Model m, Board b) {
 		this.model = m;
@@ -31,7 +33,7 @@ public class BuildModeInsertMenuListener implements ActionListener {
 			board.removeMouseMotionListener(mml[i]);
 		}
 
-		String idGen = "";
+
 
 
 		if(e.getActionCommand().equals("Square")) {
@@ -85,7 +87,28 @@ public class BuildModeInsertMenuListener implements ActionListener {
 				idGen = "B" + i;
 			}
 		}
-		board.addMouseListener(new BuildModeInsertMouseListener(model, board.getLtoPx(), e.getActionCommand().replaceAll("\\s+",""), idGen));
+
+		if(e.getActionCommand().equals("Absorber")){
+			board.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mousePressed(MouseEvent me) {
+					newAbs = new Absorber(idGen, me.getX()/board.getLtoPx(), me.getY()/board.getLtoPx(), (me.getX()/board.getLtoPx()) +1, (me.getY()/board.getLtoPx()) +1);
+					avail = model.addGizmo(newAbs);
+				}
+			});
+
+			board.addMouseMotionListener(new MouseMotionAdapter() {
+				@Override
+				public void mouseDragged(MouseEvent me) {
+					if(!(newAbs == null) && avail){
+						Absorber abs = (Absorber) newAbs;
+						model.dragAbs(abs, me.getX()/board.getLtoPx()+1, me.getY()/board.getLtoPx()+1);
+					}
+				}
+			});
+		} else {
+			board.addMouseListener(new BuildModeInsertMouseListener(model, board.getLtoPx(), e.getActionCommand().replaceAll("\\s+",""), idGen));
+	}
 	}
 
 }
