@@ -194,7 +194,9 @@ public class Model extends Observable {
     }
 
     public void addGizmo(Gizmo g){
-        gizmoList.add(g);
+       if(!isOccupied(g.getPos().x(), g.getPos().y())) {
+    		 gizmoList.add(g);
+    	}
         nob();
     }
 
