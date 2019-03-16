@@ -33,7 +33,6 @@ public class BuildModeButtonListener implements ActionListener {
             @Override
             public void mousePressed(MouseEvent me) {
                 if (e.getActionCommand().equals("Move")) {
-                    System.out.println("Moving");
                     target = model.gizmoSearch(me.getX() / LtoPx, me.getY() / LtoPx);
                     if (target != null) {
                         if (target.getPos().x() == me.getX() / LtoPx && target.getPos().y() == me.getY() / LtoPx) {
@@ -49,7 +48,6 @@ public class BuildModeButtonListener implements ActionListener {
             @Override
             public void mouseDragged(MouseEvent me) {
                 if (e.getActionCommand().equals("Move")) {
-                    System.out.println("Moving");
                     if (target != null) {
                         if (!dragging) {
                             model.moveGizmo(target, me.getX() / LtoPx, me.getY() / LtoPx);
