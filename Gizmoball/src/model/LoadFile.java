@@ -64,7 +64,7 @@ public class LoadFile {
             JOptionPane.showMessageDialog(null,
                     filename+" does not exist.",
                     "Error 404 - File not found",
-                    JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.ERROR_MESSAGE);
             return false;
         }
         createBumpers(bumperCommands);
