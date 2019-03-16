@@ -256,7 +256,7 @@ public class Model extends Observable {
         nob();
     }
 
-    public boolean isOccupied(int x, int y){
+    public boolean isOccupied(double x, double y){
         for(int i=0; i<gizmoList.size(); i++){
             if(gizmoList.get(i).getPos().x() == x && gizmoList.get(i).getPos().y() == y){
                 return true;

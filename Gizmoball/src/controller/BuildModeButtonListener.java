@@ -27,6 +27,11 @@ public class BuildModeButtonListener implements ActionListener {
             board.removeMouseListener(mss[i]);
         }
 
+        MouseMotionListener[] mml = board.getMouseMotionListeners();
+        for(int i=0; i<mml.length; i++){
+            board.removeMouseMotionListener(mml[i]);
+        }
+
         MouseListener ml = new BuildModeMouseListener(model, e.getActionCommand(),board.getLtoPx());
         board.addMouseListener(ml);
         board.addMouseListener(new MouseAdapter() {

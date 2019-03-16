@@ -6,6 +6,7 @@ import view.Board;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 public class BuildModeInsertMenuListener implements ActionListener {
 
@@ -23,6 +24,11 @@ public class BuildModeInsertMenuListener implements ActionListener {
 		MouseListener[] mss = board.getMouseListeners();
 		for(int i=0; i<mss.length; i++){
 			board.removeMouseListener(mss[i]);
+		}
+
+		MouseMotionListener[] mml = board.getMouseMotionListeners();
+		for(int i=0; i<mml.length; i++){
+			board.removeMouseMotionListener(mml[i]);
 		}
 
 		String idGen = "";
