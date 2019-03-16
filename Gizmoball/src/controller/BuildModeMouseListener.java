@@ -4,6 +4,8 @@ import model.Gizmo;
 import model.Model;
 
 import javax.swing.event.MouseInputListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 
 public class BuildModeMouseListener implements MouseInputListener {
@@ -43,6 +45,12 @@ public class BuildModeMouseListener implements MouseInputListener {
                     model.rotateGizmo(target);
                     target = null;
                 }
+                break;
+            case "Key Connect":
+                target = model.gizmoSearch(e.getX()/LtoPx, e.getY()/LtoPx);
+
+                //TODO add key prompt
+                new CustomKeyListener(model, CustomKeys.getLastKey().getKeyChar(), target);
                 break;
         }
     }
