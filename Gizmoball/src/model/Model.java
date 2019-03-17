@@ -80,12 +80,12 @@ public class Model extends Observable {
         List<LineSegment> wallSegs = walls.getLineSegments();
         double shortestTime = Geometry.timeUntilWallCollision(wallSegs.get(0), ballCircle, ballVelo);
         Vect newVelo = Geometry.reflectWall(wallSegs.get(0), ballVelo, 1.0);
+        collisionType = 0;
         for(int i=1; i<wallSegs.size(); i++){
             double currentTime = Geometry.timeUntilWallCollision(wallSegs.get(i), ballCircle, ballVelo);
             if(shortestTime > currentTime){
                 shortestTime = currentTime;
                 newVelo = Geometry.reflectWall(wallSegs.get(i), ballVelo, 1.0);
-                collisionType = 0;
             }
         }
 
@@ -368,61 +368,167 @@ public class Model extends Observable {
         double height = abs.getPos2().y()-abs.getPos().y();
         double width = abs.getPos2().x()-abs.getPos().x();
 
+        boolean check = false;
+
         if(x2 > last.x()){
-            if(last.x() == abs.getPos().x() && last.y() == abs.getPos().y()){
-                //TL backpedal
-                abs.setPos(x2, y2);
-            } else if (last.x()+1 == abs.getPos2().x() && last.y()+1 == abs.getPos2().y()){
+            if (last.x()+1 == abs.getPos2().x() && last.y()+1 == abs.getPos2().y()){
                 //BR
-                abs.setPos2(x2+1, y2+1);
+                for(int h=0; h<height; h++){
+                    if(isOccupied(x2, abs.getPos().y()+h)){
+                        check = true;
+                    }
+                }
+                if(!check){
+                    abs.setPos2(x2+1, y2+1);
+                }
+            } else if(last.x() == abs.getPos().x() && last.y() == abs.getPos().y()){
+                if(width == 1){
+                    //TR
+                    for(int h=0; h<height; h++){
+                        if(isOccupied(x2, abs.getPos().y()+h)){
+                            check = true;
+                        }
+                    }
+                    if(!check){
+                        abs.setPos2(x2+1, (int) abs.getPos2().y());
+                    }
+                } else {
+                    //TL backpedal
+                    abs.setPos(x2, y2);
+                }
+            } else if(last.x()+1 == abs.getPos2().x()){
+                //TR
+                for(int h=0; h<height; h++){
+                    if(isOccupied(x2, abs.getPos().y()+h)){
+                        check = true;
+                    }
+                }
+                if(!check){
+                    abs.setPos2(x2+1, (int) abs.getPos2().y());
+                }
             } else if(last.x() == abs.getPos().x()){
                 //BL backpedal
                 abs.setPos(x2, (int) abs.getPos().y());
-            } else if(last.x()+1 == abs.getPos2().x()){
-                //TR
-                abs.setPos2(x2+1, (int) abs.getPos2().y());
             }
         } else if(x2 < last.x()){
             if(last.x() == abs.getPos().x() && last.y() == abs.getPos().y()){
                 //TL
-                abs.setPos(x2, y2);
+                for(int h=0; h<height; h++){
+                    if(isOccupied(x2, abs.getPos().y()+h)){
+                        check = true;
+                    }
+                }
+                if(!check){
+                    abs.setPos(x2, y2);
+                }
             } else if (last.x()+1 == abs.getPos2().x() && last.y()+1 == abs.getPos2().y()){
-                //BR backpedal
-                abs.setPos2(x2+1, y2+1);
+                if(width == 1){
+                    //BL
+                    for(int h=0; h<height; h++){
+                        if(isOccupied(x2, abs.getPos().y()+h)){
+                            check = true;
+                        }
+                    }
+                    if(!check){
+                        abs.setPos(x2, (int) abs.getPos().y());
+                    }
+                } else {
+                    //BR backpedal
+                    abs.setPos2(x2+1, y2+1);
+                }
             } else if(last.x() == abs.getPos().x()){
                 //BL
-                abs.setPos(x2, (int) abs.getPos().y());
+                for(int h=0; h<height; h++){
+                    if(isOccupied(x2, abs.getPos().y()+h)){
+                        check = true;
+                    }
+                }
+                if(!check){
+                    abs.setPos(x2, (int) abs.getPos().y());
+                }
             } else if(last.x()+1 == abs.getPos2().x()){
                 //TR backpedal
                 abs.setPos2(x2+1, (int) abs.getPos2().y());
             }
         } else if(y2 > last.y()){
-            if(last.x() == abs.getPos().x() && last.y() == abs.getPos().y()){
-                //TL backpedal
-                abs.setPos(x2, y2);
-            } else if (last.x()+1 == abs.getPos2().x() && last.y()+1 == abs.getPos2().y()){
+            if (last.x()+1 == abs.getPos2().x() && last.y()+1 == abs.getPos2().y()){
                 //BR
-                abs.setPos2(x2+1, y2+1);
-            } else if(last.x() == abs.getPos().x()){
-                //BL
-                abs.setPos2((int) abs.getPos2().x(), y2+1);
+                for(int w=0; w<width; w++){
+                    if(isOccupied(abs.getPos().x()+w, y2)){
+                        check = true;
+                    }
+                }
+                if(!check){
+                    abs.setPos2(x2+1, y2+1);
+                }
+            } else if(last.x() == abs.getPos().x() && last.y() == abs.getPos().y()){
+                if(height == 1){
+                    //BL
+                    for(int w=0; w<width; w++){
+                        if(isOccupied(abs.getPos().x()+w, y2)){
+                            check = true;
+                        }
+                    }
+                    if(!check){
+                        abs.setPos2((int) abs.getPos2().x(), y2+1);
+                    }
+                } else {
+                    //TL backpedal
+                    abs.setPos(x2, y2);
+                }
             } else if(last.x()+1 == abs.getPos2().x()){
                 //TR backpedal
                 abs.setPos((int) abs.getPos().x(), y2);
+            } else if(last.x() == abs.getPos().x()){
+                //BL
+                for(int w=0; w<width; w++){
+                    if(isOccupied(abs.getPos().x()+w, y2)){
+                        check = true;
+                    }
+                }
+                if(!check){
+                    abs.setPos2((int) abs.getPos2().x(), y2+1);
+                }
             }
         } else if(y2 < last.y()){
             if(last.x() == abs.getPos().x() && last.y() == abs.getPos().y()){
                 //TL
-                abs.setPos(x2, y2);
+                for(int w=0; w<width; w++){
+                    if(isOccupied(abs.getPos().x()+w, y2)){
+                        check = true;
+                    }
+                }
+                if(!check){
+                    abs.setPos(x2, y2);
+                }
             } else if(last.x()+1 == abs.getPos2().x() && last.y()+1 == abs.getPos2().y()){
-                //BR backpedal
-                abs.setPos2(x2+1, y2+1);
+                if(height == 1){
+                    //TR
+                    for(int w=0; w<width; w++){
+                        if(isOccupied(abs.getPos().x()+w, y2)){
+                            check = true;
+                        }
+                    }
+                    if(!check){
+                        abs.setPos((int) abs.getPos().x(), y2);
+                    }
+                } else {
+                    //BR backpedal
+                    abs.setPos2(x2+1, y2+1);
+                }
             } else if(last.x() == abs.getPos().x()){
                 //BL backpedal
                 abs.setPos2((int) abs.getPos2().x(), y2+1);
             } else if(last.x()+1 == abs.getPos2().x()){
                 //TR
-                abs.setPos((int) abs.getPos().y(), y2);
+                for(int w=0; w<width; w++){
+                    if(isOccupied(abs.getPos().x()+w, y2)){
+                        check = true;
+                    }
+                }
+                if(!check){
+                    abs.setPos((int) abs.getPos().x(), y2);
+                }
             }
         }
 
