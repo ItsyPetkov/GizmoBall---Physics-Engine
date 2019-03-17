@@ -253,8 +253,8 @@ public class Model extends Observable {
     }
 
     public Ball ballSearch(int x, int y){
-        for(int i=0; i<gizmoList.size(); i++){
-            if(ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() == y){
+        for(int i=0; i<ballList.size(); i++){
+            if (ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() == y) {
                 return ballList.get(i);
             }
         }
