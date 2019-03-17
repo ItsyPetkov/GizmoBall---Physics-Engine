@@ -1,5 +1,6 @@
 package controller;
 
+import model.Ball;
 import model.Gizmo;
 import model.Model;
 import view.Board;
@@ -12,6 +13,7 @@ public class BuildModeButtonListener implements ActionListener {
     Board board;
     int LtoPx = 25;
     Gizmo target;
+    Ball targetBall;
     boolean dragging = false;
 
     public BuildModeButtonListener(Model m, Board b) {
@@ -36,12 +38,24 @@ public class BuildModeButtonListener implements ActionListener {
             board.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent me) {
+                    //Moving Gizmos
                     target = model.gizmoSearch(me.getX() / LtoPx, me.getY() / LtoPx);
                     if (target != null) {
                         if (target.getPos().x() == me.getX() / LtoPx && target.getPos().y() == me.getY() / LtoPx) {
                             model.moveGizmo(target, me.getX() / LtoPx, me.getY() / LtoPx);
                         } else {
                             dragging = true;
+                        }
+
+                        //Moving Balls
+                    } else {
+                        targetBall = model.ballSearch(me.getX() / LtoPx, me.getY() / LtoPx);
+                        if (targetBall != null) {
+                            if (targetBall.getPos().x() == me.getX() / LtoPx && targetBall.getPos().y() == me.getY() / LtoPx) {
+                                model.setBallPos(targetBall, me.getX() / LtoPx, me.getY() / LtoPx);
+                            } else {
+                                dragging = true;
+                            }
                         }
                     }
                 }
@@ -53,6 +67,10 @@ public class BuildModeButtonListener implements ActionListener {
                     if (target != null) {
                         if (!dragging) {
                             model.moveGizmo(target, me.getX() / LtoPx, me.getY() / LtoPx);
+                        }
+                    } else if (targetBall != null) {
+                        if (!dragging) {
+                            model.setBallPos(targetBall, me.getX()/LtoPx, me.getY()/LtoPx);
                         }
                     }
                 }

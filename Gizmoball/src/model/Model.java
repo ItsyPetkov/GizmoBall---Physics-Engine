@@ -252,6 +252,15 @@ public class Model extends Observable {
         return null;
     }
 
+    public Ball ballSearch(int x, int y){
+        for(int i=0; i<gizmoList.size(); i++){
+            if(ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() == y){
+                return ballList.get(i);
+            }
+        }
+        return null;
+    }
+
     public boolean checkGizmoId(String id){
         for(int i=0; i<gizmoList.size(); i++){
             if(gizmoList.get(i).getId().equals(id)){
@@ -273,6 +282,13 @@ public class Model extends Observable {
     public void moveGizmo(Gizmo g, int x, int y){
         if(gizmoList.contains(g) && (!isOccupied(x, y))){
             gizmoList.get(gizmoList.indexOf(g)).move(x,y);
+        }
+        nob();
+    }
+
+    public void setBallPos(Ball b, int x, int y){
+        if(ballList.contains(b) && (!isOccupied(x, y))){
+            ballList.get(ballList.indexOf(b)).setPos(x,y);
         }
         nob();
     }
