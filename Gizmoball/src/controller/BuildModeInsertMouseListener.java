@@ -25,7 +25,6 @@ public class BuildModeInsertMouseListener implements MouseInputListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println(type);
         switch (type) {
             case "Square":
                 model.addGizmo(new SquareBumper(id, e.getX() / LtoPx, e.getY() / LtoPx));

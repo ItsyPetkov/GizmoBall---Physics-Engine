@@ -87,21 +87,12 @@ public class BuildModeButtonListener implements ActionListener {
                     //Moving Gizmos
                     target = model.gizmoSearch(me.getX() / LtoPx, me.getY() / LtoPx);
                     if (target != null) {
-                        if (target.getPos().x() == me.getX() / LtoPx && target.getPos().y() == me.getY() / LtoPx) {
-                            model.moveGizmo(target, me.getX() / LtoPx, me.getY() / LtoPx);
-                        } else {
-                            dragging = true;
-                        }
-
-                        //Moving Balls
+                        dragging = true;
                     } else {
+                        //Moving Balls
                         targetBall = model.ballSearch(me.getX() / LtoPx, me.getY() / LtoPx);
                         if (targetBall != null) {
-                            if (targetBall.getPos().x() == me.getX() / LtoPx && targetBall.getPos().y() == me.getY() / LtoPx) {
-                                model.setBallPos(targetBall, me.getX() / LtoPx, me.getY() / LtoPx);
-                            } else {
-                                dragging = true;
-                            }
+                            dragging = true;
                         }
                     }
                 }
@@ -111,11 +102,11 @@ public class BuildModeButtonListener implements ActionListener {
                 @Override
                 public void mouseDragged(MouseEvent me) {
                     if (target != null) {
-                        if (!dragging) {
+                        if (dragging) {
                             model.moveGizmo(target, me.getX() / LtoPx, me.getY() / LtoPx);
                         }
                     } else if (targetBall != null) {
-                        if (!dragging) {
+                        if (dragging) {
                             model.setBallPos(targetBall, me.getX()/LtoPx, me.getY()/LtoPx);
                         }
                     }

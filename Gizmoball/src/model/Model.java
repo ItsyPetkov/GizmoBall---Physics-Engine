@@ -211,7 +211,7 @@ public class Model extends Observable {
                 nob();
                 return true;
             }
-        } else if(g.type().equals("LeftFlipper") || g.type().equals("LeftFlipper")){
+        } else if(g.type().equals("LeftFlipper") || g.type().equals("RightFlipper")){
             boolean trigger = true;
             double height = 2;
             double width = 2;
@@ -248,6 +248,18 @@ public class Model extends Observable {
             if(gizmoList.get(i).getPos().x() == x && gizmoList.get(i).getPos().y() == y){
                 return gizmoList.get(i);
             }
+
+            if(gizmoList.get(i).type().equals("LeftFlipper") || gizmoList.get(i).type().equals("RightFlipper")){
+                int height = 2;
+                int width = 2;
+                for(int h=0; h<height; h++){
+                    for(int w=0; w<width; w++){
+                        if(gizmoList.get(i).getPos().x()+w == x && gizmoList.get(i).getPos().y()+h == y){
+                            return gizmoList.get(i);
+                        }
+                    }
+                }
+            }
         }
         return null;
     }
@@ -281,6 +293,7 @@ public class Model extends Observable {
 
     public void moveGizmo(Gizmo g, int x, int y){
         if(gizmoList.contains(g) && (!isOccupied(x, y))){
+            System.out.println("moving");
             gizmoList.get(gizmoList.indexOf(g)).move(x,y);
         }
         nob();
