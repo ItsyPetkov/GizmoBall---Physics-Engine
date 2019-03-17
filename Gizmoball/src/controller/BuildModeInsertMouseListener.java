@@ -16,60 +16,69 @@ public class BuildModeInsertMouseListener implements MouseInputListener {
 
     private int sx, sy, ex, ey; //used for absorber
 
-    public BuildModeInsertMouseListener(Model m, int LtoPx, String type, String id){
+    public BuildModeInsertMouseListener(Model m, int LtoPx, String type, String id) {
         this.model = m;
         this.LtoPx = LtoPx;
-        this.type= type;
+        this.type = type;
         this.id = id;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println(type);
-        switch(type){
+        switch (type) {
             case "Square":
-                model.addGizmo(new SquareBumper(id, e.getX()/LtoPx, e.getY()/LtoPx));
+                model.addGizmo(new SquareBumper(id, e.getX() / LtoPx, e.getY() / LtoPx));
                 break;
             case "Circle":
-                model.addGizmo(new CircleBumper(id, e.getX()/LtoPx, e.getY()/LtoPx));
+                model.addGizmo(new CircleBumper(id, e.getX() / LtoPx, e.getY() / LtoPx));
                 break;
             case "Triangle":
-                model.addGizmo(new TriangleBumper(id, e.getX()/LtoPx, e.getY()/LtoPx));
+                model.addGizmo(new TriangleBumper(id, e.getX() / LtoPx, e.getY() / LtoPx));
                 break;
             case "LeftFlipper":
-                model.addGizmo(new LeftFlipper(id, e.getX()/LtoPx, e.getY()/LtoPx));
+                model.addGizmo(new LeftFlipper(id, e.getX() / LtoPx, e.getY() / LtoPx));
                 break;
             case "RightFlipper":
-                model.addGizmo(new RightFlipper(id, e.getX()/LtoPx, e.getY()/LtoPx));
+                model.addGizmo(new RightFlipper(id, e.getX() / LtoPx, e.getY() / LtoPx));
                 break;
             case "Ball":
                 Double[] velocities = getVelocity();
-                model.addBall(new Ball(id, e.getX()/LtoPx, e.getY()/LtoPx, velocities[0],velocities[1]));
+                if (velocities != null) {
+                    model.addBall(new Ball(id, e.getX() / LtoPx, e.getY() / LtoPx, velocities[0], velocities[1]));
+                }
                 break;
         }
 
     }
 
     public Double[] getVelocity() {
-        JTextField fieldVelX = new JTextField();
-        JTextField fieldVelY = new JTextField();
-        String velX = "", velY="";
-        Object[] input = {
-                "Velocity X: ",fieldVelX,
-                "Velocity Y: ",fieldVelY,
-        };
+        try {
+            JTextField fieldVelX = new JTextField();
+            JTextField fieldVelY = new JTextField();
+            String velX = "", velY = "";
+            Object[] input = {
+                    "Velocity X: ", fieldVelX,
+                    "Velocity Y: ", fieldVelY,
+            };
 
-        int velDialog = JOptionPane.showConfirmDialog(null, input, "Input velocity: ", JOptionPane.OK_CANCEL_OPTION);
-        if (velDialog == JOptionPane.OK_OPTION) {
-            velX = fieldVelX.getText();
-            velY = fieldVelY.getText();
+            int velDialog = JOptionPane.showConfirmDialog(null, input, "Input velocity: ", JOptionPane.OK_CANCEL_OPTION);
+            if (velDialog == JOptionPane.OK_OPTION) {
+                velX = fieldVelX.getText();
+                velY = fieldVelY.getText();
 
+            }
+            Double[] velocities = new Double[2];
+            velocities[0] = Double.parseDouble(velX);
+            velocities[1] = Double.parseDouble(velY);
+            return velocities;
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null,
+                    "Only Numbers Allowed",
+                    "Invalid Input",
+                    JOptionPane.ERROR_MESSAGE);
         }
-        Double[] velocities = new Double[2];
-        velocities[0] = Double.parseDouble(velX);
-        velocities[1] = Double.parseDouble(velY);
-
-        return velocities;
+        return null;
     }
 
     @Override
