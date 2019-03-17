@@ -271,7 +271,7 @@ public class Model extends Observable {
     }
 
     public void moveGizmo(Gizmo g, int x, int y){
-        if(gizmoList.contains(g) && (!isOccupied(g.getPos().x(), g.getPos().y()))){
+        if(gizmoList.contains(g) && (!isOccupied(x, y))){
             gizmoList.get(gizmoList.indexOf(g)).move(x,y);
         }
         nob();
@@ -335,32 +335,62 @@ public class Model extends Observable {
     }
 
     public void dragAbs(Absorber abs, int x2, int y2){
+
         double height = abs.getPos2().y()-abs.getPos().y();
         double width = abs.getPos2().x()-abs.getPos().x();
-        double newHeight = y2-abs.getPos2().y();
-        double newWidth = x2-abs.getPos2().x();
 
-        boolean trigger = true;
+        if((x2 == abs.getPos().x() && y2 == abs.getPos().y()) || (x2+1 == abs.getPos2().x() && y2+1 == abs.getPos2().y())){
 
-        for(int h=0; h<newHeight; h++){
-            for(int w=0; w<width; w++){
-                if(isOccupied(abs.getPos().x()+w, abs.getPos().y()+height+h)){
-                    trigger = false;
+        } else if(x2 >= abs.getPos().x() && y2 >= abs.getPos().y()){
+            //BR
+            System.out.println("BR");
+            double newHeight = (y2+1)-abs.getPos2().y();
+            double newWidth = (x2+1)-abs.getPos2().x();
+            System.out.println(newHeight + " " + newWidth);
+            boolean trigger = true;
+            for(int h=0; h<newHeight; h++){
+                for(int w=0; w<width; w++){
+                    if(isOccupied(abs.getPos().x()+w, abs.getPos().y()+height+h)){
+                        trigger = false;
+                    }
                 }
+            }
+            for(int w=0; w<newWidth; w++){
+                for(int h=0; h<height; h++){
+                    if(isOccupied(abs.getPos().x()+width+w, abs.getPos().y()+h)){
+                        trigger = false;
+                    }
+                }
+            }
+            if(trigger){
+                abs.setPos2((int) (abs.getPos2().x()+(newWidth)), (int) (abs.getPos2().y()+(newHeight)));
+            }
+        } else if(x2+1 <= abs.getPos2().x() && y2+1 <= abs.getPos2().y()){
+            //TL
+            System.out.println("TL");
+            double newHeight = abs.getPos().y()-y2;
+            double newWidth = abs.getPos().x()-x2;
+            boolean trigger = true;
+            for(int h=0; h<newHeight; h++){
+                for(int w=0; w<width; w++){
+                    if(isOccupied(abs.getPos().x()+w, abs.getPos().y()-(h+1))){
+                        trigger = false;
+                    }
+                }
+            }
+            for(int w=0; w<newWidth; w++){
+                for(int h=0; h<height; h++){
+                    if(isOccupied(abs.getPos().x()-(w+1), abs.getPos().y()+h)){
+                        trigger = false;
+                    }
+                }
+            }
+            if(trigger){
+                abs.setPos((int) (abs.getPos().x()-(newWidth)), (int) (abs.getPos().y()-(newHeight)));
             }
         }
 
-        for(int w=0; w<newWidth; w++){
-            for(int h=0; h<height; h++){
-                if(isOccupied(abs.getPos().x()+width+w, abs.getPos().y()+h)){
-                    trigger = false;
-                }
-            }
-        }
 
-        if(trigger){
-            abs.setPos2(abs.getPos2().x()+(x2-abs.getPos2().x()), abs.getPos2().y()+(y2-abs.getPos2().y()));
-        }
         nob();
     }
 

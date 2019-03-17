@@ -24,7 +24,7 @@ public class Absorber extends Gizmo{
         return pos2;
     }
 
-    public void setPos2(double x, double y){
+    public void setPos2(int x, int y){
         pos2 = new Vect(x, y);
     }
 

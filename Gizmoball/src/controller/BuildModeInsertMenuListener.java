@@ -102,7 +102,9 @@ public class BuildModeInsertMenuListener implements ActionListener {
 				public void mouseDragged(MouseEvent me) {
 					if(!(newAbs == null) && avail){
 						Absorber abs = (Absorber) newAbs;
-						model.dragAbs(abs, me.getX()/board.getLtoPx()+1, me.getY()/board.getLtoPx()+1);
+						int x = me.getX()/board.getLtoPx();
+						int y = me.getY()/board.getLtoPx();
+						model.dragAbs(abs, x, y);
 					}
 				}
 			});
