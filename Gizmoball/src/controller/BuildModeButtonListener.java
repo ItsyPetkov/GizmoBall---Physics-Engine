@@ -37,11 +37,11 @@ public class BuildModeButtonListener implements ActionListener {
 
         if (e.getActionCommand().equals("Gravity")) {
             try {
-                String gravity = JOptionPane.showInputDialog("Gravity value: ");
+                String gravity = "";
+                gravity = JOptionPane.showInputDialog("Gravity value: ");
                 double g = Double.parseDouble(gravity);
                 if (!(gravity.equals("")) && !(Double.isNaN(g))) {
                     model.setGravity(g);
-                    System.out.println(Double.isNaN(Double.parseDouble(gravity)));
                 }
             }catch(NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null,

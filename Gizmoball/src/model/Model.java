@@ -47,17 +47,17 @@ public class Model extends Observable {
                         ballList.get(i).setVelo(cd.getVelo().x(), cd.getVelo().y());
                         switch(collisionType){
                             case 0:
-                                System.out.println("wall");
+                                //collision with wall
                                 break;
                             case 1:
-                                System.out.println(collidingG.type() + " " + collidingG.getId());
+                                //collision with gizmo collidingG
                                 if(collidingG.type().equals("Absorber")){
                                     absorberCapture(ballList.get(i), (Absorber) collidingG);
                                     ballList.get(i).capture();
                                 }
                                 break;
                             case 2:
-                                System.out.println("ball");
+                                //collision with ball collidingB
                                 break;
                         }
                     } else {
@@ -359,10 +359,8 @@ public class Model extends Observable {
 
         } else if(x2 >= abs.getPos().x() && y2 >= abs.getPos().y()){
             //BR
-            System.out.println("BR");
             double newHeight = (y2+1)-abs.getPos2().y();
             double newWidth = (x2+1)-abs.getPos2().x();
-            System.out.println(newHeight + " " + newWidth);
             boolean trigger = true;
             for(int h=0; h<newHeight; h++){
                 for(int w=0; w<width; w++){
@@ -383,7 +381,6 @@ public class Model extends Observable {
             }
         } else if(x2+1 <= abs.getPos2().x() && y2+1 <= abs.getPos2().y()){
             //TL
-            System.out.println("TL");
             double newHeight = abs.getPos().y()-y2;
             double newWidth = abs.getPos().x()-x2;
             boolean trigger = true;
