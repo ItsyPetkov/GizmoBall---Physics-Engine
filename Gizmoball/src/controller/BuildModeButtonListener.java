@@ -57,7 +57,9 @@ public class BuildModeButtonListener implements ActionListener {
                 yf = fieldVelY.getText();
 
             }
-            model.setFriction(Double.parseDouble(xf),Double.parseDouble(yf));
+            if (xf != null && yf != null && !(xf.equals("")) && !(yf.equals(""))) {
+                model.setFriction(Double.parseDouble(xf), Double.parseDouble(yf));
+            }
         }
 
         if (e.getActionCommand().equals("Move")){
