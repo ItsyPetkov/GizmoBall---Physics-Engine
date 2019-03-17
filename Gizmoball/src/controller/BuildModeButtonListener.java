@@ -36,29 +36,47 @@ public class BuildModeButtonListener implements ActionListener {
         }
 
         if (e.getActionCommand().equals("Gravity")) {
-            String gravity = JOptionPane.showInputDialog("Gravity value: ");
-            if (gravity != null) {
-                model.setGravity(Double.parseDouble(gravity));
+            try {
+                String gravity = JOptionPane.showInputDialog("Gravity value: ");
+                double g = Double.parseDouble(gravity);
+                if (!(gravity.equals("")) && !(Double.isNaN(g))) {
+                    model.setGravity(g);
+                    System.out.println(Double.isNaN(Double.parseDouble(gravity)));
+                }
+            }catch(NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null,
+                        "Only Numbers Allowed",
+                        "Invalid Input",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
 
         if (e.getActionCommand().equals("Friction")) {
-            JTextField fieldVelX = new JTextField();
-            JTextField fieldVelY = new JTextField();
-            String xf = "", yf = "";
-            Object[] input = {
-                    "Friction X: ", fieldVelX,
-                    "Friction Y: ", fieldVelY,
-            };
+            try {
+                JTextField fieldVelX = new JTextField();
+                JTextField fieldVelY = new JTextField();
+                String xf = "", yf = "";
+                Object[] input = {
+                        "Friction X: ", fieldVelX,
+                        "Friction Y: ", fieldVelY,
+                };
 
-            int velDialog = JOptionPane.showConfirmDialog(null, input, "Input friction: ", JOptionPane.OK_CANCEL_OPTION);
-            if (velDialog == JOptionPane.OK_OPTION) {
-                xf = fieldVelX.getText();
-                yf = fieldVelY.getText();
+                int velDialog = JOptionPane.showConfirmDialog(null, input, "Input friction: ", JOptionPane.OK_CANCEL_OPTION);
+                if (velDialog == JOptionPane.OK_OPTION) {
+                    xf = fieldVelX.getText();
+                    yf = fieldVelY.getText();
 
-            }
-            if (xf != null && yf != null && !(xf.equals("")) && !(yf.equals(""))) {
-                model.setFriction(Double.parseDouble(xf), Double.parseDouble(yf));
+                }
+                double x = Double.parseDouble(xf);
+                double y = Double.parseDouble(yf);
+                if (!(xf.equals("")) && !(yf.equals("")) && !(Double.isNaN(x)) && !(Double.isNaN(y))) {
+                    model.setFriction(x, y);
+                }
+            } catch(NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null,
+                        "Only Numbers Allowed",
+                        "Invalid Input",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
 
