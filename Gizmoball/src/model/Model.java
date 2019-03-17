@@ -33,7 +33,7 @@ public class Model extends Observable {
         double moveTime = 0.05;
 
         for(int i=0; i<ballList.size(); i++) {
-            if (!(ballList.get(i).getVelo().x() == 0 && ballList.get(i).getVelo().y() == 0)) {
+            if (!(ballList.get(i).getVelo().x() == 0 && ballList.get(i).getVelo().y() == 0) || !(ballList.get(i).isCaptured())) {
                 CollisionDetails cd = timeUntilCollision(ballList.get(i), i);
                 double tuc = cd.getTuc();
                 if (tuc > moveTime) {
