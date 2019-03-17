@@ -374,8 +374,10 @@ public class Model extends Observable {
             if (last.x()+1 == abs.getPos2().x() && last.y()+1 == abs.getPos2().y()){
                 //BR
                 for(int h=0; h<height; h++){
-                    if(isOccupied(x2, abs.getPos().y()+h)){
-                        check = true;
+                    for(int w=0; w<Math.abs(abs.getPos2().x() - (x2+1)); w++){
+                        if(isOccupied(x2-w, abs.getPos().y()+h)){
+                            check = true;
+                        }
                     }
                 }
                 if(!check){
@@ -385,8 +387,10 @@ public class Model extends Observable {
                 if(width == 1){
                     //TR
                     for(int h=0; h<height; h++){
-                        if(isOccupied(x2, abs.getPos().y()+h)){
-                            check = true;
+                        for(int w=0; w<Math.abs(abs.getPos().x() - x2); w++){
+                            if(isOccupied(x2-w, abs.getPos().y()+h)){
+                                check = true;
+                            }
                         }
                     }
                     if(!check){
@@ -399,8 +403,10 @@ public class Model extends Observable {
             } else if(last.x()+1 == abs.getPos2().x()){
                 //TR
                 for(int h=0; h<height; h++){
-                    if(isOccupied(x2, abs.getPos().y()+h)){
-                        check = true;
+                    for(int w=0; w<Math.abs(last.x() - x2); w++){
+                        if(isOccupied(x2-w, abs.getPos().y()+h)){
+                            check = true;
+                        }
                     }
                 }
                 if(!check){
@@ -414,8 +420,10 @@ public class Model extends Observable {
             if(last.x() == abs.getPos().x() && last.y() == abs.getPos().y()){
                 //TL
                 for(int h=0; h<height; h++){
-                    if(isOccupied(x2, abs.getPos().y()+h)){
-                        check = true;
+                    for(int w=0; w<Math.abs(abs.getPos().x() - x2); w++){
+                        if(isOccupied(x2+w, abs.getPos().y()+h)){
+                            check = true;
+                        }
                     }
                 }
                 if(!check){
@@ -425,8 +433,10 @@ public class Model extends Observable {
                 if(width == 1){
                     //BL
                     for(int h=0; h<height; h++){
-                        if(isOccupied(x2, abs.getPos().y()+h)){
-                            check = true;
+                        for(int w=0; w<Math.abs(abs.getPos().x() - x2); w++){
+                            if(isOccupied(x2+w, abs.getPos().y()+h)){
+                                check = true;
+                            }
                         }
                     }
                     if(!check){
@@ -439,8 +449,10 @@ public class Model extends Observable {
             } else if(last.x() == abs.getPos().x()){
                 //BL
                 for(int h=0; h<height; h++){
-                    if(isOccupied(x2, abs.getPos().y()+h)){
-                        check = true;
+                    for(int w=0; w<Math.abs(abs.getPos().x() - x2); w++){
+                        if(isOccupied(x2+w, abs.getPos().y()+h)){
+                            check = true;
+                        }
                     }
                 }
                 if(!check){
@@ -454,8 +466,10 @@ public class Model extends Observable {
             if (last.x()+1 == abs.getPos2().x() && last.y()+1 == abs.getPos2().y()){
                 //BR
                 for(int w=0; w<width; w++){
-                    if(isOccupied(abs.getPos().x()+w, y2)){
-                        check = true;
+                    for(int h=0; h<Math.abs(abs.getPos2().y() - (y2+1)); h++){
+                        if(isOccupied(abs.getPos().x()+w, y2-h)){
+                            check = true;
+                        }
                     }
                 }
                 if(!check){
@@ -465,8 +479,10 @@ public class Model extends Observable {
                 if(height == 1){
                     //BL
                     for(int w=0; w<width; w++){
-                        if(isOccupied(abs.getPos().x()+w, y2)){
-                            check = true;
+                        for(int h=0; h<Math.abs(abs.getPos().y() - y2); h++){
+                            if(isOccupied(abs.getPos().x()+w, y2-h)){
+                                check = true;
+                            }
                         }
                     }
                     if(!check){
@@ -482,8 +498,10 @@ public class Model extends Observable {
             } else if(last.x() == abs.getPos().x()){
                 //BL
                 for(int w=0; w<width; w++){
-                    if(isOccupied(abs.getPos().x()+w, y2)){
-                        check = true;
+                    for(int h=0; h<Math.abs(last.y() - y2); h++){
+                        if(isOccupied(abs.getPos().x()+w, y2-h)){
+                            check = true;
+                        }
                     }
                 }
                 if(!check){
@@ -494,8 +512,10 @@ public class Model extends Observable {
             if(last.x() == abs.getPos().x() && last.y() == abs.getPos().y()){
                 //TL
                 for(int w=0; w<width; w++){
-                    if(isOccupied(abs.getPos().x()+w, y2)){
-                        check = true;
+                    for(int h=0; h<Math.abs(abs.getPos().y() - y2); h++){
+                        if(isOccupied(abs.getPos().x()+w, y2+h)){
+                            check = true;
+                        }
                     }
                 }
                 if(!check){
@@ -505,8 +525,10 @@ public class Model extends Observable {
                 if(height == 1){
                     //TR
                     for(int w=0; w<width; w++){
-                        if(isOccupied(abs.getPos().x()+w, y2)){
-                            check = true;
+                        for(int h=0; h<Math.abs(abs.getPos().y() - y2); h++){
+                            if(isOccupied(abs.getPos().x()+w, y2+h)){
+                                check = true;
+                            }
                         }
                     }
                     if(!check){
@@ -522,8 +544,10 @@ public class Model extends Observable {
             } else if(last.x()+1 == abs.getPos2().x()){
                 //TR
                 for(int w=0; w<width; w++){
-                    if(isOccupied(abs.getPos().x()+w, y2)){
-                        check = true;
+                    for(int h=0; h<Math.abs(abs.getPos().y() - y2); h++){
+                        if(isOccupied(abs.getPos().x()+w, y2+h)){
+                            check = true;
+                        }
                     }
                 }
                 if(!check){
