@@ -363,59 +363,68 @@ public class Model extends Observable {
         return false;
     }
 
-    public void dragAbs(Absorber abs, int x2, int y2){
+    public void dragAbs(Absorber abs, Vect last, int x2, int y2){
 
         double height = abs.getPos2().y()-abs.getPos().y();
         double width = abs.getPos2().x()-abs.getPos().x();
 
-        if((x2 == abs.getPos().x() && y2 == abs.getPos().y()) || (x2+1 == abs.getPos2().x() && y2+1 == abs.getPos2().y())){
-
-        } else if(x2 >= abs.getPos().x() && y2 >= abs.getPos().y()){
-            //BR
-            double newHeight = (y2+1)-abs.getPos2().y();
-            double newWidth = (x2+1)-abs.getPos2().x();
-            boolean trigger = true;
-            for(int h=0; h<newHeight; h++){
-                for(int w=0; w<width; w++){
-                    if(isOccupied(abs.getPos().x()+w, abs.getPos().y()+height+h)){
-                        trigger = false;
-                    }
-                }
+        if(x2 > last.x()){
+            if(last.x() == abs.getPos().x() && last.y() == abs.getPos().y()){
+                //TL backpedal
+                abs.setPos(x2, y2);
+            } else if (last.x()+1 == abs.getPos2().x() && last.y()+1 == abs.getPos2().y()){
+                //BR
+                abs.setPos2(x2+1, y2+1);
+            } else if(last.x() == abs.getPos().x()){
+                //BL backpedal
+                abs.setPos(x2, (int) abs.getPos().y());
+            } else if(last.x()+1 == abs.getPos2().x()){
+                //TR
+                abs.setPos2(x2+1, (int) abs.getPos2().y());
             }
-            for(int w=0; w<newWidth; w++){
-                for(int h=0; h<height; h++){
-                    if(isOccupied(abs.getPos().x()+width+w, abs.getPos().y()+h)){
-                        trigger = false;
-                    }
-                }
+        } else if(x2 < last.x()){
+            if(last.x() == abs.getPos().x() && last.y() == abs.getPos().y()){
+                //TL
+                abs.setPos(x2, y2);
+            } else if (last.x()+1 == abs.getPos2().x() && last.y()+1 == abs.getPos2().y()){
+                //BR backpedal
+                abs.setPos2(x2+1, y2+1);
+            } else if(last.x() == abs.getPos().x()){
+                //BL
+                abs.setPos(x2, (int) abs.getPos().y());
+            } else if(last.x()+1 == abs.getPos2().x()){
+                //TR backpedal
+                abs.setPos2(x2+1, (int) abs.getPos2().y());
             }
-            if(trigger){
-                abs.setPos2((int) (abs.getPos2().x()+(newWidth)), (int) (abs.getPos2().y()+(newHeight)));
+        } else if(y2 > last.y()){
+            if(last.x() == abs.getPos().x() && last.y() == abs.getPos().y()){
+                //TL backpedal
+                abs.setPos(x2, y2);
+            } else if (last.x()+1 == abs.getPos2().x() && last.y()+1 == abs.getPos2().y()){
+                //BR
+                abs.setPos2(x2+1, y2+1);
+            } else if(last.x() == abs.getPos().x()){
+                //BL
+                abs.setPos2((int) abs.getPos2().x(), y2+1);
+            } else if(last.x()+1 == abs.getPos2().x()){
+                //TR backpedal
+                abs.setPos((int) abs.getPos().x(), y2);
             }
-        } else if(x2+1 <= abs.getPos2().x() && y2+1 <= abs.getPos2().y()){
-            //TL
-            double newHeight = abs.getPos().y()-y2;
-            double newWidth = abs.getPos().x()-x2;
-            boolean trigger = true;
-            for(int h=0; h<newHeight; h++){
-                for(int w=0; w<width; w++){
-                    if(isOccupied(abs.getPos().x()+w, abs.getPos().y()-(h+1))){
-                        trigger = false;
-                    }
-                }
-            }
-            for(int w=0; w<newWidth; w++){
-                for(int h=0; h<height; h++){
-                    if(isOccupied(abs.getPos().x()-(w+1), abs.getPos().y()+h)){
-                        trigger = false;
-                    }
-                }
-            }
-            if(trigger){
-                abs.setPos((int) (abs.getPos().x()-(newWidth)), (int) (abs.getPos().y()-(newHeight)));
+        } else if(y2 < last.y()){
+            if(last.x() == abs.getPos().x() && last.y() == abs.getPos().y()){
+                //TL
+                abs.setPos(x2, y2);
+            } else if(last.x()+1 == abs.getPos2().x() && last.y()+1 == abs.getPos2().y()){
+                //BR backpedal
+                abs.setPos2(x2+1, y2+1);
+            } else if(last.x() == abs.getPos().x()){
+                //BL backpedal
+                abs.setPos2((int) abs.getPos2().x(), y2+1);
+            } else if(last.x()+1 == abs.getPos2().x()){
+                //TR
+                abs.setPos((int) abs.getPos().y(), y2);
             }
         }
-
 
         nob();
     }
