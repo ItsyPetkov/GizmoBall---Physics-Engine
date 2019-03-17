@@ -5,6 +5,7 @@ import model.Gizmo;
 import model.Model;
 import view.Board;
 
+import javax.swing.*;
 import java.awt.event.*;
 
 public class BuildModeButtonListener implements ActionListener {
@@ -25,13 +26,38 @@ public class BuildModeButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         MouseListener[] mss = board.getMouseListeners();
-        for(int i=0; i<mss.length; i++){
+        for (int i = 0; i < mss.length; i++) {
             board.removeMouseListener(mss[i]);
         }
 
         MouseMotionListener[] mml = board.getMouseMotionListeners();
-        for(int i=0; i<mml.length; i++){
+        for (int i = 0; i < mml.length; i++) {
             board.removeMouseMotionListener(mml[i]);
+        }
+
+        if (e.getActionCommand().equals("Gravity")) {
+            String gravity = JOptionPane.showInputDialog("Gravity value: ");
+            if (gravity != null) {
+                model.setGravity(Double.parseDouble(gravity));
+            }
+        }
+
+        if (e.getActionCommand().equals("Friction")) {
+            JTextField fieldVelX = new JTextField();
+            JTextField fieldVelY = new JTextField();
+            String xf = "", yf = "";
+            Object[] input = {
+                    "Friction X: ", fieldVelX,
+                    "Friction Y: ", fieldVelY,
+            };
+
+            int velDialog = JOptionPane.showConfirmDialog(null, input, "Input friction: ", JOptionPane.OK_CANCEL_OPTION);
+            if (velDialog == JOptionPane.OK_OPTION) {
+                xf = fieldVelX.getText();
+                yf = fieldVelY.getText();
+
+            }
+            model.setFriction(Double.parseDouble(xf),Double.parseDouble(yf));
         }
 
         if (e.getActionCommand().equals("Move")){

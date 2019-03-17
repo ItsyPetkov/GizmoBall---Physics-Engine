@@ -4,14 +4,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import controller.*;
@@ -27,24 +20,24 @@ public class BuildMode extends JFrame {
 	private JMenu mode;
 	private Board board;
 	private Model model;
-	
+
 	public BuildMode(Model model) {
 		this.model = model;
-		
+
 		jmb = new JMenuBar();
 		file = new JMenu("File");
 		insert = new JMenu("Insert");
 		mode = new JMenu("Mode");
-		
+
 		jmb.add(file);
 		jmb.add(insert);
 		jmb.add(mode);
-		
+
 		JMenuItem runMode = new JMenuItem("Enter Run Mode");
 		runMode.addActionListener(new ModeMenuActionListener(model));
-		
+
 		mode.add(runMode);
-		
+
 		setJMenuBar(jmb);
 		setTitle("Gizmoball - Build Mode");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -55,10 +48,10 @@ public class BuildMode extends JFrame {
 		setContentPane(contentPane);
 		this.setVisible(true);
 		this.setResizable(false);
-		
+
 		this.addKeyListener(new EscapeKeyListener(state()));
 		this.setFocusable(true);
-		
+
 		JLabel lblWelcomeToGizmoball = new JLabel("Welcome to Gizmoball - Build Mode");
 		lblWelcomeToGizmoball.setFont(new Font("Tahoma", Font.ITALIC, 25));
 		lblWelcomeToGizmoball.setHorizontalAlignment(SwingConstants.CENTER);
@@ -113,30 +106,36 @@ public class BuildMode extends JFrame {
 		insert.add(rightFlipper);
 		insert.add(absorber);
 		insert.add(ball);
-		
+
 		JPanel buttonPanel = new JPanel(new GridLayout(3,1));
 		JButton btnMove = new JButton("Move");
 		ActionListener bl = new BuildModeButtonListener(model, board);
 		btnMove.addActionListener(bl);
-		
+
 		JButton btnRotate = new JButton("Rotate");
 		btnRotate.addActionListener(bl);
-		
+
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(bl);
-		
+
 		JButton btnConnect = new JButton("Connect");
 		btnConnect.addActionListener(bl);
-		
+
 		JButton btnDisconnect = new JButton("Disconnect");
 		btnDisconnect.addActionListener(bl);
-		
+
 		JButton btnKeyConnect = new JButton("Key Connect");
 		btnKeyConnect.addActionListener(bl);
-		
+
 		JButton btnKeyDisconnect = new JButton("Key Disconnect");
 		btnKeyDisconnect.addActionListener(bl);
-		
+
+		JButton btnGravity = new JButton("Gravity");
+		btnGravity.addActionListener(bl);
+
+		JButton btnFriction = new JButton("Friction");
+		btnFriction.addActionListener(bl);
+
 		buttonPanel.add(btnMove);
 		buttonPanel.add(btnRotate);
 		buttonPanel.add(btnDelete);
@@ -144,11 +143,13 @@ public class BuildMode extends JFrame {
 		buttonPanel.add(btnDisconnect);
 		buttonPanel.add(btnKeyConnect);
 		buttonPanel.add(btnKeyDisconnect);
+		buttonPanel.add(btnGravity);
+		buttonPanel.add(btnFriction);
 		contentPane.add(buttonPanel, BorderLayout.SOUTH);
 	}
-	
+
 	public static String state() {
 		return "not running";
 	}
-	
+
 }
