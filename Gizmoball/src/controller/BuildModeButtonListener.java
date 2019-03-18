@@ -43,7 +43,7 @@ public class BuildModeButtonListener implements ActionListener {
                 if (!(gravity.equals("")) && !(Double.isNaN(g))) {
                     model.setGravity(g);
                 }
-            }catch(NumberFormatException ex) {
+            }catch(NumberFormatException | NullPointerException ex) {
                 JOptionPane.showMessageDialog(null,
                         "Only Numbers Allowed",
                         "Invalid Input",
