@@ -41,18 +41,22 @@ public class BuildModeInsertMouseListener implements MouseInputListener {
                 model.addGizmo(new RightFlipper(id, e.getX() / LtoPx, e.getY() / LtoPx));
                 break;
             case "Ball":
-                Double[] velocities = getVelocity();
-                if (velocities != null) {
-                    model.addBall(new Ball(id, e.getX() / LtoPx, e.getY() / LtoPx, velocities[0], velocities[1]));
+                try {
+                    Double[] velocities = getVelocity();
+                    if (velocities != null) {
+                        model.addBall(new Ball(id, e.getX() / LtoPx, e.getY() / LtoPx, velocities[0], velocities[1]));
+                    }
+                } catch (NullPointerException ex) {
+
                 }
                 break;
         }
 
     }
 
-    //returns ball velocity
     public Double[] getVelocity() {
         try {
+            Double[] velocities = new Double[2];
             JTextField fieldVelX = new JTextField();
             JTextField fieldVelY = new JTextField();
             String velX = "", velY = "";
@@ -66,16 +70,18 @@ public class BuildModeInsertMouseListener implements MouseInputListener {
                 velX = fieldVelX.getText();
                 velY = fieldVelY.getText();
 
+                velocities[0] = Double.parseDouble(velX);
+                velocities[1] = Double.parseDouble(velY);
+                return velocities;
             }
-            Double[] velocities = new Double[2];
-            velocities[0] = Double.parseDouble(velX);
-            velocities[1] = Double.parseDouble(velY);
-            return velocities;
+
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null,
                     "Only Numbers Allowed",
                     "Invalid Input",
                     JOptionPane.ERROR_MESSAGE);
+        } catch (NullPointerException ex) {
+
         }
         return null;
     }
