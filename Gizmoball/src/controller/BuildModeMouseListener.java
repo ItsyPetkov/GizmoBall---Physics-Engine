@@ -2,11 +2,14 @@ package controller;
 
 import model.Gizmo;
 import model.Model;
+import view.KeyAlert;
 
+import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
+import java.security.Key;
 
 public class BuildModeMouseListener implements MouseInputListener {
 
@@ -48,9 +51,9 @@ public class BuildModeMouseListener implements MouseInputListener {
                 break;
             case "Key Connect":
                 target = model.gizmoSearch(e.getX()/LtoPx, e.getY()/LtoPx);
-
-                //TODO add key prompt
-                new CustomKeyListener(model, CustomKeys.getLastKey().getKeyChar(), target);
+                KeyAlert ka = new KeyAlert();
+                //TODO wait until key pressed
+                new CustomKeyListener(model, 'a', target);
                 break;
         }
     }

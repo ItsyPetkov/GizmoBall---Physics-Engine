@@ -46,6 +46,9 @@ public class RunMode extends JFrame {
 		this.addKeyListener(new EscapeKeyListener(state()));
 		this.setFocusable(true);
 		timer = new Timer(50, new TimerTickListener(model));
+		for (int i = 0; i < CustomKeys.size(); i++) {
+			this.addKeyListener(CustomKeys.getKey(i));
+		}
 		
 		JLabel lblWelcomeToGizmoball = new JLabel("Welcome to Gizmoball - Run Mode");
 		lblWelcomeToGizmoball.setFont(new Font("Tahoma", Font.ITALIC, 25));
