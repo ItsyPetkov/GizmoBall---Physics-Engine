@@ -180,7 +180,6 @@ public class LoadFile {
         for (int i = 0; i < commands.size(); i++) {
             if (commands.get(i)[0].equals("Rotate")) {
                 id = commands.get(i)[1];
-                System.out.println(id);
                 for (Gizmo g : model.getGizmos()) {
                     if (g.getId().equals(id)) {
 

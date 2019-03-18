@@ -36,8 +36,18 @@ public class SaveFile {
                         wr.write(g.getId() + " ");
                         wr.write(Integer.toString((int)g.getPos().x())+ " ");
                         wr.write(Integer.toString((int)g.getPos().y()));
+                        wr.write("\n");
+                        if (g.rotation > 0) {
+                            for (int r = 0; r < g.rotation; r++) {
+                                wr.write("Rotate ");
+                                wr.write(g.getId());
+                                wr.write("\n");
+                            }
+                            break;
+                        }
                         break;
                     }
+
                 }
                 wr.write("\n");
             }
@@ -53,6 +63,7 @@ public class SaveFile {
                 wr.write("\n");
             }
             wr.write("\n");
+
 
             wr.flush();
             wr.close();

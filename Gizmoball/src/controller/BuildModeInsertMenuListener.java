@@ -3,6 +3,7 @@ package controller;
 import model.Absorber;
 import model.Gizmo;
 import model.Model;
+import physics.Vect;
 import view.Board;
 
 import java.awt.event.*;
@@ -14,6 +15,7 @@ public class BuildModeInsertMenuListener implements ActionListener {
 	String idGen = "";
 	Gizmo newAbs = null;
 	boolean avail = false;
+	Vect last;
 
 	public BuildModeInsertMenuListener(Model m, Board b) {
 		this.model = m;
@@ -104,7 +106,15 @@ public class BuildModeInsertMenuListener implements ActionListener {
 						Absorber abs = (Absorber) newAbs;
 						int x = me.getX()/board.getLtoPx();
 						int y = me.getY()/board.getLtoPx();
-						model.dragAbs(abs, x, y);
+						if(last == null){
+							last = new Vect(x,y);
+						} else if(!(last.x() == x && last.y() == y)){
+							boolean check = model.dragAbs(abs, last, x, y);
+							if(check){
+								last = new Vect(x,y);
+							}
+						}
+
 					}
 				}
 			});

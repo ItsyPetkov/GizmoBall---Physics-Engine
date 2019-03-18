@@ -1,5 +1,6 @@
 package controller;
 
+import model.Ball;
 import model.Gizmo;
 import model.Model;
 import view.KeyAlert;
@@ -15,6 +16,7 @@ public class BuildModeMouseListener implements MouseInputListener {
 
     Model model;
     Gizmo target;
+    Ball targetBall;
     int LtoPx;
     String action;
 
@@ -40,6 +42,11 @@ public class BuildModeMouseListener implements MouseInputListener {
                 if(!(target == null)){
                     model.deleteGizmo(target);
                     target = null;
+                } else {
+                    targetBall = model.ballSearch(e.getX()/LtoPx, e.getY()/LtoPx);
+                    if (!(targetBall == null)) {
+                        model.deleteBall(targetBall);
+                    }
                 }
                 break;
             case "Rotate":

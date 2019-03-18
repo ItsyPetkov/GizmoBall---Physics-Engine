@@ -7,15 +7,6 @@ import java.util.List;
 
 public class LeftFlipper extends Gizmo {
     private String type = "LeftFlipper";
-    //An enumerated type to keep track of how the flipper is moving
-    public enum StateOfMotion {
-        UPWARDS, DOWNWARDS, STATIONARY
-    }
-    //An enumerated type to keep track of the flippers position
-    public enum Position {
-        VERTICAL, HORIZONTAL, TRANSIENT
-    }
-
 
     //Constituent flipper parts
     private Color colour;
@@ -31,8 +22,13 @@ public class LeftFlipper extends Gizmo {
     private Angle rotationLeft;
     private Vect centerOfRotation;
 
-    private StateOfMotion movement;
-    private Position position;
+    private boolean mUpwards;
+    private boolean mDownwards;
+    private boolean mStationary;
+
+    private boolean mVertical;
+    private boolean mHorizontal;
+    private boolean mTransient;
 
     //Creates a flipper, represented by circles, lines and vectors
     public LeftFlipper(String id,int x, int y) {
@@ -58,48 +54,49 @@ public class LeftFlipper extends Gizmo {
         //Flipper rotates at the top
         centerOfRotation = topCircle.getCenter();
         //Flipper starting position
-        movement = StateOfMotion.STATIONARY;
-        position = Position.VERTICAL;
+        beStationary();
+        beVertical();
 
     }
     //where the actual movement happens
     public Angle moveThroughAngle(Angle leftToGo) {
-
-        if(movement == movement.UPWARDS){
+        if(mUpwards){
+            //System.out.println("doing Up");
             if(leftToGo.compareTo(rotation) > 0) {
                 applyMovement(rotation);
                 rotationLeft = leftToGo.minus(rotation);
-                setPosition(Position.TRANSIENT);
+                beTransient();
             } else if(leftToGo.compareTo(Angle.DEG_90) == 0) {
-                movement = StateOfMotion.STATIONARY;
+                beStationary();
                 rotationLeft = Angle.ZERO;
-                setPosition(Position.HORIZONTAL);
+                beHorizontal();
             } else {
                 applyMovement(leftToGo);
-                movement = StateOfMotion.STATIONARY;
-                setPosition(Position.HORIZONTAL);
+                beStationary();
+                beHorizontal();
                 rotationLeft = Angle.ZERO;
 
             }
             return rotationLeft;
         }
 
-        if(movement == movement.DOWNWARDS) {
+        if(mDownwards) {
+            //System.out.println("doing down");
             if(leftToGo.compareTo(rotation) > 0) {
                 applyMovement(Angle.ZERO.minus(rotation));
                 rotationLeft = leftToGo.minus(rotation);
-                setPosition(Position.TRANSIENT);
+                beTransient();
                 return rotationLeft;
             } else if(leftToGo.compareTo(Angle.DEG_90) == 0) {
-                movement = StateOfMotion.STATIONARY;
+                beStationary();
                 rotationLeft = Angle.DEG_90;
-                setPosition(Position.VERTICAL);
+                beVertical();
                 return Angle.ZERO;
             } else {
                 applyMovement(Angle.ZERO.minus(leftToGo));
-                movement = StateOfMotion.STATIONARY;
+                beStationary();
                 rotationLeft = Angle.DEG_90;
-                setPosition(Position.VERTICAL);
+                beVertical();
                 return Angle.ZERO;
             }
         } else
@@ -132,20 +129,60 @@ public class LeftFlipper extends Gizmo {
         rotationLeft = left;
     }
 
-    public StateOfMotion getMovement() {
-        return movement;
+    public void goUpwards(){
+        mDownwards = false;
+        mStationary = false;
+        mUpwards = true;
+
     }
 
-    public void setMovement(StateOfMotion movement) {
-        this.movement = movement;
+    public void goDownwards(){
+        mUpwards = false;
+        mStationary = false;
+        mDownwards = true;
     }
 
-    public Position getPosition() {
-        return position;
+    public void beStationary(){
+        mUpwards = false;
+        mDownwards = false;
+        mStationary = true;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+    public void beVertical(){
+        mHorizontal = false;
+        mTransient = false;
+        mVertical = true;
+    }
+
+    public void beHorizontal(){
+        mVertical = false;
+        mTransient = false;
+        mHorizontal = true;
+    }
+
+    public void beTransient(){
+        mVertical = false;
+        mHorizontal = false;
+        mTransient = true;
+    }
+
+    public boolean getUpwards(){
+        return mUpwards;
+    }
+
+    public boolean getDownwards(){
+        return mDownwards;
+    }
+
+    public boolean getVertical(){
+        return mVertical;
+    }
+
+    public boolean getTransient(){
+        return mTransient;
+    }
+    public boolean getHorizontal(){
+        return mHorizontal;
     }
 
     @Override
