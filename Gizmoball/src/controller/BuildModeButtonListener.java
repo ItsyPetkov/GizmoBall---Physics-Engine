@@ -43,11 +43,13 @@ public class BuildModeButtonListener implements ActionListener {
                 if (!(gravity.equals("")) && !(Double.isNaN(g))) {
                     model.setGravity(g);
                 }
-            }catch(NumberFormatException | NullPointerException ex) {
+            }catch(NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null,
                         "Only Numbers Allowed",
                         "Invalid Input",
                         JOptionPane.ERROR_MESSAGE);
+            } catch (NullPointerException ex) {
+
             }
         }
 
@@ -65,12 +67,11 @@ public class BuildModeButtonListener implements ActionListener {
                 if (velDialog == JOptionPane.OK_OPTION) {
                     xf = fieldVelX.getText();
                     yf = fieldVelY.getText();
-
-                }
-                double x = Double.parseDouble(xf);
-                double y = Double.parseDouble(yf);
-                if (!(xf.equals("")) && !(yf.equals("")) && !(Double.isNaN(x)) && !(Double.isNaN(y))) {
-                    model.setFriction(x, y);
+                    double x = Double.parseDouble(xf);
+                    double y = Double.parseDouble(yf);
+                    if (!(xf.equals("")) && !(yf.equals("")) && !(Double.isNaN(x)) && !(Double.isNaN(y))) {
+                        model.setFriction(x, y);
+                    }
                 }
             } catch(NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null,
