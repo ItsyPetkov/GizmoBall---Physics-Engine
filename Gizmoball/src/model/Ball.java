@@ -28,6 +28,12 @@ public class Ball implements IBall{
     }
 
     public void setVelo(double xv, double yv){
+        if(xv > 200){
+            xv = 200;
+        }
+        if(yv > 200){
+            yv = 200;
+        }
         velo = new Vect(xv, yv);
     }
 

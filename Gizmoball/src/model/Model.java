@@ -135,17 +135,15 @@ public class Model extends IModel{
     }
 
     private void moveBallForTime(IBall ball, double time){
-        Vect velo = ball.getVelo();
         Vect pos = ball.getPos();
 
+        //friction
         Vect fv = friction(ball.getVelo(), time);
         ball.setVelo(fv.x(), fv.y());
 
-        double newX = pos.x() + (velo.x()*time);
-
-        double yDist = (velo.y() * time) + 0.5*(gravity*(time*time));
-        double newY = pos.y() + yDist;
-
+        //gravity
+        double newX = pos.x() + (ball.getVelo().x()*time);
+        double newY = pos.y() + ((ball.getVelo().y() * time) + 0.5*(gravity*(time*time)));
         ball.setVelo(ball.getVelo().x(), ball.getVelo().y()+(gravity*time));
 
         ball.setPos(newX, newY);
