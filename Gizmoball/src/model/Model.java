@@ -244,12 +244,13 @@ public class Model extends IModel{
 
         for(int i=0; i<gizmoList.size(); i++){
             if(gizmoList.get(i).type().equals("Absorber")) {
+
                 IGizmo absorber =(Absorber) gizmoList.get(i);
-                double range = absorber.getPos().x() - ((Absorber) absorber).getPos2().x();
-                if (gizmoList.get(i).getPos().x() == x && gizmoList.get(i).getPos().y() == y ||
-                        gizmoList.get(i).getPos().x() + range <= x && gizmoList.get(i).getPos().y() == y ||
-                        gizmoList.get(i).getPos().x() == x && gizmoList.get(i).getPos().y() + range <= y ||
-                        gizmoList.get(i).getPos().x() + range <= x && gizmoList.get(i).getPos().y() + range <= y) {
+                double rangeX = ((Absorber) absorber).getPos2().x() - absorber.getPos().x();
+                double rangeY = ((Absorber) absorber).getPos2().y() - absorber.getPos().y();
+                boolean vertical = ((absorber.getPos().x()+rangeX >= x) && (x >= absorber.getPos().x()));
+                boolean horizontal = ((absorber.getPos().y()+rangeY >= y) && (y >= absorber.getPos().y()));
+                if (vertical && horizontal) {
                     return gizmoList.get(i);
                 }
             }
