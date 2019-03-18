@@ -363,12 +363,12 @@ public class Model extends Observable {
         return false;
     }
 
-    public void dragAbs(Absorber abs, Vect last, int x2, int y2){
+    public boolean dragAbs(Absorber abs, Vect last, int x2, int y2){
 
         double height = abs.getPos2().y()-abs.getPos().y();
         double width = abs.getPos2().x()-abs.getPos().x();
 
-        boolean check = false;
+        boolean check = true;
 
         if(x2 > last.x()){
             if (last.x()+1 == abs.getPos2().x() && last.y()+1 == abs.getPos2().y()){
@@ -376,11 +376,11 @@ public class Model extends Observable {
                 for(int h=0; h<height; h++){
                     for(int w=0; w<Math.abs(abs.getPos2().x() - (x2+1)); w++){
                         if(isOccupied(x2-w, abs.getPos().y()+h)){
-                            check = true;
+                            check = false;
                         }
                     }
                 }
-                if(!check){
+                if(check){
                     abs.setPos2(x2+1, y2+1);
                 }
             } else if(last.x() == abs.getPos().x() && last.y() == abs.getPos().y()){
@@ -389,30 +389,30 @@ public class Model extends Observable {
                     for(int h=0; h<height; h++){
                         for(int w=0; w<Math.abs(abs.getPos().x() - x2); w++){
                             if(isOccupied(x2-w, abs.getPos().y()+h)){
-                                check = true;
+                                check = false;
                             }
                         }
                     }
-                    if(!check){
+                    if(check){
                         abs.setPos2(x2+1, (int) abs.getPos2().y());
                     }
                 } else {
                     //TL backpedal
-                    abs.setPos(x2, y2);
+                    abs.setPos(x2, (int) abs.getPos().y());
                 }
-            } else if(last.x()+1 == abs.getPos2().x()){
+            } else if(last.x()+1 == abs.getPos2().x() && last.y() == abs.getPos().y()){
                 //TR
                 for(int h=0; h<height; h++){
                     for(int w=0; w<Math.abs(last.x() - x2); w++){
                         if(isOccupied(x2-w, abs.getPos().y()+h)){
-                            check = true;
+                            check = false;
                         }
                     }
                 }
-                if(!check){
+                if(check){
                     abs.setPos2(x2+1, (int) abs.getPos2().y());
                 }
-            } else if(last.x() == abs.getPos().x()){
+            } else if(last.x() == abs.getPos().x() && last.y()+1 == abs.getPos2().y()){
                 //BL backpedal
                 abs.setPos(x2, (int) abs.getPos().y());
             }
@@ -422,12 +422,12 @@ public class Model extends Observable {
                 for(int h=0; h<height; h++){
                     for(int w=0; w<Math.abs(abs.getPos().x() - x2); w++){
                         if(isOccupied(x2+w, abs.getPos().y()+h)){
-                            check = true;
+                            check = false;
                         }
                     }
                 }
-                if(!check){
-                    abs.setPos(x2, y2);
+                if(check){
+                    abs.setPos(x2, (int) abs.getPos().y());
                 }
             } else if (last.x()+1 == abs.getPos2().x() && last.y()+1 == abs.getPos2().y()){
                 if(width == 1){
@@ -435,30 +435,30 @@ public class Model extends Observable {
                     for(int h=0; h<height; h++){
                         for(int w=0; w<Math.abs(abs.getPos().x() - x2); w++){
                             if(isOccupied(x2+w, abs.getPos().y()+h)){
-                                check = true;
+                                check = false;
                             }
                         }
                     }
-                    if(!check){
+                    if(check){
                         abs.setPos(x2, (int) abs.getPos().y());
                     }
                 } else {
                     //BR backpedal
-                    abs.setPos2(x2+1, y2+1);
+                    abs.setPos2(x2+1, (int) abs.getPos2().y());
                 }
-            } else if(last.x() == abs.getPos().x()){
+            } else if(last.x() == abs.getPos().x() && last.y()+1 == abs.getPos2().y()){
                 //BL
                 for(int h=0; h<height; h++){
                     for(int w=0; w<Math.abs(abs.getPos().x() - x2); w++){
                         if(isOccupied(x2+w, abs.getPos().y()+h)){
-                            check = true;
+                            check = false;
                         }
                     }
                 }
-                if(!check){
+                if(check){
                     abs.setPos(x2, (int) abs.getPos().y());
                 }
-            } else if(last.x()+1 == abs.getPos2().x()){
+            } else if(last.x()+1 == abs.getPos2().x() && last.y() == abs.getPos().y()){
                 //TR backpedal
                 abs.setPos2(x2+1, (int) abs.getPos2().y());
             }
@@ -468,12 +468,12 @@ public class Model extends Observable {
                 for(int w=0; w<width; w++){
                     for(int h=0; h<Math.abs(abs.getPos2().y() - (y2+1)); h++){
                         if(isOccupied(abs.getPos().x()+w, y2-h)){
-                            check = true;
+                            check = false;
                         }
                     }
                 }
-                if(!check){
-                    abs.setPos2(x2+1, y2+1);
+                if(check){
+                    abs.setPos2((int) abs.getPos2().x(), y2+1);
                 }
             } else if(last.x() == abs.getPos().x() && last.y() == abs.getPos().y()){
                 if(height == 1){
@@ -481,30 +481,30 @@ public class Model extends Observable {
                     for(int w=0; w<width; w++){
                         for(int h=0; h<Math.abs(abs.getPos().y() - y2); h++){
                             if(isOccupied(abs.getPos().x()+w, y2-h)){
-                                check = true;
+                                check = false;
                             }
                         }
                     }
-                    if(!check){
+                    if(check){
                         abs.setPos2((int) abs.getPos2().x(), y2+1);
                     }
                 } else {
                     //TL backpedal
                     abs.setPos(x2, y2);
                 }
-            } else if(last.x()+1 == abs.getPos2().x()){
+            } else if(last.x()+1 == abs.getPos2().x() && last.y() == abs.getPos().y()){
                 //TR backpedal
                 abs.setPos((int) abs.getPos().x(), y2);
-            } else if(last.x() == abs.getPos().x()){
+            } else if(last.x() == abs.getPos().x() && last.y()+1 == abs.getPos2().y()){
                 //BL
                 for(int w=0; w<width; w++){
                     for(int h=0; h<Math.abs(last.y() - y2); h++){
                         if(isOccupied(abs.getPos().x()+w, y2-h)){
-                            check = true;
+                            check = false;
                         }
                     }
                 }
-                if(!check){
+                if(check){
                     abs.setPos2((int) abs.getPos2().x(), y2+1);
                 }
             }
@@ -514,12 +514,12 @@ public class Model extends Observable {
                 for(int w=0; w<width; w++){
                     for(int h=0; h<Math.abs(abs.getPos().y() - y2); h++){
                         if(isOccupied(abs.getPos().x()+w, y2+h)){
-                            check = true;
+                            check = false;
                         }
                     }
                 }
-                if(!check){
-                    abs.setPos(x2, y2);
+                if(check){
+                    abs.setPos((int) abs.getPos().x(), y2);
                 }
             } else if(last.x()+1 == abs.getPos2().x() && last.y()+1 == abs.getPos2().y()){
                 if(height == 1){
@@ -527,36 +527,36 @@ public class Model extends Observable {
                     for(int w=0; w<width; w++){
                         for(int h=0; h<Math.abs(abs.getPos().y() - y2); h++){
                             if(isOccupied(abs.getPos().x()+w, y2+h)){
-                                check = true;
+                                check = false;
                             }
                         }
                     }
-                    if(!check){
+                    if(check){
                         abs.setPos((int) abs.getPos().x(), y2);
                     }
                 } else {
                     //BR backpedal
                     abs.setPos2(x2+1, y2+1);
                 }
-            } else if(last.x() == abs.getPos().x()){
+            } else if(last.x() == abs.getPos().x() && last.y()+1 == abs.getPos2().y()){
                 //BL backpedal
                 abs.setPos2((int) abs.getPos2().x(), y2+1);
-            } else if(last.x()+1 == abs.getPos2().x()){
+            } else if(last.x()+1 == abs.getPos2().x() && last.y() == abs.getPos().y()){
                 //TR
                 for(int w=0; w<width; w++){
                     for(int h=0; h<Math.abs(abs.getPos().y() - y2); h++){
                         if(isOccupied(abs.getPos().x()+w, y2+h)){
-                            check = true;
+                            check = false;
                         }
                     }
                 }
-                if(!check){
+                if(check){
                     abs.setPos((int) abs.getPos().x(), y2);
                 }
             }
         }
-
         nob();
+        return check;
     }
 
     public void setGravity(double g){

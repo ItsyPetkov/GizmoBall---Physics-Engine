@@ -109,8 +109,10 @@ public class BuildModeInsertMenuListener implements ActionListener {
 						if(last == null){
 							last = new Vect(x,y);
 						} else if(!(last.x() == x && last.y() == y)){
-							model.dragAbs(abs, last, x, y);
-							last = new Vect(x,y);
+							boolean check = model.dragAbs(abs, last, x, y);
+							if(check){
+								last = new Vect(x,y);
+							}
 						}
 
 					}
