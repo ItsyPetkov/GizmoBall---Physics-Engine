@@ -280,8 +280,7 @@ public class Model extends IModel{
             if (ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() == y ||
                     ballList.get(i).getPos().x() - range == x && ballList.get(i).getPos().y() == y ||
                     ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() - range == y ||
-                    ballList.get(i).getPos().x() - range == x && ballList.get(i).getPos().y() - range == y ||
-                    ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() == y) {
+                    ballList.get(i).getPos().x() - range == x && ballList.get(i).getPos().y() - range == y) {
                 return ballList.get(i);
             }
         }
