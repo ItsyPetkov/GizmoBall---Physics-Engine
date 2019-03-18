@@ -26,4 +26,6 @@ public abstract class IModel extends Observable {
     public abstract boolean dragAbs(Absorber abs, Vect last, int x2, int y2);
     public abstract void setGravity(double g);
     public abstract void setFriction(double xf, double yf);
+    public abstract double getGravity();
+    public abstract double[] getFriction();
 }

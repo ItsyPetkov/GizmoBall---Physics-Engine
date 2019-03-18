@@ -57,6 +57,12 @@ public class LoadFile implements ILoadFile{
                     //Move Command
                 } else if (line.startsWith("Move")) {
                     moveCommands.add(temp);
+                } else if (line.startsWith("Gravity")) {
+                    model.setGravity(Double.parseDouble(temp[1]));
+                } else if (line.startsWith("Friction")) {
+                    double xf = Double.parseDouble(temp[1]);
+                    double yf = Double.parseDouble(temp[2]);
+                    model.setFriction(xf, yf);
                 }
             }
         } catch(FileNotFoundException ex) {

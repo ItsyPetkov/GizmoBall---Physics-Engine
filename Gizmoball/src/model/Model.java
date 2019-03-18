@@ -581,4 +581,14 @@ public class Model extends IModel{
         mu = xf;
         mu2 = yf;
     }
+    public double getGravity() {
+        return gravity;
+    }
+
+    public double[] getFriction() {
+        double[] friction = new double[2];
+        friction[0] = mu;
+        friction[1] = mu2;
+        return friction;
+    }
 }
