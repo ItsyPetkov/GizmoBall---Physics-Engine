@@ -11,7 +11,7 @@ import controller.*;
 import model.IModel;
 import model.Model;
 
-public class BuildMode extends JFrame {
+public class BuildMode extends JFrame implements IBuildMode{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -24,6 +24,10 @@ public class BuildMode extends JFrame {
 
 	public BuildMode(IModel model) {
 		this.model = model;
+		draw();
+	}
+
+	public void draw(){
 
 		jmb = new JMenuBar();
 		file = new JMenu("File");

@@ -4,20 +4,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import model.*;
-import view.BuildMode;
-import view.Main;
-import view.MainMenu;
-import view.RunMode;
+import view.*;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MainMenuButtonListener implements ActionListener {
 
-	private RunMode rm;
-	private BuildMode bm;
-	private Model model;
-	private LoadFile loadfile;
+	private IRunMode rm;
+	private IBuildMode bm;
+	private IModel model;
+	private ILoadFile loadfile;
 	private JFileChooser chooser;
 
 	public MainMenuButtonListener() {

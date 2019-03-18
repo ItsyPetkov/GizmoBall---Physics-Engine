@@ -10,7 +10,7 @@ import controller.*;
 import model.IModel;
 import model.Model;
 
-public class RunMode extends JFrame {
+public class RunMode extends JFrame implements IRunMode{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -22,19 +22,22 @@ public class RunMode extends JFrame {
 	
 	public RunMode(IModel model) {
 		this.model = model;
-		
+		draw();
+	}
+
+	public void draw(){
 		jmb = new JMenuBar();
 		mode = new JMenu("Mode");
 		mode.setFocusable(false);
-		
+
 		jmb.add(mode);
-		
+
 		JMenuItem buildMode = new JMenuItem("Enter Build Mode");
 		buildMode.setFocusable(false);
 		buildMode.addActionListener(new ModeMenuActionListener(model));
-		
+
 		mode.add(buildMode);
-		
+
 		setJMenuBar(jmb);
 		setTitle("Gizmoball - Run Mode");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -49,17 +52,17 @@ public class RunMode extends JFrame {
 		for (int i = 0; i < CustomKeys.size(); i++) {
 			this.addKeyListener(CustomKeys.getKey(i));
 		}
-		
+
 		JLabel lblWelcomeToGizmoball = new JLabel("Welcome to Gizmoball - Run Mode");
 		lblWelcomeToGizmoball.setFont(new Font("Tahoma", Font.ITALIC, 25));
 		lblWelcomeToGizmoball.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblWelcomeToGizmoball, BorderLayout.NORTH);
-		
+
 		board = new Board(model);
 		contentPane.add(board, BorderLayout.CENTER);
 
 		this.addKeyListener(new AbsorberKeyListener(model));
-		
+
 		JPanel buttonPanel = new JPanel(new GridLayout(1,1));
 		JButton btnTick = new JButton("Tick");
 		btnTick.setFocusable(false);
@@ -70,7 +73,7 @@ public class RunMode extends JFrame {
 		JButton btnPause = new JButton("Pause");
 		btnPause.setFocusable(false);
 		btnPause.addActionListener(new RunModeButtonListener(model, this));
-		
+
 		buttonPanel.add(btnTick);
 		buttonPanel.add(btnRun);
 		buttonPanel.add(btnPause);
