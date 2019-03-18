@@ -262,8 +262,13 @@ public class Model extends IModel{
     }
 
     public IBall ballSearch(int x, int y){
-        for(int i=0; i<ballList.size(); i++){
-            if (ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() == y) {
+        int range = 1;
+        for(int i=0; i<ballList.size(); i++) {
+            if (ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() == y ||
+                    ballList.get(i).getPos().x() - range == x && ballList.get(i).getPos().y() == y ||
+                    ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() - range == y ||
+                    ballList.get(i).getPos().x() - range == x && ballList.get(i).getPos().y() - range == y ||
+                    ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() == y) {
                 return ballList.get(i);
             }
         }
