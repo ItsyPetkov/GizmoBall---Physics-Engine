@@ -39,10 +39,12 @@ public class Model extends IModel{
                 if (tuc > moveTime) {
                     //no collision
                     moveBallForTime(ballList.get(i), moveTime);
-                    ballList.get(i).release();
                 } else {
-                    if(!(ballList.get(i).isCaptured())){
-                        //collision
+                    //collision
+                    if(ballList.get(i).isCaptured()){
+                        moveBallForTime(ballList.get(i), moveTime+0.005);
+                        ballList.get(i).release();
+                    } else {
                         moveBallForTime(ballList.get(i), tuc);
                         ballList.get(i).setVelo(cd.getVelo().x(), cd.getVelo().y());
                         switch(collisionType){
@@ -60,9 +62,6 @@ public class Model extends IModel{
                                 //collision with ball collidingB
                                 break;
                         }
-                    } else {
-                        //captured ball
-                        moveBallForTime(ballList.get(i), moveTime);
                     }
                 }
             }
