@@ -1,9 +1,7 @@
 package controller;
 
-import model.Gizmo;
 import model.IModel;
-import model.Model;
-import model.RightFlipper;
+import model.IGizmo;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -11,10 +9,10 @@ import java.awt.event.KeyListener;
 public class CustomKeyListener implements KeyListener {
 
     private char key;
-    private Gizmo gizmo;
+    private IGizmo gizmo;
     private IModel model;
 
-    public CustomKeyListener(IModel model, char key, Gizmo gizmo) {
+    public CustomKeyListener(IModel model, char key, IGizmo gizmo) {
         this.key = key;
         this.gizmo = gizmo;
         this.model = model;
@@ -75,7 +73,7 @@ public class CustomKeyListener implements KeyListener {
         }
     }
 
-    public Gizmo getGizmo() {
+    public IGizmo getGizmo() {
         return gizmo;
     }
 

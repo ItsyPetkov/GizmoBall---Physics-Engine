@@ -7,7 +7,7 @@ import physics.Vect;
 import java.awt.*;
 import java.util.List;
 
-public abstract class Gizmo {
+public abstract class Gizmo implements IGizmo{
 
     Vect pos;
     String id;
@@ -51,9 +51,5 @@ public abstract class Gizmo {
 
     public int getRotation(){
         return rotation;
-    }
-
-    public void move(int x, int y) {
-        pos = new Vect(x,y);
     }
 }

@@ -3,7 +3,6 @@ package controller;
 import model.Absorber;
 import model.Gizmo;
 import model.IModel;
-import model.Model;
 import physics.Vect;
 import view.Board;
 

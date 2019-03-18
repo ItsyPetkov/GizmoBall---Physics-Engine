@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class LoadFile {
+public class LoadFile implements ILoadFile{
     IModel model;
 
     public LoadFile(IModel m) {
@@ -121,9 +121,9 @@ public class LoadFile {
                 id = commands.get(i)[1];
                 x = Integer.parseInt(commands.get(i)[2]);
                 y = Integer.parseInt(commands.get(i)[3]);
-                for (Gizmo g : model.getGizmos()) {
+                for (IGizmo g : model.getGizmos()) {
                     if (g.getId().equals(id)) {
-                        g.move(x, y);
+                        g.setPos(x, y);
                     }
                 }
             }
@@ -148,11 +148,11 @@ public class LoadFile {
 
     public void deleteGizmos(List<String[]> commands) {
         String id;
-        List<Gizmo> toRemove = new ArrayList<>();
+        List<IGizmo> toRemove = new ArrayList<>();
         for (int i = 0; i < commands.size(); i++) {
             id = commands.get(i)[1];
             if (commands.get(i)[0].equals("Delete")) {
-                for (Gizmo g : model.getGizmos()) {
+                for (IGizmo g : model.getGizmos()) {
                     if (g.getId().equals(id)) {
                         if (model.getGizmos().contains(g)) {
                             toRemove.add(g);
@@ -180,7 +180,7 @@ public class LoadFile {
         for (int i = 0; i < commands.size(); i++) {
             if (commands.get(i)[0].equals("Rotate")) {
                 id = commands.get(i)[1];
-                for (Gizmo g : model.getGizmos()) {
+                for (IGizmo g : model.getGizmos()) {
                     if (g.getId().equals(id)) {
 
                         g.rotate();
@@ -192,13 +192,13 @@ public class LoadFile {
 
     public void connectGizmos(List<String[]> commands) {
         String id1, id2;
-        Gizmo g1 = null, g2 = null;
+        IGizmo g1 = null, g2 = null;
 
         for (int i = 0; i < commands.size(); i++) {
             if (commands.get(i)[0].equals("Connect")) {
                 id1 = commands.get(i)[1];
                 id2 = commands.get(i)[2];
-                for (Gizmo g : model.getGizmos()) {
+                for (IGizmo g : model.getGizmos()) {
                     if (g.getId().equals(id1)) {
                         g1 = g;
                     }

@@ -50,7 +50,6 @@ public class BuildMode extends JFrame {
 		this.setVisible(true);
 		this.setResizable(false);
 
-		this.addKeyListener(new EscapeKeyListener(state()));
 		this.setFocusable(true);
 
 		JLabel lblWelcomeToGizmoball = new JLabel("Welcome to Gizmoball - Build Mode");

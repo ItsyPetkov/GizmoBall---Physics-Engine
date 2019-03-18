@@ -4,7 +4,7 @@ import physics.Vect;
 import physics.Circle;
 import java.awt.Color;
 
-public class Ball {
+public class Ball implements IBall{
 
     private Vect velo;
     private Vect pos;

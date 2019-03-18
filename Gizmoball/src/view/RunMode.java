@@ -44,7 +44,6 @@ public class RunMode extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		this.setVisible(true);
-		this.addKeyListener(new EscapeKeyListener(state()));
 		this.setFocusable(true);
 		timer = new Timer(50, new TimerTickListener(model));
 		for (int i = 0; i < CustomKeys.size(); i++) {

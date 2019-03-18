@@ -45,7 +45,7 @@ public class Board extends JPanel implements Observer {
 		//drawing the objects and setting up the scene for the game
 
 		//drawing gizmos
-		List<Gizmo> gizmoList = model.getGizmos();
+		List<IGizmo> gizmoList = model.getGizmos();
 		for(int i=0; i<gizmoList.size(); i++) {
 			switch (gizmoList.get(i).type()) {
 				case "Absorber":
@@ -70,7 +70,7 @@ public class Board extends JPanel implements Observer {
 		}
 
 		//drawing the balls
-		List<Ball> ballList = model.getBalls();
+		List<IBall> ballList = model.getBalls();
 		for(int i=0; i<ballList.size(); i++){
 			g.setColor(ballList.get(i).getColour());
 			Vect ballPos = ballList.get(i).getPos();
@@ -109,7 +109,7 @@ public class Board extends JPanel implements Observer {
 		g.fillRect((int) (gPos.x()*LtoPx), (int) (gPos.y()*LtoPx), LtoPx, LtoPx);
 	}
 
-	private void drawCircle(Graphics g, Gizmo gizmo){
+	private void drawCircle(Graphics g, IGizmo gizmo){
 		Vect gPos = gizmo.getPos();
 		g.setColor(gizmo.getColour());
 		g.fillOval((int) (gPos.x()*LtoPx), (int) (gPos.y()*LtoPx), LtoPx, LtoPx);
@@ -143,7 +143,7 @@ public class Board extends JPanel implements Observer {
 		}
 	}
 
-	private void drawFlipper(Graphics g, Gizmo gizmo){    //drawing the flippers
+	private void drawFlipper(Graphics g, IGizmo gizmo){    //drawing the flippers
 	    List<LineSegment> ls = gizmo.getSides();
 	    List<Circle> cs = gizmo.getCorners();
 	    Circle topCircle = cs.get(0);

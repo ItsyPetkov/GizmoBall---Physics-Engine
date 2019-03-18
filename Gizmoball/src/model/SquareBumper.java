@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SquareBumper extends Gizmo {
+public class SquareBumper extends Gizmo{
     private Color colour;
     private String type;
 

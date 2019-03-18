@@ -1,6 +1,6 @@
 package controller;
 
-import model.Gizmo;
+import model.IGizmo;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class CustomKeys {
         return lastKey;
     }
 
-    public static void remove(Gizmo gizmo) {
+    public static void remove(IGizmo gizmo) {
         for(CustomKeyListener ke : keys) {
             if (ke.getGizmo().equals(gizmo)) {
                 keys.remove(ke);

@@ -13,19 +13,19 @@ import java.util.Observable;
 public class Model extends IModel{
 
     private Walls walls;
-    private List<Gizmo> gizmoList;
-    private List<Ball> ballList;
+    private List<IGizmo> gizmoList;
+    private List<IBall> ballList;
     private double gravity = 25;
     private double mu = 0.025;
     private double mu2 = 0.025;
     private int collisionType = 0;
-    private Gizmo collidingG;
-    private Ball collidingB;
+    private IGizmo collidingG;
+    private IBall collidingB;
 
     public Model(){
         walls = new Walls(0,0,20,20);
-        gizmoList = new ArrayList<Gizmo>();
-        ballList = new ArrayList<Ball>();
+        gizmoList = new ArrayList<>();
+        ballList = new ArrayList<>();
 
     }
 
@@ -72,7 +72,7 @@ public class Model extends IModel{
         this.notifyObservers();
     }
 
-    public CollisionDetails timeUntilCollision(Ball ball, int ballNo){
+    public CollisionDetails timeUntilCollision(IBall ball, int ballNo){
         Circle ballCircle = ball.getCircle();
         Vect ballVelo = ball.getVelo();
 
@@ -134,7 +134,7 @@ public class Model extends IModel{
         return new CollisionDetails(shortestTime, newVelo);
     }
 
-    public Ball moveBallForTime(Ball ball, double time){
+    private void moveBallForTime(IBall ball, double time){
         Vect velo = ball.getVelo();
         Vect pos = ball.getPos();
 
@@ -149,8 +149,6 @@ public class Model extends IModel{
         ball.setVelo(ball.getVelo().x(), ball.getVelo().y()+(gravity*time));
 
         ball.setPos(newX, newY);
-
-        return ball;
     }
 
     private Vect friction(Vect old, double moveTime){
@@ -159,13 +157,13 @@ public class Model extends IModel{
         return new Vect(x,y);
     }
 
-    private void absorberCapture(Ball ball, Absorber abs){
+    private void absorberCapture(IBall ball, Absorber abs){
         Vect bottomRight = abs.getPos2();
         ball.setPos( bottomRight.x() - (ball.getRadius()) - 0.25, bottomRight.y() - (ball.getRadius()) - 0.25);
         ball.setVelo(0.0,0.0);
     }
 
-    public void absorberShoot(Ball ball){
+    public void absorberShoot(IBall ball){
         if(ball.isCaptured()){
             ball.setVelo(0.0, -50);
 
@@ -180,11 +178,11 @@ public class Model extends IModel{
         return walls.getBR();
     }
 
-    public List<Gizmo> getGizmos(){
+    public List<IGizmo> getGizmos(){
         return gizmoList;
     }
 
-    public List<Ball> getBalls(){
+    public List<IBall> getBalls(){
         return ballList;
     }
 
@@ -193,7 +191,7 @@ public class Model extends IModel{
         this.notifyObservers();
     }
 
-    public boolean addGizmo(Gizmo g){
+    public boolean addGizmo(IGizmo g){
         if(g.type().equals("Absorber")){
             boolean trigger = true;
             Absorber abs = (Absorber) g;
@@ -236,14 +234,14 @@ public class Model extends IModel{
         return false;
     }
 
-    public void addBall(Ball b){
+    public void addBall(IBall b){
         if(!isOccupied(b.getPos().x(), b.getPos().y())) {
             ballList.add(b);
         }
         nob();
     }
 
-    public Gizmo gizmoSearch(int x, int y){
+    public IGizmo gizmoSearch(int x, int y){
         for(int i=0; i<gizmoList.size(); i++){
             if(gizmoList.get(i).getPos().x() == x && gizmoList.get(i).getPos().y() == y){
                 return gizmoList.get(i);
@@ -264,7 +262,7 @@ public class Model extends IModel{
         return null;
     }
 
-    public Ball ballSearch(int x, int y){
+    public IBall ballSearch(int x, int y){
         for(int i=0; i<ballList.size(); i++){
             if (ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() == y) {
                 return ballList.get(i);
@@ -291,34 +289,34 @@ public class Model extends IModel{
         return true;
     }
 
-    public void moveGizmo(Gizmo g, int x, int y){
+    public void moveGizmo(IGizmo g, int x, int y){
         if(gizmoList.contains(g) && (!isOccupied(x, y))){
             System.out.println("moving");
-            gizmoList.get(gizmoList.indexOf(g)).move(x,y);
+            gizmoList.get(gizmoList.indexOf(g)).setPos(x,y);
         }
         nob();
     }
 
-    public void setBallPos(Ball b, int x, int y){
+    public void setBallPos(IBall b, int x, int y){
         if(ballList.contains(b) && (!isOccupied(x, y))){
             ballList.get(ballList.indexOf(b)).setPos(x,y);
         }
         nob();
     }
 
-    public void rotateGizmo(Gizmo g){
+    public void rotateGizmo(IGizmo g){
         if(gizmoList.contains(g)){
             gizmoList.get(gizmoList.indexOf(g)).rotate();
         }
         nob();
     }
 
-    public void deleteGizmo(Gizmo g){
+    public void deleteGizmo(IGizmo g){
         gizmoList.remove(g);
         nob();
     }
 
-    public void deleteBall(Ball b){
+    public void deleteBall(IBall b){
         ballList.remove(b);
         nob();
     }

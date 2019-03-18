@@ -1,9 +1,6 @@
 package controller;
 
-import model.IModel;
-import model.LoadFile;
-import model.Model;
-import model.SaveFile;
+import model.*;
 import view.BuildMode;
 import view.MainMenu;
 import view.RunMode;
@@ -17,8 +14,8 @@ import java.io.File;
 
 public class FileMenuActionListener implements ActionListener {
 
-    private LoadFile loadfile;
-    private SaveFile savefile;
+    private ILoadFile loadfile;
+    private ISaveFile savefile;
     private IModel model;
     private BuildMode gui;
     private JFileChooser chooser;

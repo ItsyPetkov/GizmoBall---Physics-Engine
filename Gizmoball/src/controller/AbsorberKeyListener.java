@@ -3,7 +3,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import model.IModel;
-import model.Model;
 
 public class AbsorberKeyListener implements KeyListener {
 	

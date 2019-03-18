@@ -1,7 +1,7 @@
 package controller;
 
-import model.Ball;
-import model.Gizmo;
+import model.IBall;
+import model.IGizmo;
 import model.IModel;
 import view.Board;
 
@@ -13,8 +13,8 @@ public class BuildModeButtonListener implements ActionListener {
     IModel model;
     Board board;
     int LtoPx = 25;
-    Gizmo target;
-    Ball targetBall;
+    IGizmo target;
+    IBall targetBall;
     boolean dragging = false;
 
     public BuildModeButtonListener(IModel m, Board b) {

@@ -1,9 +1,6 @@
 package controller;
 
-import model.Ball;
-import model.Gizmo;
-import model.IModel;
-import model.Model;
+import model.*;
 import view.KeyAlert;
 
 import javax.swing.*;
@@ -16,8 +13,8 @@ import java.security.Key;
 public class BuildModeMouseListener implements MouseInputListener {
 
     IModel model;
-    Gizmo target;
-    Ball targetBall;
+    IGizmo target;
+    IBall targetBall;
     int LtoPx;
     String action;
 
