@@ -62,9 +62,4 @@ public class Absorber extends Gizmo{
         cs.add(new Circle(pos2.x(), pos2.y(),0));
         return cs;
     }
-
-    @Override
-    public void rotate() {
-
-    }
 }
