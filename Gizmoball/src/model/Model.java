@@ -71,6 +71,7 @@ public class Model extends IModel{
         this.notifyObservers();
     }
 
+    //finds time until collision between ball and an object or wall
     public CollisionDetails timeUntilCollision(IBall ball, int ballNo){
         Circle ballCircle = ball.getCircle();
         Vect ballVelo = ball.getVelo();
@@ -156,12 +157,14 @@ public class Model extends IModel{
         return new Vect(x,y);
     }
 
+    //capturing ball in absorber setting ball velocity to 0
     private void absorberCapture(IBall ball, Absorber abs){
         Vect bottomRight = abs.getPos2();
         ball.setPos( bottomRight.x() - (ball.getRadius()) - 0.25, bottomRight.y() - (ball.getRadius()) - 0.25);
         ball.setVelo(0.0,0.0);
     }
 
+    //shoots the ball out of the absorber
     public void absorberShoot(IBall ball){
         if(ball.isCaptured()){
             ball.setVelo(0.0, -50);
@@ -169,27 +172,33 @@ public class Model extends IModel{
         }
     }
 
+    //returns top left wall
     public Vect getWallTL(){
         return walls.getTL();
     }
 
+    //returns bottom right wall
     public Vect getWallBR(){
         return walls.getBR();
     }
 
+    //returns all available gizmos
     public List<IGizmo> getGizmos(){
         return gizmoList;
     }
 
+    //returns all available balls
     public List<IBall> getBalls(){
         return ballList;
     }
 
+    //updating observers
     private void nob(){
         this.setChanged();
         this.notifyObservers();
     }
 
+    //adding a gizmo to the global gizmoList
     public boolean addGizmo(IGizmo g){
         if(g.type().equals("Absorber")){
             boolean trigger = true;
@@ -233,6 +242,7 @@ public class Model extends IModel{
         return false;
     }
 
+    //adding a ball to global ballList
     public void addBall(IBall b){
         if(!isOccupied(b.getPos().x(), b.getPos().y())) {
             ballList.add(b);
@@ -240,6 +250,7 @@ public class Model extends IModel{
         nob();
     }
 
+    //finding a gizmo from global gizmoList based on (x,y) position
     public IGizmo gizmoSearch(int x, int y){
 
         for(int i=0; i<gizmoList.size(); i++){
@@ -274,6 +285,7 @@ public class Model extends IModel{
         return null;
     }
 
+    //finding a ball from global ballList based on (x,y) position
     public IBall ballSearch(int x, int y){
         int range = 1;
         for(int i=0; i<ballList.size(); i++) {
@@ -287,6 +299,7 @@ public class Model extends IModel{
         return null;
     }
 
+    //checking if a gizmo already exists based on gizmo id
     public boolean checkGizmoId(String id){
         for(int i=0; i<gizmoList.size(); i++){
             if(gizmoList.get(i).getId().equals(id)){
@@ -296,6 +309,7 @@ public class Model extends IModel{
         return true;
     }
 
+    //checking if a ball already exists based on ball id
     public boolean checkBallId(String id){
         for(int i=0; i<ballList.size(); i++){
             if(ballList.get(i).getId().equals(id)){
@@ -305,6 +319,7 @@ public class Model extends IModel{
         return true;
     }
 
+    //updating the position vector of a gizmo
     public void moveGizmo(IGizmo g, int x, int y){
         if(gizmoList.contains(g) && (!isOccupied(x, y))){
             System.out.println("moving");
@@ -313,6 +328,7 @@ public class Model extends IModel{
         nob();
     }
 
+    //updating the position vector of a ball
     public void setBallPos(IBall b, int x, int y){
         if(ballList.contains(b) && (!isOccupied(x, y))){
             ballList.get(ballList.indexOf(b)).setPos(x,y);
@@ -320,6 +336,7 @@ public class Model extends IModel{
         nob();
     }
 
+    //rotating gizmos
     public void rotateGizmo(IGizmo g){
         if(gizmoList.contains(g)){
             gizmoList.get(gizmoList.indexOf(g)).rotate();
@@ -327,16 +344,19 @@ public class Model extends IModel{
         nob();
     }
 
+    //deleting gizmos
     public void deleteGizmo(IGizmo g){
         gizmoList.remove(g);
         nob();
     }
 
+    //deleting balls
     public void deleteBall(IBall b){
         ballList.remove(b);
         nob();
     }
 
+    //checks if a gizmo or ball occupies a space to prevent overlapping
     private boolean isOccupied(double x, double y){
         for(int i=0; i<gizmoList.size(); i++){
             if(gizmoList.get(i).getPos().x() == x && gizmoList.get(i).getPos().y() == y){
@@ -377,6 +397,7 @@ public class Model extends IModel{
         return false;
     }
 
+    //checks which direction an abs can be dragged to
     public boolean dragAbs(Absorber abs, Vect last, int x2, int y2){
 
         double height = abs.getPos2().y()-abs.getPos().y();
@@ -581,6 +602,7 @@ public class Model extends IModel{
         mu = xf;
         mu2 = yf;
     }
+
     public double getGravity() {
         return gravity;
     }
