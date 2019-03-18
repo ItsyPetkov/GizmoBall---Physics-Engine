@@ -35,6 +35,7 @@ public class BuildModeButtonListener implements ActionListener {
             board.removeMouseMotionListener(mml[i]);
         }
 
+        //Handling setting gravity
         if (e.getActionCommand().equals("Gravity")) {
             try {
                 String gravity = "";
@@ -53,6 +54,7 @@ public class BuildModeButtonListener implements ActionListener {
             }
         }
 
+        //Handling setting friction
         if (e.getActionCommand().equals("Friction")) {
             try {
                 JTextField fieldVelX = new JTextField();
@@ -81,6 +83,7 @@ public class BuildModeButtonListener implements ActionListener {
             }
         }
 
+        //Handling moving gizmos
         if (e.getActionCommand().equals("Move")){
             board.addMouseListener(new MouseAdapter() {
                 @Override

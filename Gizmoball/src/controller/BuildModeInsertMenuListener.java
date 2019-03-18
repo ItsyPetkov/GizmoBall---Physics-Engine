@@ -24,7 +24,7 @@ public class BuildModeInsertMenuListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		//Remove listeners
 		MouseListener[] mss = board.getMouseListeners();
 		for(int i=0; i<mss.length; i++){
 			board.removeMouseListener(mss[i]);
@@ -35,9 +35,7 @@ public class BuildModeInsertMenuListener implements ActionListener {
 			board.removeMouseMotionListener(mml[i]);
 		}
 
-
-
-
+		//Creating id's for gizmos
 		if(e.getActionCommand().equals("Square")) {
 			int i = 1;
 			idGen = "S" + i;
@@ -90,6 +88,7 @@ public class BuildModeInsertMenuListener implements ActionListener {
 			}
 		}
 
+		//Dynamically moving absorber
 		if(e.getActionCommand().equals("Absorber")){
 			board.addMouseListener(new MouseAdapter() {
 				@Override

@@ -58,7 +58,7 @@ public class InGameMenuBuildMode {
 		inGameMenuFrame.setVisible(true);
 		inGameMenuFrame.setLocationRelativeTo(null);
 	}
-	
+
 	public static void inGameMenuExitGameFrame() {
 		exitFrame = new JFrame("Exit?");
 		Container content = exitFrame.getContentPane();

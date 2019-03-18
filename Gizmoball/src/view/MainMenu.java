@@ -21,6 +21,7 @@ public class MainMenu {
 	static JFrame exitFrame;
 	static JFrame mainMenuFrame;
 
+	//Displays the main menu
 	public static void mainMenuFrame() {
 		mainMenuFrame = new JFrame("Gizmoball - Main Menu");
 		mainMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,6 +61,7 @@ public class MainMenu {
 		mainMenuFrame.setLocationRelativeTo(null);
 	}
 
+	//Clicking Exit in Main Menu
 	public static void exitGameFrame() {
 		exitFrame = new JFrame("Exit?");
 		Container content = exitFrame.getContentPane();

@@ -50,6 +50,7 @@ public class BuildModeInsertMouseListener implements MouseInputListener {
 
     }
 
+    //returns ball velocity
     public Double[] getVelocity() {
         try {
             JTextField fieldVelX = new JTextField();

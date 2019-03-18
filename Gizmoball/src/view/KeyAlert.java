@@ -9,6 +9,7 @@ public class KeyAlert {
     char key = '\0';
     JDialog jd;
 
+    //KeyConnect prompt
     public KeyAlert() {
 
         JFrame frame = new JFrame();

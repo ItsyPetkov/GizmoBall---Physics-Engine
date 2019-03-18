@@ -18,12 +18,13 @@ public class ModeMenuActionListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+		// Starting Run Mode
 		if(arg0.getActionCommand().equals("Enter Run Mode")) {
 			for(Frame f: BuildMode.getFrames()) {
 				f.dispose();
 			}
 			new RunMode(model);
+		//Starting Build Mode
 		}else if(arg0.getActionCommand().equals("Enter Build Mode")) {
 			RunMode.getTimer().stop();
 			for(Frame f: RunMode.getFrames()) {
