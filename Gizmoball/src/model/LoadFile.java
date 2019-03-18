@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LoadFile {
-    Model model;
+    IModel model;
 
-    public LoadFile(Model m) {
+    public LoadFile(IModel m) {
         model = m;
     }
 

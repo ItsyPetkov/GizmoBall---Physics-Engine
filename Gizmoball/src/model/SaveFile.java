@@ -6,10 +6,10 @@ import java.io.Writer;
 import java.util.List;
 
 public class SaveFile {
-    Model model;
+    IModel model;
     private List<Gizmo> gizmoList;
     private List<Ball> ballList;
-    public SaveFile(Model m) {
+    public SaveFile(IModel m) {
         model = m;
         gizmoList = model.getGizmos();
         ballList = model.getBalls();

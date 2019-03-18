@@ -4,15 +4,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import model.IModel;
 import model.Model;
 import view.BuildMode;
 import view.RunMode;
 
 public class ModeMenuActionListener implements ActionListener {
 
-	Model model;
+	IModel model;
 
-	public ModeMenuActionListener(Model m) {
+	public ModeMenuActionListener(IModel m) {
 		this.model = m;
 	}
 

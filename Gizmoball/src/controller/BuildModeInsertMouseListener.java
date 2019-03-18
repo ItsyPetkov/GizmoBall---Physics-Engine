@@ -9,14 +9,14 @@ import java.awt.event.MouseListener;
 
 public class BuildModeInsertMouseListener implements MouseInputListener {
 
-    Model model;
+    IModel model;
     int LtoPx;
     String type;
     String id;
 
     private int sx, sy, ex, ey; //used for absorber
 
-    public BuildModeInsertMouseListener(Model m, int LtoPx, String type, String id) {
+    public BuildModeInsertMouseListener(IModel m, int LtoPx, String type, String id) {
         this.model = m;
         this.LtoPx = LtoPx;
         this.type = type;

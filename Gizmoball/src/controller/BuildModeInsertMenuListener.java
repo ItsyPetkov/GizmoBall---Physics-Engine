@@ -2,6 +2,7 @@ package controller;
 
 import model.Absorber;
 import model.Gizmo;
+import model.IModel;
 import model.Model;
 import physics.Vect;
 import view.Board;
@@ -10,14 +11,14 @@ import java.awt.event.*;
 
 public class BuildModeInsertMenuListener implements ActionListener {
 
-	Model model;
+	IModel model;
 	Board board;
 	String idGen = "";
 	Gizmo newAbs = null;
 	boolean avail = false;
 	Vect last;
 
-	public BuildModeInsertMenuListener(Model m, Board b) {
+	public BuildModeInsertMenuListener(IModel m, Board b) {
 		this.model = m;
 		this.board = b;
 	}

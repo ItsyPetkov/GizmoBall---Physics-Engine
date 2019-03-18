@@ -1,6 +1,7 @@
 package controller;
 
 import model.Gizmo;
+import model.IModel;
 import model.Model;
 import model.RightFlipper;
 
@@ -11,9 +12,9 @@ public class CustomKeyListener implements KeyListener {
 
     private char key;
     private Gizmo gizmo;
-    private Model model;
+    private IModel model;
 
-    public CustomKeyListener(Model model, char key, Gizmo gizmo) {
+    public CustomKeyListener(IModel model, char key, Gizmo gizmo) {
         this.key = key;
         this.gizmo = gizmo;
         this.model = model;

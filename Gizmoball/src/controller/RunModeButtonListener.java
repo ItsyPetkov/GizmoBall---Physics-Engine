@@ -3,15 +3,16 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import model.IModel;
 import model.Model;
 import view.RunMode;
 
 public class RunModeButtonListener implements ActionListener {
 
-	Model model;
+	IModel model;
 	RunMode gui;
 
-	public RunModeButtonListener(Model model, RunMode gui) {
+	public RunModeButtonListener(IModel model, RunMode gui) {
 		this.model = model;
 		this.gui = gui;
 	}

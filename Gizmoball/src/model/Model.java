@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-public class Model extends Observable {
+public class Model extends IModel{
 
     private Walls walls;
     private List<Gizmo> gizmoList;
@@ -188,7 +188,7 @@ public class Model extends Observable {
         return ballList;
     }
 
-    public void nob(){
+    private void nob(){
         this.setChanged();
         this.notifyObservers();
     }
@@ -323,7 +323,7 @@ public class Model extends Observable {
         nob();
     }
 
-    public boolean isOccupied(double x, double y){
+    private boolean isOccupied(double x, double y){
         for(int i=0; i<gizmoList.size(); i++){
             if(gizmoList.get(i).getPos().x() == x && gizmoList.get(i).getPos().y() == y){
                 return true;

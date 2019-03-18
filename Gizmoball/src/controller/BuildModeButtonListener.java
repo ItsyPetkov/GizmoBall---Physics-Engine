@@ -2,7 +2,7 @@ package controller;
 
 import model.Ball;
 import model.Gizmo;
-import model.Model;
+import model.IModel;
 import view.Board;
 
 import javax.swing.*;
@@ -10,14 +10,14 @@ import java.awt.event.*;
 
 public class BuildModeButtonListener implements ActionListener {
 
-    Model model;
+    IModel model;
     Board board;
     int LtoPx = 25;
     Gizmo target;
     Ball targetBall;
     boolean dragging = false;
 
-    public BuildModeButtonListener(Model m, Board b) {
+    public BuildModeButtonListener(IModel m, Board b) {
         this.model = m;
         this.board = b;
     }

@@ -2,6 +2,7 @@ package controller;
 
 import model.Ball;
 import model.Gizmo;
+import model.IModel;
 import model.Model;
 import view.KeyAlert;
 
@@ -14,13 +15,13 @@ import java.security.Key;
 
 public class BuildModeMouseListener implements MouseInputListener {
 
-    Model model;
+    IModel model;
     Gizmo target;
     Ball targetBall;
     int LtoPx;
     String action;
 
-    public BuildModeMouseListener(Model m, String action, int LtoPx){
+    public BuildModeMouseListener(IModel m, String action, int LtoPx){
         this.model = m;
         this.LtoPx = LtoPx;
         this.action = action;

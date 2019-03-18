@@ -1,5 +1,6 @@
 package controller;
 
+import model.IModel;
 import model.LoadFile;
 import model.Model;
 import model.SaveFile;
@@ -18,11 +19,11 @@ public class FileMenuActionListener implements ActionListener {
 
     private LoadFile loadfile;
     private SaveFile savefile;
-    private Model model;
+    private IModel model;
     private BuildMode gui;
     private JFileChooser chooser;
 
-    public FileMenuActionListener(Model m, BuildMode g) {
+    public FileMenuActionListener(IModel m, BuildMode g) {
         model = m;
         gui = g;
     }

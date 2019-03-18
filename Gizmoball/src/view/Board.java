@@ -17,10 +17,10 @@ public class Board extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 1L;
 	private boolean running;
-	private Model model;
+	private IModel model;
 	private int LtoPx = 25;
 	
-	public Board(Model m) {
+	public Board(IModel m) {
 		m.addObserver(this);
 		model = m;
 		running = true;

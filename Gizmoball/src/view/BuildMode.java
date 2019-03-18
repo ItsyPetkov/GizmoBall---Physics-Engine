@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import controller.*;
+import model.IModel;
 import model.Model;
 
 public class BuildMode extends JFrame {
@@ -19,9 +20,9 @@ public class BuildMode extends JFrame {
 	private JMenu insert;
 	private JMenu mode;
 	private Board board;
-	private Model model;
+	private IModel model;
 
-	public BuildMode(Model model) {
+	public BuildMode(IModel model) {
 		this.model = model;
 
 		jmb = new JMenuBar();

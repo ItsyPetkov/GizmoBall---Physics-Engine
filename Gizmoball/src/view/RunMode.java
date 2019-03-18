@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import controller.*;
+import model.IModel;
 import model.Model;
 
 public class RunMode extends JFrame {
@@ -15,11 +16,11 @@ public class RunMode extends JFrame {
 	private JPanel contentPane;
 	private JMenuBar jmb;
 	private JMenu mode;
-	private Model model;
+	private IModel model;
 	private Board board;
 	private static Timer timer;
 	
-	public RunMode(Model model) {
+	public RunMode(IModel model) {
 		this.model = model;
 		
 		jmb = new JMenuBar();

@@ -2,13 +2,14 @@ package controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import model.IModel;
 import model.Model;
 
 public class AbsorberKeyListener implements KeyListener {
 	
-	private Model model;
+	private IModel model;
 	
-	public AbsorberKeyListener(Model m) {
+	public AbsorberKeyListener(IModel m) {
 		model = m;
 	}
 
