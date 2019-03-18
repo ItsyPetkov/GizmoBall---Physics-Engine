@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import physics.Circle;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import java.awt.*;
 
 public class BallTest {
@@ -51,6 +52,25 @@ public class BallTest {
         assertEquals(ballCircle.getRadius(), 0.25);
         assertEquals(ballCircle.getCenter().x(), 10);
         assertEquals(ballCircle.getCenter().y(), 10);
+    }
+
+    @Test
+    void getTypeTest(){
+        assertEquals(ball.getType(), "Ball");
+    }
+
+    @Test
+    void getIdTest() {
+        assertEquals(ball.getId(), "B1");
+    }
+
+    @Test
+    void ballCaptureTest(){
+        assertFalse(ball.isCaptured());
+        ball.capture();
+        assertTrue(ball.isCaptured());
+        ball.release();
+        assertFalse(ball.isCaptured());
     }
 
 }
