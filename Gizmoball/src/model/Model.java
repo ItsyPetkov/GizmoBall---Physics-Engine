@@ -242,7 +242,19 @@ public class Model extends IModel{
     }
 
     public IGizmo gizmoSearch(int x, int y){
+
         for(int i=0; i<gizmoList.size(); i++){
+            if(gizmoList.get(i).type().equals("Absorber")) {
+                IGizmo absorber =(Absorber) gizmoList.get(i);
+                double range = absorber.getPos().x() - ((Absorber) absorber).getPos2().x();
+                if (gizmoList.get(i).getPos().x() == x && gizmoList.get(i).getPos().y() == y ||
+                        gizmoList.get(i).getPos().x() + range <= x && gizmoList.get(i).getPos().y() == y ||
+                        gizmoList.get(i).getPos().x() == x && gizmoList.get(i).getPos().y() + range <= y ||
+                        gizmoList.get(i).getPos().x() + range <= x && gizmoList.get(i).getPos().y() + range <= y) {
+                    return gizmoList.get(i);
+                }
+            }
+
             if(gizmoList.get(i).getPos().x() == x && gizmoList.get(i).getPos().y() == y){
                 return gizmoList.get(i);
             }
