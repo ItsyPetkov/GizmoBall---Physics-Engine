@@ -155,8 +155,8 @@ public class Board extends JPanel implements Observer {
 	    LineSegment leftSideLine = ls.get(3);
 
 	    g.setColor(gizmo.getColour());
-	    g.fillOval((int) ((topCircle.getCenter().x() - 0.25) * LtoPx), (int) ((topCircle.getCenter().y() - 0.25) * LtoPx), 10, 10);
-	    g.fillOval((int) ((bottomCircle.getCenter().x() - 0.25) * LtoPx), (int) ((bottomCircle.getCenter().y() - 0.25) * LtoPx), 10, 10);
+	    g.fillOval((int) ((topCircle.getCenter().x() - 0.25) * LtoPx), (int) ((topCircle.getCenter().y() - 0.25) * LtoPx), 13, 13);
+	    g.fillOval((int) ((bottomCircle.getCenter().x() - 0.25) * LtoPx), (int) ((bottomCircle.getCenter().y() - 0.25) * LtoPx), 13, 13);
 
 	    //Make middle of flipper with a polynomial, rectangle doesn't work
         int[] X = new int[4];

@@ -43,13 +43,13 @@ public class LeftFlipper extends Gizmo {
         this.colour=colour.BLACK;
 
         //Constituent Parts of Flipper
-        topSideLine = new LineSegment(center.x() , center.y() + 0.25, center.x() + 0.5, center.y() + 0.25);
-        bottomSideLine = new LineSegment(center.x() , center.y() + 1.75, center.x() +  0.5, center.y() + 1.75);
-        rightSideLine = new LineSegment(center.x() + 0.5, center.y() + 0.25, center.x() + 0.5, center.y() + 1.75);
-        leftSideLine = new LineSegment(center.x() , center.y() + 0.25, center.x() , center.y() + 1.75);
+        topSideLine = new LineSegment(center.x() +0.0 , center.y() + 0.25, center.x() + 0.55, center.y() + 0.25);
+        bottomSideLine = new LineSegment(center.x() +0.0  , center.y() + 1.75, center.x() +  0.55, center.y() + 1.75);
+        rightSideLine = new LineSegment(center.x() + 0.55, center.y() + 0.25, center.x() + 0.55, center.y() + 1.75);
+        leftSideLine = new LineSegment(center.x()+0.0 , center.y() + 0.25, center.x() +0.0, center.y() + 1.75);
 
-        topCircle = new Circle(center.x()  +0.25, center.y() + 0.25, 0.25);
-        bottomCircle = new Circle(center.x() +  0.25, center.y() + 1.75, 0.25);
+        topCircle = new Circle(center.x() +0.25 , center.y() +0.25 , 0.25);
+        bottomCircle = new Circle(center.x() + 0.25 , center.y() + 1.75, 0.25);
 
         //Flipper rotates at the top
         centerOfRotation = topCircle.getCenter();
@@ -58,6 +58,7 @@ public class LeftFlipper extends Gizmo {
         beVertical();
 
     }
+
     //where the actual movement happens
     public Angle moveThroughAngle(Angle leftToGo) {
         if(mUpwards){
