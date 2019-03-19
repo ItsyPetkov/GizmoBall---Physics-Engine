@@ -110,7 +110,11 @@ public class BuildModeInsertMenuListener implements ActionListener {
 						int x = me.getX()/board.getLtoPx();
 						int y = me.getY()/board.getLtoPx();
 						if(!(last.x() == x && last.y() == y)){
-							boolean check = model.dragAbs((Absorber) (model.gizmoSearch((int) gen.x(), (int) gen.y())), last, x, y);
+							Absorber abs = (Absorber) (model.gizmoSearch((int) gen.x(), (int) gen.y()));
+							boolean check = false;
+							if(abs != null){
+								check = model.dragAbs(abs , last, x, y);
+							}
 							if(check){
 								last = new Vect(x,y);
 							}
