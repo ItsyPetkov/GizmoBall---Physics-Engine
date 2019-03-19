@@ -1,5 +1,6 @@
 package controller;
 
+import model.IGizmo;
 import view.KeyAlert;
 
 import java.awt.event.KeyEvent;
@@ -7,19 +8,21 @@ import java.awt.event.KeyListener;
 
 public class BuildModeKeyListener implements KeyListener {
 
-    KeyEvent key = null;
     KeyAlert ka = null;
+    IGizmo target;
 
-    public BuildModeKeyListener(KeyAlert ka) {
+    public BuildModeKeyListener(KeyAlert ka, IGizmo target) {
         this.ka = ka;
+        this.target = target;
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
         CustomKeys.setLast(e);
-        System.out.println(CustomKeys.getLastKey().getKeyChar());
+
         ka.setKey(e.getKeyChar());
         ka.close();
+        new CustomKeyListener(CustomKeys.getLastKey(), target);
     }
 
     @Override

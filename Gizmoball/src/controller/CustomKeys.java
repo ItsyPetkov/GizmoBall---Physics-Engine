@@ -9,7 +9,7 @@ import java.util.List;
 public class CustomKeys {
 
     private static List<CustomKeyListener> keys = new ArrayList<>();
-    private static KeyEvent lastKey = null;
+    private static char lastKey = '\0';
 
 
     public static void addKey(CustomKeyListener newListener) {
@@ -29,17 +29,17 @@ public class CustomKeys {
     }
 
     public static void setLast(KeyEvent key) {
-        lastKey = key;
+        lastKey = key.getKeyChar();
     }
 
-    public static KeyEvent getLastKey() {
+    public static char getLastKey() {
         return lastKey;
     }
 
     public static void remove(IGizmo gizmo) {
-        for(CustomKeyListener ke : keys) {
-            if (ke.getGizmo().equals(gizmo)) {
-                keys.remove(ke);
+        for (int i = 0; i < keys.size(); i++) {
+            if (keys.get(i).getGizmo().equals(gizmo)) {
+                keys.remove(i);
             }
         }
     }

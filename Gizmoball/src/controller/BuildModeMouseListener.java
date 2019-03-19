@@ -17,11 +17,13 @@ public class BuildModeMouseListener implements MouseInputListener {
     IBall targetBall;
     int LtoPx;
     String action;
+    Character key;
 
     public BuildModeMouseListener(IModel m, String action, int LtoPx){
         this.model = m;
         this.LtoPx = LtoPx;
         this.action = action;
+        key = '\0';
     }
 
     @Override
@@ -56,10 +58,11 @@ public class BuildModeMouseListener implements MouseInputListener {
                 break;
             case "Key Connect":
                 target = model.gizmoSearch(e.getX()/LtoPx, e.getY()/LtoPx);
-                KeyAlert ka = new KeyAlert();
-                //TODO wait until key pressed
-                new CustomKeyListener(model, 'a', target);
+                KeyAlert ka = new KeyAlert(target);
                 break;
+            case "Key Disconnect":
+                target = model.gizmoSearch(e.getX()/LtoPx, e.getY()/LtoPx);
+                CustomKeys.remove(target);
         }
     }
 

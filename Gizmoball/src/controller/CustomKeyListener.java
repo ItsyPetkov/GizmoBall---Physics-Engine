@@ -10,12 +10,10 @@ public class CustomKeyListener implements KeyListener {
 
     private char key;
     private IGizmo gizmo;
-    private IModel model;
 
-    public CustomKeyListener(IModel model, char key, IGizmo gizmo) {
+    public CustomKeyListener(char key, IGizmo gizmo) {
         this.key = key;
         this.gizmo = gizmo;
-        this.model = model;
 
         CustomKeys.addKey(this);
     }
