@@ -43,4 +43,11 @@ public class SquareTest {
         assertEquals(cs.get(2).getRadius(), 0);
         assertEquals(cs.get(3).getRadius(), 0);
     }
+
+    @Test
+    void triggerTest(){
+        assertEquals(s.getColour(), Color.BLUE);
+        s.trigger();
+        assertEquals(s.getColour(), Color.ORANGE);
+    }
 }

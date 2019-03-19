@@ -52,6 +52,6 @@ public class SquareBumper extends Gizmo{
 
     @Override
     public void trigger() {
-        setColour(Color.GREEN);
+        setColour(Color.ORANGE);
     }
 }

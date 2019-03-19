@@ -36,4 +36,11 @@ public class CircleTest {
         assertEquals(cs.size(), 1);
         assertEquals(cs.get(0).getRadius(), 0.5);
     }
+
+    @Test
+    void triggerTest(){
+        assertEquals(c.getColour(), Color.RED);
+        c.trigger();
+        assertEquals(c.getColour(), Color.YELLOW);
+    }
 }

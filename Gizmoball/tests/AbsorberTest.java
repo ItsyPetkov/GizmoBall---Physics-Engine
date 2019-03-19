@@ -1,4 +1,5 @@
 import model.Absorber;
+import model.Ball;
 import org.junit.jupiter.api.Test;
 import physics.Circle;
 import physics.LineSegment;
@@ -47,5 +48,14 @@ public class AbsorberTest {
         assertEquals(cs.get(1).getRadius(), 0);
         assertEquals(cs.get(2).getRadius(), 0);
         assertEquals(cs.get(3).getRadius(), 0);
+    }
+
+    @Test
+    void triggerTest(){
+        Ball b = new Ball("B1",10, 10, 20, -10);
+        assertTrue(abs.capture(b));
+        assertFalse(abs.capture(b));
+        abs.trigger();
+        assertEquals(b.getVelo().y(), -50);
     }
 }

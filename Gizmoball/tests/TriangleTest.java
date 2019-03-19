@@ -38,4 +38,11 @@ public class TriangleTest {
         assertEquals(cs.get(1).getRadius(), 0);
         assertEquals(cs.get(2).getRadius(), 0);
     }
+
+    @Test
+    void triggerTest(){
+        assertEquals(t.getColour(), Color.GREEN);
+        t.trigger();
+        assertEquals(t.getColour(), Color.CYAN);
+    }
 }
