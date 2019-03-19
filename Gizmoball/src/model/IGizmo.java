@@ -20,6 +20,7 @@ public interface IGizmo {
     void rotate();
     int getRotation();
     boolean addConnection(IGizmo g);
+    boolean removeConnection(IGizmo g);
     List<IGizmo> getConnections();
     void trigger();
 

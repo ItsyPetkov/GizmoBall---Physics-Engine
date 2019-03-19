@@ -437,6 +437,10 @@ public class Model extends IModel{
         gizmoList.get(gizmoList.indexOf(g)).addConnection(c);
     }
 
+    public void removeGizmoConnection(IGizmo g, IGizmo c){
+        gizmoList.get(gizmoList.indexOf(g)).removeConnection(c);
+    }
+
     //checks if a gizmo or ball occupies a space to prevent overlapping
     private boolean isOccupied(double x, double y){
         for(int i=0; i<gizmoList.size(); i++){

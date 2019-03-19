@@ -65,7 +65,11 @@ public class BuildModeMouseListener implements MouseInputListener {
                 }
                 break;
             case "Disconnect":
-
+                if(target == null){
+                    target = model.gizmoSearch(e.getX()/LtoPx, e.getY()/LtoPx);
+                } else {
+                    model.setGizmoConnection(target, model.gizmoSearch(e.getX()/LtoPx, e.getY()/LtoPx));
+                }
                 break;
             case "Key Connect":
                 target = model.gizmoSearch(e.getX()/LtoPx, e.getY()/LtoPx);

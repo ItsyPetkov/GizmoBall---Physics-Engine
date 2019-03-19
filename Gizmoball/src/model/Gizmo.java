@@ -65,5 +65,9 @@ public abstract class Gizmo extends Observable implements IGizmo{
         return connections.add(g);
     }
 
+    public boolean removeConnection(IGizmo g){
+        return connections.remove(g);
+    }
+
     abstract public void trigger();
 }
