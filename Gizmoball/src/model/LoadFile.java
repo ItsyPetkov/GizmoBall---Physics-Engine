@@ -5,6 +5,7 @@ import view.MainMenu;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -76,14 +77,23 @@ public class LoadFile implements ILoadFile{
                     JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        createBumpers(bumperCommands);
-        rotateGizmos(rotateCommands);
-        createBall(ballCommands);
-        moveGizmos(moveCommands);
-        deleteGizmos(deleteCommands);
-        connectGizmos(connectCommands);
-        keyConnectGizmos(keyConnectCommands);
-        return true;
+        try {
+            createBumpers(bumperCommands);
+            rotateGizmos(rotateCommands);
+            createBall(ballCommands);
+            moveGizmos(moveCommands);
+            deleteGizmos(deleteCommands);
+            connectGizmos(connectCommands);
+            keyConnectGizmos(keyConnectCommands);
+            return true;
+        } catch(NumberFormatException ex) {
+            System.out.println("File "+filename+" is corrupted.");
+            JOptionPane.showMessageDialog(null,
+                    filename+" is corrupted "+ex.getLocalizedMessage(),
+                    "Corrupt File Format",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
     }
 
     private void createBumpers(List<String[]> commands) {
