@@ -255,8 +255,11 @@ public class Model extends IModel{
                 IGizmo absorber = (Absorber) gizmoList.get(i);
                 double rangeX = ((Absorber) absorber).getPos2().x() - absorber.getPos().x();
                 double rangeY = ((Absorber) absorber).getPos2().y() - absorber.getPos().y();
-                boolean vertical = ((absorber.getPos().x() + rangeX >= x) && (x >= absorber.getPos().x()));
-                boolean horizontal = ((absorber.getPos().y() + rangeY >= y) && (y >= absorber.getPos().y()));
+                double absX = absorber.getPos().x();
+                double absY = absorber.getPos().y();
+
+                boolean vertical = ((absX + rangeX >= x+1) && (x >= absX));
+                boolean horizontal = ((absY + rangeY >= y+1) && (y >= absY));
                 if (vertical && horizontal) {
                     return gizmoList.get(i);
                 }
