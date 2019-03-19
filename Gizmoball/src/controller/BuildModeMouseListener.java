@@ -1,6 +1,7 @@
 package controller;
 
 import model.*;
+import view.IKeyAlert;
 import view.KeyAlert;
 
 import javax.swing.*;
@@ -58,7 +59,7 @@ public class BuildModeMouseListener implements MouseInputListener {
                 break;
             case "Key Connect":
                 target = model.gizmoSearch(e.getX()/LtoPx, e.getY()/LtoPx);
-                KeyAlert ka = new KeyAlert(target);
+                IKeyAlert ka = new KeyAlert(target);
                 break;
             case "Key Disconnect":
                 target = model.gizmoSearch(e.getX()/LtoPx, e.getY()/LtoPx);

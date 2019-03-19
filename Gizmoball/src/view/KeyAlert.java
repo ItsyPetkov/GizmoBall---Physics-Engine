@@ -8,11 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.security.Key;
 
-public class KeyAlert {
-    Character key = '\0';
+public class KeyAlert implements IKeyAlert {
     JFrame frame;
     JDialog jd;
-    final Object sync = new Object();
 
 
     public KeyAlert(IGizmo target) {
@@ -29,15 +27,6 @@ public class KeyAlert {
         jd.addKeyListener(bmkl);
         jd.setVisible(true);
 
-    }
-
-
-    public void setKey(char key) {
-        this.key = key;
-    }
-
-    public char getKey() {
-        return key;
     }
 
     public void close() {

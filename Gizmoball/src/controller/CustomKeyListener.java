@@ -2,7 +2,9 @@ package controller;
 
 import model.IModel;
 import model.IGizmo;
+import model.LeftFlipper;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -36,16 +38,13 @@ public class CustomKeyListener implements KeyListener {
                     System.out.println("rfp");
                     break;
                 case "Circle":
-                    //change colour
-                    System.out.println("c");
+                    gizmo.setColour(new Color((int)(Math.random() * 0x1000000)));
                     break;
                 case "Square":
-                    //change colour
-                    System.out.println("s");
+                    gizmo.setColour(new Color((int)(Math.random() * 0x1000000)));
                     break;
                 case "Triangle":
-                    //change colour
-                    System.out.println("t");
+                    gizmo.setColour(new Color((int)(Math.random() * 0x1000000)));
                     break;
                 case "Absorber":
                     //shoot
