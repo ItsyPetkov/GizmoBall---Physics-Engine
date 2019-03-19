@@ -54,7 +54,6 @@ public class CustomKeyListener implements KeyListener, ActionListener {
                         angle = gizmo.getRotationLeft();
                     }
                     gizmo.goUpwards();
-                    System.out.println("lfp");
                     break;
                 case "RightFlipper":
                     //flipper flips
@@ -71,7 +70,6 @@ public class CustomKeyListener implements KeyListener, ActionListener {
                         angle = gizmo.getRotationLeft();
                     }
                     gizmo.goUpwards();
-                    System.out.println("rfp");
                     break;
                 case "Circle":
                     gizmo.setColour(new Color((int)(Math.random() * 0x1000000)));
@@ -83,8 +81,7 @@ public class CustomKeyListener implements KeyListener, ActionListener {
                     gizmo.setColour(new Color((int)(Math.random() * 0x1000000)));
                     break;
                 case "Absorber":
-                    //shoot
-                    System.out.println("a");
+                    gizmo.trigger();
                     break;
             }
         }
@@ -110,7 +107,6 @@ public class CustomKeyListener implements KeyListener, ActionListener {
                     }
                     gizmo.goDownwards();
 
-                    System.out.println("lfr");
                     break;
                 case "RightFlipper":
                     //flipper unflips
@@ -127,7 +123,6 @@ public class CustomKeyListener implements KeyListener, ActionListener {
                         angle = gizmo.getRotationLeft();
                     }
                     gizmo.goDownwards();
-                    System.out.println("rfr");
                     break;
             }
         }
