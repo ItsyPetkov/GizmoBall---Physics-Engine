@@ -6,6 +6,7 @@ import physics.Circle;
 import physics.Geometry;
 import java.awt.Color;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -248,35 +249,60 @@ public class Model extends IModel{
         nob();
     }
 
-    //finding a gizmo in gizmoList based on (x,y) position
-    public IGizmo gizmoSearch(int x, int y){
-        for(int i=0; i<gizmoList.size(); i++){
-            if(gizmoList.get(i).type().equals("Absorber")) {
-                IGizmo absorber =(Absorber) gizmoList.get(i);
+    private IGizmo findAbsorber(int x, int y) {
+        for (int i = 0; i < gizmoList.size(); i++) {
+            if (gizmoList.get(i).type().equals("Absorber")) {
+                IGizmo absorber = (Absorber) gizmoList.get(i);
                 double rangeX = ((Absorber) absorber).getPos2().x() - absorber.getPos().x();
                 double rangeY = ((Absorber) absorber).getPos2().y() - absorber.getPos().y();
-                boolean vertical = ((absorber.getPos().x()+rangeX >= x) && (x >= absorber.getPos().x()));
-                boolean horizontal = ((absorber.getPos().y()+rangeY >= y) && (y >= absorber.getPos().y()));
+                boolean vertical = ((absorber.getPos().x() + rangeX >= x) && (x >= absorber.getPos().x()));
+                boolean horizontal = ((absorber.getPos().y() + rangeY >= y) && (y >= absorber.getPos().y()));
                 if (vertical && horizontal) {
                     return gizmoList.get(i);
                 }
             }
+        }
+        return null;
+    }
 
-            if(gizmoList.get(i).getPos().x() == x && gizmoList.get(i).getPos().y() == y){
+    private IGizmo findBumper(int x, int y) {
+        for (int i = 0; i < gizmoList.size(); i++) {
+            if (gizmoList.get(i).getPos().x() == x && gizmoList.get(i).getPos().y() == y) {
                 return gizmoList.get(i);
             }
+        }
+        return null;
+    }
 
-            if(gizmoList.get(i).type().equals("LeftFlipper") || gizmoList.get(i).type().equals("RightFlipper")){
+    private IGizmo findFlipper(int x, int y) {
+        for (int i = 0; i < gizmoList.size(); i++) {
+            if (gizmoList.get(i).type().equals("LeftFlipper") || gizmoList.get(i).type().equals("RightFlipper")) {
                 int height = 2;
                 int width = 2;
-                for(int h=0; h<height; h++){
-                    for(int w=0; w<width; w++){
-                        if(gizmoList.get(i).getPos().x()+w == x && gizmoList.get(i).getPos().y()+h == y){
+                for (int h = 0; h < height; h++) {
+                    for (int w = 0; w < width; w++) {
+                        if (gizmoList.get(i).getPos().x() + w == x && gizmoList.get(i).getPos().y() + h == y) {
                             return gizmoList.get(i);
                         }
                     }
                 }
             }
+        }
+        return null;
+    }
+
+    //finding a gizmo in gizmoList based on (x,y) position
+    public IGizmo gizmoSearch(int x, int y){
+        IGizmo absorber = findAbsorber(x, y);
+        IGizmo bumper = findBumper(x, y);
+        IGizmo flipper = findFlipper(x, y);
+
+        if (absorber != null) {
+            return absorber;
+        } else if (bumper != null) {
+            return bumper;
+        } else if (flipper != null) {
+            return  flipper;
         }
         return null;
     }
@@ -298,13 +324,6 @@ public class Model extends IModel{
                     vertical || horizontal || diagonal) {
                 return ballList.get(i);
             }
-
-//            if (ballX == x && ballY == y ||
-//                    ballList.get(i).getPos().x() - range == x && ballList.get(i).getPos().y() == y ||
-//                    ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() - range == y ||
-//                    ballList.get(i).getPos().x() - range == x && ballList.get(i).getPos().y() - range == y) {
-//                return ballList.get(i);
-//            }
         }
         return null;
     }
