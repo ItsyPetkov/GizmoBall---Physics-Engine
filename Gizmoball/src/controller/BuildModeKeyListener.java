@@ -20,7 +20,6 @@ public class BuildModeKeyListener implements KeyListener {
     public void keyTyped(KeyEvent e) {
         CustomKeys.setLast(e);
 
-        ka.setKey(e.getKeyChar());
         ka.close();
         new CustomKeyListener(CustomKeys.getLastKey(), target);
     }
