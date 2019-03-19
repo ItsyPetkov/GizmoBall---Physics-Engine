@@ -1,5 +1,6 @@
 package model;
 
+import physics.Angle;
 import physics.Circle;
 import physics.LineSegment;
 import physics.Vect;
@@ -21,4 +22,24 @@ public interface IGizmo {
     boolean addConnection(IGizmo g);
     List<IGizmo> getConnections();
     void trigger();
+
+    boolean getUpwards();
+
+    boolean getDownwards();
+
+    Angle moveThroughAngle(Angle angle);
+
+    boolean getVertical();
+
+    Angle getRotationLeft();
+
+    boolean getTransient();
+
+    void setRotationLeft(Angle minus);
+
+    void goUpwards();
+
+    boolean getHorizontal();
+
+    void goDownwards();
 }

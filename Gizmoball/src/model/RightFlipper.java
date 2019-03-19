@@ -33,8 +33,7 @@ public class RightFlipper extends Gizmo {
     //Creates a flipper, represented by circles, lines and vectors
     public RightFlipper(String id,int x, int y) {
         super(id,x,y);
-
-        //centre created with the x and y coordinates
+//centre created with the x and y coordinates
         center = new Vect((double) (x+2), (double)y);
 
         //90 degrees to rotate through initially
@@ -59,6 +58,7 @@ public class RightFlipper extends Gizmo {
         beVertical();
 
     }
+
     //where the actual movement happens
     public Angle moveThroughAngle(Angle leftToGo) {
         if(mUpwards){
@@ -107,8 +107,8 @@ public class RightFlipper extends Gizmo {
     }
     //Method for visually changing the flipper
     public void applyMovement(Angle angle) {
-        // Angle is changed here to make it rotate around the opposite way to differentiate flipper types
-        angle = Angle.ZERO.minus(angle);
+
+
 
         topCircle = Geometry.rotateAround(topCircle, centerOfRotation, angle);
         bottomCircle = Geometry.rotateAround(bottomCircle, centerOfRotation, angle);
@@ -118,18 +118,9 @@ public class RightFlipper extends Gizmo {
         leftSideLine = Geometry.rotateAround(leftSideLine, centerOfRotation, angle);
         rightSideLine = Geometry.rotateAround(rightSideLine, centerOfRotation, angle);
 
-        //setChanged();
-        //notifyObservers();
-    }
 
-    //Getters and Setters
-
-    public Circle getTopCircle(){
-        return topCircle;
-    }
-
-    public Circle getBottomCircle(){
-        return bottomCircle;
+        setChanged();
+        notifyObservers();
     }
 
     public Angle getRotationLeft() {
@@ -196,17 +187,17 @@ public class RightFlipper extends Gizmo {
         return mHorizontal;
     }
 
-    @Override
+
     public Color getColour(){
         return colour;
     }
 
-    @Override
+
     public void setColour(Color c){
         colour = c;
     }
 
-    @Override
+
     public List<LineSegment> getSides(){
         List<LineSegment> ls = new ArrayList<LineSegment>();
         ls.add(topSideLine);
@@ -216,7 +207,7 @@ public class RightFlipper extends Gizmo {
         return ls;
     }
 
-    @Override
+
     public List<Circle> getCorners(){
         List<Circle> cs = new ArrayList<Circle>();
         cs.add(topCircle);

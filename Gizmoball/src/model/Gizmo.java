@@ -7,8 +7,9 @@ import physics.Vect;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
-public abstract class Gizmo implements IGizmo{
+public abstract class Gizmo extends Observable implements IGizmo{
 
     Vect pos;
     String id;

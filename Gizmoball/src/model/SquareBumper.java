@@ -1,5 +1,6 @@
 package model;
 
+import physics.Angle;
 import physics.Circle;
 import physics.LineSegment;
 
@@ -53,5 +54,53 @@ public class SquareBumper extends Gizmo{
     @Override
     public void trigger() {
         setColour(Color.ORANGE);
+    }
+
+    public boolean getUpwards() {
+        return false;
+    }
+
+    @Override
+    public boolean getDownwards() {
+        return false;
+    }
+
+    @Override
+    public Angle moveThroughAngle(Angle angle) {
+        return null;
+    }
+
+    @Override
+    public boolean getVertical() {
+        return false;
+    }
+
+    @Override
+    public Angle getRotationLeft() {
+        return null;
+    }
+
+    @Override
+    public boolean getTransient() {
+        return false;
+    }
+
+    @Override
+    public void setRotationLeft(Angle minus) {
+
+    }
+
+    @Override
+    public void goUpwards() {
+
+    }
+
+    @Override
+    public boolean getHorizontal() {
+        return false;
+    }
+
+    @Override
+    public void goDownwards() {
     }
 }
