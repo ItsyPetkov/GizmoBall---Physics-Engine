@@ -70,9 +70,24 @@ public class BuildModeInsertMouseListener implements MouseInputListener {
                 velX = fieldVelX.getText();
                 velY = fieldVelY.getText();
 
-                velocities[0] = Double.parseDouble(velX);
-                velocities[1] = Double.parseDouble(velY);
-                return velocities;
+                velocities[0] = 0.0;
+                velocities[1] = 0.0;
+
+                if (!(velX.equals("") || velY.equals(""))) {
+                    velocities[0] = Double.parseDouble(velX);
+                    velocities[1] = Double.parseDouble(velY);
+                    return velocities;
+                } else {
+                    if (velX.equals("") && velY.equals("")) {
+                        return velocities;
+                    } else if (velX.equals("") && !(velY.equals(""))) {
+                        velocities[1] = Double.parseDouble(velY);
+                        return velocities;
+                    } else if (!(velX.equals("")) && velY.equals("")) {
+                        velocities[0] = Double.parseDouble(velX);
+                        return velocities;
+                    }
+                }
             }
 
         } catch (NumberFormatException ex) {

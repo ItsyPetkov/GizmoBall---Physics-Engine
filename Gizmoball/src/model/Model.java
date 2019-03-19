@@ -252,7 +252,7 @@ public class Model extends IModel{
     private IGizmo findAbsorber(int x, int y) {
         for (int i = 0; i < gizmoList.size(); i++) {
             if (gizmoList.get(i).type().equals("Absorber")) {
-                IGizmo absorber = (Absorber) gizmoList.get(i);
+                IGizmo absorber = gizmoList.get(i);
                 double rangeX = ((Absorber) absorber).getPos2().x() - absorber.getPos().x();
                 double rangeY = ((Absorber) absorber).getPos2().y() - absorber.getPos().y();
                 double absX = absorber.getPos().x();
@@ -261,7 +261,7 @@ public class Model extends IModel{
                 boolean vertical = ((absX + rangeX >= x+1) && (x >= absX));
                 boolean horizontal = ((absY + rangeY >= y+1) && (y >= absY));
                 if (vertical && horizontal) {
-                    return gizmoList.get(i);
+                    return absorber;
                 }
             }
         }
