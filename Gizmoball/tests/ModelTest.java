@@ -25,7 +25,7 @@ public class ModelTest {
         assertEquals(model.getGizmos().size(), 1);
         assertEquals(model.getGizmos().get(0).getPos().x(), 2);
         assertEquals(model.getGizmos().get(0).getPos().y(), 3);
-        //model.deleteGizmo(g);
+        model.deleteGizmo(model.gizmoSearch(2,3));
         assertEquals(model.getGizmos().size(), 0);
     }
 
@@ -44,7 +44,7 @@ public class ModelTest {
         assertEquals(model.getBalls().size(), 1);
         assertEquals(model.getBalls().get(0).getPos().x(), 2);
         assertEquals(model.getBalls().get(0).getPos().y(), 3);
-        //model.deleteBall(b);
+        model.deleteBall(model.ballSearch(2,3));
         assertEquals(model.getBalls().size(), 0);
     }
 
@@ -59,7 +59,8 @@ public class ModelTest {
     @Test
     void gizmoSearch(){
         model.addGizmo("Square", "S1", 2, 3);
-        //assertEquals(model.gizmoSearch(2,3), g);
+        Gizmo g = new SquareBumper("S1", 2, 3);
+        assertEquals(model.gizmoSearch(2,3), g);
         assertNull(model.gizmoSearch(2,4));
     }
 
@@ -89,7 +90,7 @@ public class ModelTest {
         model.addGizmo("Square", "S1", 2, 3);
         assertEquals(model.getGizmos().get(0).getPos().x(), 2);
         assertEquals(model.getGizmos().get(0).getPos().y(), 3);
-        //model.moveGizmo(s, 4, 5);
+        model.moveGizmo(model.gizmoSearch(2,3), 4, 5);
         assertEquals(model.getGizmos().get(0).getPos().x(), 4);
         assertEquals(model.getGizmos().get(0).getPos().y(), 5);
     }
@@ -99,7 +100,7 @@ public class ModelTest {
         model.addBall("B1", 2, 3, 10, -20);
         assertEquals(model.getBalls().get(0).getPos().x(), 2);
         assertEquals(model.getBalls().get(0).getPos().y(), 3);
-        //model.setBallPos(b, 4, 9);
+        model.setBallPos(model.ballSearch(2,3), 4, 9);
         assertEquals(model.getBalls().get(0).getPos().x(), 4);
         assertEquals(model.getBalls().get(0).getPos().y(), 9);
     }
@@ -108,7 +109,7 @@ public class ModelTest {
     void rotateGizmoTest(){
         model.addGizmo("Square", "S1", 2, 3);
         assertEquals(model.gizmoSearch(2, 3).getRotation(), 0);
-        model.gizmoSearch(2, 3).rotate();
+        model.rotateGizmo(model.gizmoSearch(2, 3));
         assertEquals(model.gizmoSearch(2, 3).getRotation(), 1);
     }
 

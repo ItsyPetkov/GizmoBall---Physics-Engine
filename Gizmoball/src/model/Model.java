@@ -281,12 +281,13 @@ public class Model extends IModel{
         int width = 2;
         for(int h=-1; h<height; h++){
             for(int w=-1; w<width; w++){
-                if(!isOccupied(x+w, y+h)){
+                if(isOccupied(x+w, y+h)){
                     check = false;
                 }
             }
         }
 
+        System.out.println(check);
         if(check){
             ballList.add(b);
             nob();
