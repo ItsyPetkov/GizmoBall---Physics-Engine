@@ -1,4 +1,5 @@
 import model.Gizmo;
+import model.SquareBumper;
 import model.TriangleBumper;
 import org.junit.jupiter.api.Test;
 
@@ -33,6 +34,15 @@ public class GizmoTest {
         assertEquals(t.getRotation(), 3);
         t.rotate();
         assertEquals(t.getRotation(), 0);
+    }
+
+    @Test
+    void connectionTest(){
+        assertEquals(t.getConnections().size(), 0);
+        SquareBumper s = new SquareBumper("S1", 4, 8);
+        t.addConnection(s);
+        assertEquals(t.getConnections().size(), 1);
+        assertEquals(s.getConnections().size(), 0);
     }
 
 }

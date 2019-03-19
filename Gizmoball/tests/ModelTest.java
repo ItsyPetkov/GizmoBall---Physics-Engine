@@ -57,21 +57,6 @@ public class ModelTest {
     }
 
     @Test
-    void gizmoSearch(){
-        model.addGizmo("Square", "S1", 2, 3);
-        Gizmo g = new SquareBumper("S1", 2, 3);
-        assertEquals(model.gizmoSearch(2,3), g);
-        assertNull(model.gizmoSearch(2,4));
-    }
-
-    @Test
-    void ballSearch(){
-        model.addBall("B1", 2, 3, 10, -20);
-        //assertEquals(model.ballSearch(2,3), b);
-        assertNull(model.ballSearch(4,3));
-    }
-
-    @Test
     void gizmoIdTest(){
         model.addGizmo("Square", "S1", 2, 3);
         assertFalse(model.checkGizmoId("S1"));

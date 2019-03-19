@@ -426,7 +426,6 @@ public class Model extends IModel{
     //updating the position vector of a gizmo
     public void moveGizmo(IGizmo g, int x, int y){
         if(gizmoList.contains(g) && (!isOccupied(x, y))){
-            System.out.println("moving");
             gizmoList.get(gizmoList.indexOf(g)).setPos(x,y);
         }
         nob();

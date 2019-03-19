@@ -34,6 +34,18 @@ public class BallTest {
         ball.setVelo(-5, 3);
         assertEquals(ball.getVelo().x(), -5);
         assertEquals(ball.getVelo().y(), 3);
+        ball.setVelo(-201, -201);
+        assertEquals(ball.getVelo().x(), -200);
+        assertEquals(ball.getVelo().y(), -200);
+        ball.setVelo(201, 201);
+        assertEquals(ball.getVelo().x(), 200);
+        assertEquals(ball.getVelo().y(), 200);
+        ball.setVelo(0.005, 0.005);
+        assertEquals(ball.getVelo().x(), 0);
+        assertEquals(ball.getVelo().y(), 0);
+        ball.setVelo(-0.005, -0.005);
+        assertEquals(ball.getVelo().x(), 0);
+        assertEquals(ball.getVelo().y(), 0);
     }
 
     @Test
