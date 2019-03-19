@@ -62,6 +62,7 @@ public class BuildModeMouseListener implements MouseInputListener {
                     target = model.gizmoSearch(e.getX()/LtoPx, e.getY()/LtoPx);
                 } else {
                     model.setGizmoConnection(target, model.gizmoSearch(e.getX()/LtoPx, e.getY()/LtoPx));
+                    target = null;
                 }
                 break;
             case "Disconnect":
@@ -69,6 +70,7 @@ public class BuildModeMouseListener implements MouseInputListener {
                     target = model.gizmoSearch(e.getX()/LtoPx, e.getY()/LtoPx);
                 } else {
                     model.setGizmoConnection(target, model.gizmoSearch(e.getX()/LtoPx, e.getY()/LtoPx));
+                    target = null;
                 }
                 break;
             case "Key Connect":
