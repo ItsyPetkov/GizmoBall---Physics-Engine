@@ -1,5 +1,6 @@
 package model;
 
+import controller.CustomKeyListener;
 import view.MainMenu;
 
 import javax.swing.*;
@@ -81,6 +82,7 @@ public class LoadFile implements ILoadFile{
         moveGizmos(moveCommands);
         deleteGizmos(deleteCommands);
         connectGizmos(connectCommands);
+        keyConnectGizmos(keyConnectCommands);
         return true;
     }
 
@@ -158,11 +160,16 @@ public class LoadFile implements ILoadFile{
     }
     private void keyConnectGizmos(List<String[]> commands) {
         String[] comd = commands.get(0);
-        System.out.println(comd[0]);
+        List<IGizmo> gizmoList = model.getGizmos();
         if (comd[0].equals("KeyConnect")) {
-            System.out.println(comd[1]);
-            System.out.println(comd[2]);
-            System.out.println(comd[3]);
+            int keyCode = Integer.parseInt(comd[2]);
+            char key = (char) keyCode;
+            String id = comd[4];
+            for (IGizmo g : gizmoList) {
+                if (g.getId().equals(id)) {
+                    new CustomKeyListener(key, g);
+                }
+            }
         }
     }
 
