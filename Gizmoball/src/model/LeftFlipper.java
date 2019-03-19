@@ -33,7 +33,6 @@ public class LeftFlipper extends Gizmo {
     //Creates a flipper, represented by circles, lines and vectors
     public LeftFlipper(String id,int x, int y) {
         super(id,x,y);
-
         //centre created with the x and y coordinates
         center = new Vect((double)x, (double)y);
 
@@ -50,6 +49,23 @@ public class LeftFlipper extends Gizmo {
 
         topCircle = new Circle(center.x() +0.25 , center.y() +0.25 , 0.25);
         bottomCircle = new Circle(center.x() + 0.25 , center.y() + 1.75, 0.25);
+        /*
+        //centre created with the x and y coordinates
+        center = new Vect((double)x + 0.25, (double)y + 0.25);
+
+        //90 degrees to rotate through initially
+        rotationLeft = Angle.DEG_90;
+        rotation = new Angle(1);
+        this.colour=colour.BLACK;
+
+        //Constituent Parts of Flipper
+        topSideLine = new LineSegment(center.x() -0.25 , center.y() , center.x() + 0.25, center.y() );
+        bottomSideLine = new LineSegment(center.x() -0.25  , center.y() + 1.5, center.x() +  0.25, center.y() + 1.5);
+        rightSideLine = new LineSegment(center.x() + 0.25, center.y() , center.x() + 0.25, center.y() + 1.5);
+        leftSideLine = new LineSegment(center.x()-0.25 , center.y() , center.x() -0.25, center.y() + 1.5);
+
+        topCircle = new Circle(center.x()  , center.y()  , 0.25);
+        bottomCircle = new Circle(center.x()  , center.y() + 1.5, 0.25);*/
 
         //Flipper rotates at the top
         centerOfRotation = topCircle.getCenter();
@@ -58,7 +74,6 @@ public class LeftFlipper extends Gizmo {
         beVertical();
 
     }
-
     //where the actual movement happens
     public Angle moveThroughAngle(Angle leftToGo) {
         if(mUpwards){
@@ -107,8 +122,8 @@ public class LeftFlipper extends Gizmo {
     }
     //Method for visually changing the flipper
     public void applyMovement(Angle angle) {
-
-
+        // Angle is changed here to make it rotate around the opposite way to differentiate flipper types
+        angle = Angle.ZERO.minus(angle);
 
         topCircle = Geometry.rotateAround(topCircle, centerOfRotation, angle);
         bottomCircle = Geometry.rotateAround(bottomCircle, centerOfRotation, angle);
@@ -118,8 +133,18 @@ public class LeftFlipper extends Gizmo {
         leftSideLine = Geometry.rotateAround(leftSideLine, centerOfRotation, angle);
         rightSideLine = Geometry.rotateAround(rightSideLine, centerOfRotation, angle);
 
-        //setChanged();
-        //notifyObservers();
+        setChanged();
+        notifyObservers();
+    }
+
+    //Getters and Setters
+
+    public Circle getTopCircle(){
+        return topCircle;
+    }
+
+    public Circle getBottomCircle(){
+        return bottomCircle;
     }
 
     public Angle getRotationLeft() {
@@ -186,17 +211,17 @@ public class LeftFlipper extends Gizmo {
         return mHorizontal;
     }
 
-    @Override
+
     public Color getColour(){
         return colour;
     }
 
-    @Override
+
     public void setColour(Color c){
         colour = c;
     }
 
-    @Override
+
     public List<LineSegment> getSides(){
         List<LineSegment> ls = new ArrayList<LineSegment>();
         ls.add(topSideLine);
@@ -206,7 +231,7 @@ public class LeftFlipper extends Gizmo {
         return ls;
     }
 
-    @Override
+
     public List<Circle> getCorners(){
         List<Circle> cs = new ArrayList<Circle>();
         cs.add(topCircle);
