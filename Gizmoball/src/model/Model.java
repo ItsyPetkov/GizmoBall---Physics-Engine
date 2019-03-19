@@ -316,12 +316,12 @@ public class Model extends IModel{
         for(int i=0; i<ballList.size(); i++) {
             double ballX = ballList.get(i).getPos().x();
             double ballY = ballList.get(i).getPos().y();
+            ballX = Math.round(ballX);
+            ballY = Math.round(ballY);
+
             boolean vertical = ballX - range == x && ballY == y;
             boolean horizontal = ballX == x && ballY - range == y;
             boolean diagonal = ballX - range == x && ballY - range == y;
-
-            ballX = Math.round(ballX);
-            ballY = Math.round(ballY);
 
             if (ballX == x && ballY == y ||
                     vertical || horizontal || diagonal) {
