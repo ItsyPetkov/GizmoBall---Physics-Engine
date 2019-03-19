@@ -6,6 +6,7 @@ import physics.Circle;
 import physics.Geometry;
 import java.awt.Color;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -196,7 +197,7 @@ public class Model extends IModel{
         this.notifyObservers();
     }
 
-    //adding a gizmo to the global gizmoList
+    //adding a gizmo to gizmoList
     public boolean addGizmo(IGizmo g){
         if(g.type().equals("Absorber")){
             boolean trigger = true;
@@ -240,7 +241,7 @@ public class Model extends IModel{
         return false;
     }
 
-    //adding a ball to global ballList
+    //adding a ball to ballList
     public void addBall(IBall b){
         if(!isOccupied(b.getPos().x(), b.getPos().y())) {
             ballList.add(b);
@@ -248,32 +249,42 @@ public class Model extends IModel{
         nob();
     }
 
-    //finding a gizmo from global gizmoList based on (x,y) position
-    public IGizmo gizmoSearch(int x, int y){
-
-        for(int i=0; i<gizmoList.size(); i++){
-            if(gizmoList.get(i).type().equals("Absorber")) {
-
-                IGizmo absorber =(Absorber) gizmoList.get(i);
+    private IGizmo findAbsorber(int x, int y) {
+        for (int i = 0; i < gizmoList.size(); i++) {
+            if (gizmoList.get(i).type().equals("Absorber")) {
+                IGizmo absorber = gizmoList.get(i);
                 double rangeX = ((Absorber) absorber).getPos2().x() - absorber.getPos().x();
                 double rangeY = ((Absorber) absorber).getPos2().y() - absorber.getPos().y();
-                boolean vertical = ((absorber.getPos().x()+rangeX >= x) && (x >= absorber.getPos().x()));
-                boolean horizontal = ((absorber.getPos().y()+rangeY >= y) && (y >= absorber.getPos().y()));
+                double absX = absorber.getPos().x();
+                double absY = absorber.getPos().y();
+
+                boolean vertical = ((absX + rangeX >= x+1) && (x >= absX));
+                boolean horizontal = ((absY + rangeY >= y+1) && (y >= absY));
                 if (vertical && horizontal) {
-                    return gizmoList.get(i);
+                    return absorber;
                 }
             }
+        }
+        return null;
+    }
 
-            if(gizmoList.get(i).getPos().x() == x && gizmoList.get(i).getPos().y() == y){
+    private IGizmo findBumper(int x, int y) {
+        for (int i = 0; i < gizmoList.size(); i++) {
+            if (gizmoList.get(i).getPos().x() == x && gizmoList.get(i).getPos().y() == y) {
                 return gizmoList.get(i);
             }
+        }
+        return null;
+    }
 
-            if(gizmoList.get(i).type().equals("LeftFlipper") || gizmoList.get(i).type().equals("RightFlipper")){
+    private IGizmo findFlipper(int x, int y) {
+        for (int i = 0; i < gizmoList.size(); i++) {
+            if (gizmoList.get(i).type().equals("LeftFlipper") || gizmoList.get(i).type().equals("RightFlipper")) {
                 int height = 2;
                 int width = 2;
-                for(int h=0; h<height; h++){
-                    for(int w=0; w<width; w++){
-                        if(gizmoList.get(i).getPos().x()+w == x && gizmoList.get(i).getPos().y()+h == y){
+                for (int h = 0; h < height; h++) {
+                    for (int w = 0; w < width; w++) {
+                        if (gizmoList.get(i).getPos().x() + w == x && gizmoList.get(i).getPos().y() + h == y) {
                             return gizmoList.get(i);
                         }
                     }
@@ -283,14 +294,37 @@ public class Model extends IModel{
         return null;
     }
 
-    //finding a ball from global ballList based on (x,y) position
+    //finding a gizmo in gizmoList based on (x,y) position
+    public IGizmo gizmoSearch(int x, int y){
+        IGizmo absorber = findAbsorber(x, y);
+        IGizmo bumper = findBumper(x, y);
+        IGizmo flipper = findFlipper(x, y);
+
+        if (absorber != null) {
+            return absorber;
+        } else if (bumper != null) {
+            return bumper;
+        } else if (flipper != null) {
+            return  flipper;
+        }
+        return null;
+    }
+
+    //finding a ball from ballList based on (x,y) position
     public IBall ballSearch(int x, int y){
         int range = 1;
         for(int i=0; i<ballList.size(); i++) {
-            if (ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() == y ||
-                    ballList.get(i).getPos().x() - range == x && ballList.get(i).getPos().y() == y ||
-                    ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() - range == y ||
-                    ballList.get(i).getPos().x() - range == x && ballList.get(i).getPos().y() - range == y) {
+            double ballX = ballList.get(i).getPos().x();
+            double ballY = ballList.get(i).getPos().y();
+            boolean vertical = ballX - range == x && ballY == y;
+            boolean horizontal = ballX == x && ballY - range == y;
+            boolean diagonal = ballX - range == x && ballY - range == y;
+
+            ballX = Math.round(ballX);
+            ballY = Math.round(ballY);
+
+            if (ballX == x && ballY == y ||
+                    vertical || horizontal || diagonal) {
                 return ballList.get(i);
             }
         }
