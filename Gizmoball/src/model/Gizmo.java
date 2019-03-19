@@ -5,6 +5,7 @@ import physics.LineSegment;
 import physics.Vect;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Gizmo implements IGizmo{
@@ -12,11 +13,13 @@ public abstract class Gizmo implements IGizmo{
     Vect pos;
     String id;
     int rotation;
+    List<IGizmo> connections;
 
     public Gizmo(String id, double x, double y){
         pos = new Vect(x, y);
         this.id = id;
         rotation = 0;
+        connections = new ArrayList<>();
     }
 
     public Vect getPos(){
@@ -51,5 +54,13 @@ public abstract class Gizmo implements IGizmo{
 
     public int getRotation(){
         return rotation;
+    }
+
+    public List<IGizmo> getConnections(){
+        return connections;
+    }
+
+    public boolean addConnection(IGizmo g){
+        return connections.add(g);
     }
 }

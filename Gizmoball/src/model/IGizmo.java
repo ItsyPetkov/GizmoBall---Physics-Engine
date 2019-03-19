@@ -18,4 +18,6 @@ public interface IGizmo {
     String getId();
     void rotate();
     int getRotation();
+    boolean addConnection(IGizmo g);
+    List<IGizmo> getConnections();
 }

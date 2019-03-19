@@ -24,6 +24,7 @@ public abstract class IModel extends Observable {
     public abstract void rotateGizmo(IGizmo g);
     public abstract void deleteGizmo(IGizmo g);
     public abstract void deleteBall(IBall b);
+    public abstract void setGizmoConnection(IGizmo g, IGizmo c);
     public abstract boolean dragAbs(Absorber abs, Vect last, int x2, int y2);
     public abstract void setGravity(double g);
     public abstract void setFriction(double xf, double yf);

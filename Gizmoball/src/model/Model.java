@@ -54,6 +54,30 @@ public class Model extends IModel{
                                 break;
                             case 1:
                                 //collision with gizmo collidingG
+                                List<IGizmo> conList = collidingG.getConnections();
+                                for(int j=0; j<conList.size(); j++){
+                                    switch(conList.get(j).type()){
+                                        case "Square":
+                                            conList.get(j).setColour(Color.GREEN);
+                                            break;
+                                        case "Triangle":
+                                            conList.get(j).setColour(Color.CYAN);
+                                            break;
+                                        case "Circle":
+                                            conList.get(j).setColour(Color.YELLOW);
+                                            break;
+                                        case "LeftFlipper":
+                                            //flipper flip
+                                            break;
+                                        case "RightFlipper":
+                                            //flipper flip
+                                            break;
+                                        case "Absorber":
+                                            //absorber shoot
+                                            break;
+                                    }
+                                }
+
                                 if(collidingG.type().equals("Absorber")){
                                     absorberCapture(ballList.get(i), (Absorber) collidingG);
                                     ballList.get(i).capture();
@@ -287,7 +311,6 @@ public class Model extends IModel{
             }
         }
 
-        System.out.println(check);
         if(check){
             ballList.add(b);
             nob();
@@ -432,6 +455,10 @@ public class Model extends IModel{
     public void deleteBall(IBall b){
         ballList.remove(b);
         nob();
+    }
+
+    public void setGizmoConnection(IGizmo g, IGizmo c){
+        gizmoList.get(gizmoList.indexOf(g)).addConnection(c);
     }
 
     //checks if a gizmo or ball occupies a space to prevent overlapping

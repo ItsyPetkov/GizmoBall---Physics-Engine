@@ -57,6 +57,16 @@ public class BuildModeMouseListener implements MouseInputListener {
                     target = null;
                 }
                 break;
+            case "Connect":
+                if(target == null){
+                    target = model.gizmoSearch(e.getX()/LtoPx, e.getY()/LtoPx);
+                } else {
+                    model.setGizmoConnection(target, model.gizmoSearch(e.getX()/LtoPx, e.getY()/LtoPx));
+                }
+                break;
+            case "Disconnect":
+
+                break;
             case "Key Connect":
                 target = model.gizmoSearch(e.getX()/LtoPx, e.getY()/LtoPx);
                 IKeyAlert ka = new KeyAlert(target);
