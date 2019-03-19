@@ -73,17 +73,20 @@ public class BuildModeInsertMouseListener implements MouseInputListener {
                 velocities[0] = 0.0;
                 velocities[1] = 0.0;
 
+                boolean emptyX = velX.equals("");
+                boolean emptyY = velY.equals("");
+
                 if (!(velX.equals("") || velY.equals(""))) {
                     velocities[0] = Double.parseDouble(velX);
                     velocities[1] = Double.parseDouble(velY);
                     return velocities;
                 } else {
-                    if (velX.equals("") && velY.equals("")) {
+                    if (emptyX && emptyY) {
                         return velocities;
-                    } else if (velX.equals("") && !(velY.equals(""))) {
+                    } else if (emptyX) {
                         velocities[1] = Double.parseDouble(velY);
                         return velocities;
-                    } else if (!(velX.equals("")) && velY.equals("")) {
+                    } else if (emptyY) {
                         velocities[0] = Double.parseDouble(velX);
                         return velocities;
                     }
