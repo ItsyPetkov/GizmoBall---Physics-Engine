@@ -285,14 +285,32 @@ public class Model extends IModel{
 
     //finding a ball from global ballList based on (x,y) position
     public IBall ballSearch(int x, int y){
+        System.out.println("mouse x: "+x);
+        System.out.println("mouse y: "+y);
+        System.out.println();
+
         int range = 1;
         for(int i=0; i<ballList.size(); i++) {
-            if (ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() == y ||
-                    ballList.get(i).getPos().x() - range == x && ballList.get(i).getPos().y() == y ||
-                    ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() - range == y ||
-                    ballList.get(i).getPos().x() - range == x && ballList.get(i).getPos().y() - range == y) {
+            double ballX = ballList.get(i).getPos().x();
+            double ballY = ballList.get(i).getPos().y();
+            boolean vertical = ballX - range == x && ballY == y;
+            boolean horizontal = ballX == x && ballY - range == y;
+            boolean diagonal = ballX - range == x && ballY - range == y;
+
+            ballX = Math.round(ballX);
+            ballY = Math.round(ballY);
+
+            if (ballX == x && ballY == y ||
+                    vertical || horizontal || diagonal) {
                 return ballList.get(i);
             }
+
+//            if (ballX == x && ballY == y ||
+//                    ballList.get(i).getPos().x() - range == x && ballList.get(i).getPos().y() == y ||
+//                    ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() - range == y ||
+//                    ballList.get(i).getPos().x() - range == x && ballList.get(i).getPos().y() - range == y) {
+//                return ballList.get(i);
+//            }
         }
         return null;
     }
