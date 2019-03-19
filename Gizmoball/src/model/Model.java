@@ -54,36 +54,17 @@ public class Model extends IModel{
                                 break;
                             case 1:
                                 //collision with gizmo collidingG
-                                List<IGizmo> conList = collidingG.getConnections();
-                                for(int j=0; j<conList.size(); j++){
-                                    switch(conList.get(j).type()){
-                                        case "Square":
-                                            conList.get(j).setColour(Color.GREEN);
-                                            break;
-                                        case "Triangle":
-                                            conList.get(j).setColour(Color.CYAN);
-                                            break;
-                                        case "Circle":
-                                            conList.get(j).setColour(Color.YELLOW);
-                                            break;
-                                        case "LeftFlipper":
-                                            //flipper flip
-                                            System.out.println("LF flip");
-                                            break;
-                                        case "RightFlipper":
-                                            //flipper flip
-                                            System.out.println("RF flip");
-                                            break;
-                                        case "Absorber":
-                                            //absorber shoot
-                                            System.out.println("abs shoot");
-                                            break;
-                                    }
-                                }
 
+                                //absorber capture
                                 if(collidingG.type().equals("Absorber")){
                                     absorberCapture(ballList.get(i), (Absorber) collidingG);
                                     ballList.get(i).capture();
+                                }
+
+                                //triggering connections of the colliding gizmo
+                                List<IGizmo> conList = collidingG.getConnections();
+                                for(int j=0; j<conList.size(); j++){
+                                    conList.get(j).trigger();
                                 }
                                 break;
                             case 2:
@@ -185,17 +166,10 @@ public class Model extends IModel{
 
     //capturing ball in absorber setting ball velocity to 0
     private void absorberCapture(IBall ball, Absorber abs){
+        abs.capture(ball);
         Vect bottomRight = abs.getPos2();
         ball.setPos( bottomRight.x() - (ball.getRadius()) - 0.25, bottomRight.y() - (ball.getRadius()) - 0.25);
         ball.setVelo(0.0,0.0);
-    }
-
-    //shoots the ball out of the absorber
-    public void absorberShoot(IBall ball){
-        if(ball.isCaptured()){
-            ball.setVelo(0.0, -50);
-
-        }
     }
 
     //returns top left wall

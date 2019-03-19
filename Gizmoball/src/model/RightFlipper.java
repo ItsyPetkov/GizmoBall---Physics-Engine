@@ -225,6 +225,11 @@ public class RightFlipper extends Gizmo {
     }
 
     @Override
+    public void trigger() {
+        //flip
+    }
+
+    @Override
     public String type(){
         return type;
     }

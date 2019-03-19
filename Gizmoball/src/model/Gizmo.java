@@ -63,4 +63,6 @@ public abstract class Gizmo implements IGizmo{
     public boolean addConnection(IGizmo g){
         return connections.add(g);
     }
+
+    abstract public void trigger();
 }

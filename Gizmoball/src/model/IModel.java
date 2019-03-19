@@ -7,7 +7,6 @@ import java.util.Observable;
 
 public abstract class IModel extends Observable {
     public abstract void moveBall();
-    public abstract void absorberShoot(IBall ball);
     public abstract Vect getWallTL();
     public abstract Vect getWallBR();
     public abstract List<IGizmo> getGizmos();

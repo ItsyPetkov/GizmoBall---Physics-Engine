@@ -86,4 +86,9 @@ public class TriangleBumper extends Gizmo {
         }
         return cs;
     }
+
+    @Override
+    public void trigger() {
+        setColour(Color.CYAN);
+    }
 }

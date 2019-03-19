@@ -1,7 +1,9 @@
 package controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.List;
 
+import model.IGizmo;
 import model.IModel;
 
 public class AbsorberKeyListener implements KeyListener {
@@ -21,9 +23,10 @@ public class AbsorberKeyListener implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		if(key == KeyEvent.VK_F) {
-			for(int i=0; i<model.getBalls().size(); i++){
-				if(model.getBalls().get(i).isCaptured()){
-					model.absorberShoot(model.getBalls().get(i));
+			List<IGizmo> gizmoList = model.getGizmos();
+			for(int i=0; i<gizmoList.size(); i++){
+				if(gizmoList.get(i).type().equals("Absorber")){
+					gizmoList.get(i).trigger();
 				}
 			}
 		}

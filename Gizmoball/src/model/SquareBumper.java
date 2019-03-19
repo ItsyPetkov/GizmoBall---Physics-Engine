@@ -49,4 +49,9 @@ public class SquareBumper extends Gizmo{
         cs.add(new Circle(super.getPos().x()+1, super.getPos().y()+1, 0));
         return cs;
     }
+
+    @Override
+    public void trigger() {
+        setColour(Color.GREEN);
+    }
 }

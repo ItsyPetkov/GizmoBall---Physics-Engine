@@ -13,9 +13,9 @@ public class BuildModeInsertMenuListener implements ActionListener {
 	IModel model;
 	Board board;
 	String idGen = "";
-	Gizmo newAbs = null;
 	boolean avail = false;
 	Vect last;
+	Vect gen;
 
 	public BuildModeInsertMenuListener(IModel m, Board b) {
 		this.model = m;
@@ -93,21 +93,24 @@ public class BuildModeInsertMenuListener implements ActionListener {
 			board.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent me) {
-					avail = model.addAbsorber(idGen, me.getX()/board.getLtoPx(), me.getY()/board.getLtoPx(), (me.getX()/board.getLtoPx()) +1, (me.getY()/board.getLtoPx()) +1);
+					int x1 = me.getX()/board.getLtoPx();
+					int y1 = me.getY()/board.getLtoPx();
+					int x2 = (me.getX()/board.getLtoPx()) +1;
+					int y2 = (me.getY()/board.getLtoPx()) +1;
+					avail = model.addAbsorber(idGen, x1, y1, x2, y2);
+					last = new Vect(x1, y1);
+					gen = new Vect(x1, y1);
 				}
 			});
 
 			board.addMouseMotionListener(new MouseMotionAdapter() {
 				@Override
 				public void mouseDragged(MouseEvent me) {
-					if(!(newAbs == null) && avail){
-						Absorber abs = (Absorber) newAbs;
+					if(avail){
 						int x = me.getX()/board.getLtoPx();
 						int y = me.getY()/board.getLtoPx();
-						if(last == null){
-							last = new Vect(x,y);
-						} else if(!(last.x() == x && last.y() == y)){
-							boolean check = model.dragAbs(abs, last, x, y);
+						if(!(last.x() == x && last.y() == y)){
+							boolean check = model.dragAbs((Absorber) (model.gizmoSearch((int) gen.x(), (int) gen.y())), last, x, y);
 							if(check){
 								last = new Vect(x,y);
 							}
