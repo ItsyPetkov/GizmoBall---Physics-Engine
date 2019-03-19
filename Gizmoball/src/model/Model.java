@@ -422,9 +422,16 @@ public class Model extends IModel{
         }
 
         for(int i=0; i<ballList.size(); i++){
-            if(ballList.get(i).getPos().x() == x && ballList.get(i).getPos().y() == y){
-                return true;
+            int height = 1;
+            int width = 1;
+            for(int h=-1; h<height; h++){
+                for(int w=-1; w<width; w++){
+                    if(ballList.get(i).getPos().x()+w == x && ballList.get(i).getPos().y()+h == y){
+                        return true;
+                    }
+                }
             }
+
         }
         return false;
     }
