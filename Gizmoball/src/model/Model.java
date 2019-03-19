@@ -68,12 +68,15 @@ public class Model extends IModel{
                                             break;
                                         case "LeftFlipper":
                                             //flipper flip
+                                            System.out.println("LF flip");
                                             break;
                                         case "RightFlipper":
                                             //flipper flip
+                                            System.out.println("RF flip");
                                             break;
                                         case "Absorber":
                                             //absorber shoot
+                                            System.out.println("abs shoot");
                                             break;
                                     }
                                 }

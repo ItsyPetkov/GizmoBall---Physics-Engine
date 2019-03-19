@@ -80,10 +80,11 @@ public class LoadFile implements ILoadFile{
         createBall(ballCommands);
         moveGizmos(moveCommands);
         deleteGizmos(deleteCommands);
+        connectGizmos(connectCommands);
         return true;
     }
 
-    public void createBumpers(List<String[]> commands) {
+    private void createBumpers(List<String[]> commands) {
         String shape, id;
         int posX, posY;
 
@@ -103,7 +104,7 @@ public class LoadFile implements ILoadFile{
         }
     }
 
-    public void moveGizmos(List<String[]> commands) {
+    private void moveGizmos(List<String[]> commands) {
         String id;
         int x, y;
         for (int i = 0; i < commands.size(); i++) {
@@ -119,7 +120,7 @@ public class LoadFile implements ILoadFile{
             }
         }
     }
-    public void createBall(List<String[]> commands) {
+    private void createBall(List<String[]> commands) {
         String id = "";
         double x, y, velX, velY;
 
@@ -136,7 +137,7 @@ public class LoadFile implements ILoadFile{
         }
     }
 
-    public void deleteGizmos(List<String[]> commands) {
+    private void deleteGizmos(List<String[]> commands) {
         String id;
         List<IGizmo> toRemove = new ArrayList<>();
         for (int i = 0; i < commands.size(); i++) {
@@ -155,7 +156,7 @@ public class LoadFile implements ILoadFile{
             }
         }
     }
-    public void keyConnectGizmos(List<String[]> commands) {
+    private void keyConnectGizmos(List<String[]> commands) {
         String[] comd = commands.get(0);
         System.out.println(comd[0]);
         if (comd[0].equals("KeyConnect")) {
@@ -165,7 +166,7 @@ public class LoadFile implements ILoadFile{
         }
     }
 
-    public void rotateGizmos(List<String[]> commands) {
+    private void rotateGizmos(List<String[]> commands) {
         String id;
         for (int i = 0; i < commands.size(); i++) {
             if (commands.get(i)[0].equals("Rotate")) {
@@ -180,7 +181,7 @@ public class LoadFile implements ILoadFile{
         }
     }
 
-    public void connectGizmos(List<String[]> commands) {
+    private void connectGizmos(List<String[]> commands) {
         String id1, id2;
         IGizmo g1 = null, g2 = null;
 
@@ -197,8 +198,7 @@ public class LoadFile implements ILoadFile{
                     }
                 }
                 if (g1 != null && g2 != null) {
-                    System.out.println("Gizmo 1 id: " + g1.getId());
-                    System.out.println("Gizmo 2 id: " + g2.getId());
+                    g1.addConnection(g2);
                 }
             }
         }
