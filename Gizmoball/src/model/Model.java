@@ -198,55 +198,100 @@ public class Model extends IModel{
     }
 
     //adding a gizmo to gizmoList
-    public boolean addGizmo(IGizmo g){
-        if(g.type().equals("Absorber")){
-            boolean trigger = true;
-            Absorber abs = (Absorber) g;
-            double height = abs.getPos2().y() - abs.getPos().y();
-            double width = abs.getPos2().x() - abs.getPos().x();
-            for(int h=0; h<height; h++){
-                for(int w=0; w<width; w++){
-                    if(isOccupied(abs.getPos().x()+w, abs.getPos().y()+h)){
-                        trigger = false;
-                    }
+    public boolean addGizmo(String type, String id, int x, int y){
+        boolean check = true;
+        switch(type){
+            case "Square":
+                if(!isOccupied(x, y)){
+                    gizmoList.add(new SquareBumper(id, x, y));
+                    nob();
+                    return true;
                 }
-            }
-            if(trigger){
-                gizmoList.add(g);
-                nob();
-                return true;
-            }
-        } else if(g.type().equals("LeftFlipper") || g.type().equals("RightFlipper")){
-            boolean trigger = true;
+                return false;
+            case "Circle":
+                if(!isOccupied(x, y)){
+                    gizmoList.add(new CircleBumper(id, x, y));
+                    nob();
+                    return true;
+                }
+                return false;
+            case "Triangle":
+                if(!isOccupied(x, y)){
+                    gizmoList.add(new TriangleBumper(id, x, y));
+                    nob();
+                    return true;
+                }
+                return false;
+        }
+
+        if(type.equals("LeftFlipper") || type.equals("RightFlipper")){
             double height = 2;
             double width = 2;
             for(int h=0; h<height; h++){
                 for(int w=0; w<width; w++){
-                    if(isOccupied(g.getPos().x()+w, g.getPos().y()+h)){
-                        trigger = false;
+                    if(isOccupied(x+w, y+h)){
+                        check = false;
                     }
                 }
             }
-            if(trigger){
-                gizmoList.add(g);
-                nob();
-                return true;
+
+            if(check){
+                if(type.equals("LeftFlipper")){
+                    gizmoList.add(new LeftFlipper(id, x, y));
+                    nob();
+                }
+
+                if(type.equals("RightFlipper")){
+                    gizmoList.add(new RightFlipper(id, x, y));
+                    nob();
+                }
+
             }
-        } else if(!isOccupied(g.getPos().x(), g.getPos().y())){
-            gizmoList.add(g);
-            nob();
-            return true;
+            return check;
         }
-        nob();
+
         return false;
     }
 
-    //adding a ball to ballList
-    public void addBall(IBall b){
-        if(!isOccupied(b.getPos().x(), b.getPos().y())) {
-            ballList.add(b);
+    public boolean addAbsorber(String id, int x1, int y1, int x2, int y2){
+        boolean check = true;
+        Absorber abs = new Absorber(id, x1, y1, x2, y2);
+        double height = abs.getPos2().y() - abs.getPos().y();
+        double width = abs.getPos2().x() - abs.getPos().x();
+        for(int h=0; h<height; h++){
+            for(int w=0; w<width; w++){
+                if(isOccupied(abs.getPos().x()+w, abs.getPos().y()+h)){
+                    check = false;
+                }
+            }
         }
-        nob();
+
+        if(check){
+            gizmoList.add(abs);
+            nob();
+        }
+        return check;
+    }
+
+    //adding a ball to ballList
+    public boolean addBall(String id, double x, double y, double xv, double yv){
+        Ball b = new Ball(id, x, y, xv, yv);
+        boolean check = true;
+        int height = 2;
+        int width = 2;
+        for(int h=-1; h<height; h++){
+            for(int w=-1; w<width; w++){
+                if(!isOccupied(x+w, y+h)){
+                    check = false;
+                }
+            }
+        }
+
+        if(check){
+            ballList.add(b);
+            nob();
+        }
+        return check;
     }
 
     private IGizmo findAbsorber(int x, int y) {

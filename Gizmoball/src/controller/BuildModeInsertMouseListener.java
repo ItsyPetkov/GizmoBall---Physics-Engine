@@ -24,32 +24,17 @@ public class BuildModeInsertMouseListener implements MouseInputListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        switch (type) {
-            case "Square":
-                model.addGizmo(new SquareBumper(id, e.getX() / LtoPx, e.getY() / LtoPx));
-                break;
-            case "Circle":
-                model.addGizmo(new CircleBumper(id, e.getX() / LtoPx, e.getY() / LtoPx));
-                break;
-            case "Triangle":
-                model.addGizmo(new TriangleBumper(id, e.getX() / LtoPx, e.getY() / LtoPx));
-                break;
-            case "LeftFlipper":
-                model.addGizmo(new LeftFlipper(id, e.getX() / LtoPx, e.getY() / LtoPx));
-                break;
-            case "RightFlipper":
-                model.addGizmo(new RightFlipper(id, e.getX() / LtoPx, e.getY() / LtoPx));
-                break;
-            case "Ball":
-                try {
-                    Double[] velocities = getVelocity();
-                    if (velocities != null) {
-                        model.addBall(new Ball(id, e.getX() / LtoPx, e.getY() / LtoPx, velocities[0], velocities[1]));
-                    }
-                } catch (NullPointerException ex) {
-
+        if(type.equals("Ball")){
+            try {
+                Double[] velocities = getVelocity();
+                if (velocities != null) {
+                    model.addBall(id, e.getX() / LtoPx, e.getY() / LtoPx, velocities[0], velocities[1]);
                 }
-                break;
+            } catch (NullPointerException ex) {
+
+            }
+        } else {
+            model.addGizmo(type, id, e.getX() / LtoPx, e.getY() / LtoPx);
         }
 
     }
@@ -122,7 +107,7 @@ public class BuildModeInsertMouseListener implements MouseInputListener {
             x2 = Math.max(sx, ex);
             y1 = Math.min(sy, ey);
             y2 = Math.max(sy, ey);
-            model.addGizmo(new Absorber(id, x1/LtoPx, y1/LtoPx, x2/LtoPx + 1, y2/LtoPx + 1));
+            model.addAbsorber(id, x1/LtoPx, y1/LtoPx, x2/LtoPx + 1, y2/LtoPx + 1);
         }
     }
 

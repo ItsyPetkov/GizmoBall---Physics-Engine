@@ -12,8 +12,9 @@ public abstract class IModel extends Observable {
     public abstract Vect getWallBR();
     public abstract List<IGizmo> getGizmos();
     public abstract List<IBall> getBalls();
-    public abstract boolean addGizmo(IGizmo g);
-    public abstract void addBall(IBall b);
+    public abstract boolean addGizmo(String type, String id, int x, int y);
+    public abstract boolean addAbsorber(String id, int x1, int y1, int x2, int y2);
+    public abstract boolean addBall(String id, double x, double y, double xv, double yv);
     public abstract IGizmo gizmoSearch(int x, int y);
     public abstract IBall ballSearch(int x, int y);
     public abstract boolean checkGizmoId(String id);

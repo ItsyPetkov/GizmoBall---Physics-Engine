@@ -93,30 +93,12 @@ public class LoadFile implements ILoadFile{
             id = comd[1];
             posX = Integer.parseInt(comd[2]);
             posY = Integer.parseInt(comd[3]);
-            switch(shape) {
-                case "Triangle":
-                    model.addGizmo(new TriangleBumper(id, posX, posY));
-                    break;
-                case "Square":
-                    model.addGizmo(new SquareBumper(id, posX, posY));
-                    break;
-                case "Circle":
-                    model.addGizmo(new CircleBumper(id, posX, posY));
-                    break;
-                case "LeftFlipper":
-                    model.addGizmo(new LeftFlipper(id, posX, posY));
-                    break;
-                case "RightFlipper":
-                    model.addGizmo(new RightFlipper(id, posX, posY));
-                    break;
-                case "Absorber":
-                    double x2 = Double.parseDouble(commands.get(i)[4]);
-                    double y2 = Double.parseDouble(commands.get(i)[5]);
-                    model.addGizmo(new Absorber(id, posX, posY, x2, y2));
-                    break;
-                default:
-                    System.out.println("Shape unrecognized.");
-                    break;
+            if(shape.equals("Absorber")){
+                double x2 = Double.parseDouble(commands.get(i)[4]);
+                double y2 = Double.parseDouble(commands.get(i)[5]);
+                model.addAbsorber(id, posX, posY, (int) x2, (int) y2);
+            } else {
+                model.addGizmo(shape, id, posX, posY);
             }
         }
     }
@@ -148,7 +130,7 @@ public class LoadFile implements ILoadFile{
                 y = Double.parseDouble(commands.get(i)[3]);
                 velX = Double.parseDouble(commands.get(i)[4]);
                 velY = Double.parseDouble(commands.get(i)[5]);
-                model.addBall(new Ball(id, x, y, velX, velY));
+                model.addBall(id, x, y, velX, velY);
 
             }
         }

@@ -21,105 +21,92 @@ public class ModelTest {
     @Test
     void deleteGizmosTest(){
         assertEquals(model.getGizmos().size(), 0);
-        Gizmo g = new SquareBumper("S1", 2, 3);
-        model.addGizmo(g);
+        model.addGizmo("Square", "S1", 2, 3);
         assertEquals(model.getGizmos().size(), 1);
         assertEquals(model.getGizmos().get(0).getPos().x(), 2);
         assertEquals(model.getGizmos().get(0).getPos().y(), 3);
-        model.deleteGizmo(g);
+        //model.deleteGizmo(g);
         assertEquals(model.getGizmos().size(), 0);
     }
 
     @Test
     void addGizmoOcc(){
-        Gizmo g = new SquareBumper("S1", 2, 3);
-        model.addGizmo(g);
+        model.addGizmo("Square","S1", 2, 3);
         assertEquals(model.getGizmos().size(), 1);
-        Gizmo g2 = new TriangleBumper("T1", 2, 3);
-        model.addGizmo(g2);
+        model.addGizmo("Triangle", "T1", 2, 3);
         assertEquals(model.getGizmos().size(), 1);
     }
 
     @Test
     void deleteBallsTest(){
         assertEquals(model.getBalls().size(), 0);
-        Ball b = new Ball("B1", 2, 3, 10, -20);
-        model.addBall(b);
+        model.addBall("B1", 2, 3, 10, -20);
         assertEquals(model.getBalls().size(), 1);
         assertEquals(model.getBalls().get(0).getPos().x(), 2);
         assertEquals(model.getBalls().get(0).getPos().y(), 3);
-        model.deleteBall(b);
+        //model.deleteBall(b);
         assertEquals(model.getBalls().size(), 0);
     }
 
     @Test
     void addBallOcc(){
-        Ball b = new Ball("B1", 2, 3, 10, -20);
-        model.addBall(b);
+        model.addBall("B1", 2, 3, 10, -20);
         assertEquals(model.getBalls().size(), 1);
-        Ball b2 = new Ball("B2", 2, 3, -7, -6);
-        model.addBall(b2);
+        model.addBall("B2", 2, 3, -7, -6);
         assertEquals(model.getBalls().size(), 1);
     }
 
     @Test
     void gizmoSearch(){
-        Gizmo g = new SquareBumper("S1", 2, 3);
-        model.addGizmo(g);
-        assertEquals(model.gizmoSearch(2,3), g);
+        model.addGizmo("Square", "S1", 2, 3);
+        //assertEquals(model.gizmoSearch(2,3), g);
         assertNull(model.gizmoSearch(2,4));
     }
 
     @Test
     void ballSearch(){
-        Ball b = new Ball("B1", 2, 3, 10, -20);
-        model.addBall(b);
-        assertEquals(model.ballSearch(2,3), b);
+        model.addBall("B1", 2, 3, 10, -20);
+        //assertEquals(model.ballSearch(2,3), b);
         assertNull(model.ballSearch(4,3));
     }
 
     @Test
     void gizmoIdTest(){
-        Gizmo g = new SquareBumper("S1", 2, 3);
-        model.addGizmo(g);
+        model.addGizmo("Square", "S1", 2, 3);
         assertFalse(model.checkGizmoId("S1"));
         assertTrue(model.checkGizmoId("S2"));
     }
 
     @Test
     void ballIdTest(){
-        Ball b = new Ball("B1", 2, 3, 10, -20);
-        model.addBall(b);
+        model.addBall("B1", 2, 3, 10, -20);
         assertFalse(model.checkBallId("B1"));
         assertTrue(model.checkBallId("B2"));
     }
 
     @Test
     void moveGizmoTest(){
-        SquareBumper s = new SquareBumper("S1", 2, 3);
-        model.addGizmo(s);
+        model.addGizmo("Square", "S1", 2, 3);
         assertEquals(model.getGizmos().get(0).getPos().x(), 2);
         assertEquals(model.getGizmos().get(0).getPos().y(), 3);
-        model.moveGizmo(s, 4, 5);
+        //model.moveGizmo(s, 4, 5);
         assertEquals(model.getGizmos().get(0).getPos().x(), 4);
         assertEquals(model.getGizmos().get(0).getPos().y(), 5);
     }
 
     @Test
     void setBallPosTest(){
-        Ball b = new Ball("B1", 2, 3, 10, -20);
-        model.addBall(b);
+        model.addBall("B1", 2, 3, 10, -20);
         assertEquals(model.getBalls().get(0).getPos().x(), 2);
         assertEquals(model.getBalls().get(0).getPos().y(), 3);
-        model.setBallPos(b, 4, 9);
+        //model.setBallPos(b, 4, 9);
         assertEquals(model.getBalls().get(0).getPos().x(), 4);
         assertEquals(model.getBalls().get(0).getPos().y(), 9);
     }
 
     @Test
     void rotateGizmoTest(){
-        SquareBumper s = new SquareBumper("S1", 2, 3);
-        model.addGizmo(s);
+        model.addGizmo("Square", "S1", 2, 3);
         assertEquals(model.gizmoSearch(2, 3).getRotation(), 0);
         model.gizmoSearch(2, 3).rotate();
         assertEquals(model.gizmoSearch(2, 3).getRotation(), 1);

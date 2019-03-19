@@ -93,8 +93,7 @@ public class BuildModeInsertMenuListener implements ActionListener {
 			board.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent me) {
-					newAbs = new Absorber(idGen, me.getX()/board.getLtoPx(), me.getY()/board.getLtoPx(), (me.getX()/board.getLtoPx()) +1, (me.getY()/board.getLtoPx()) +1);
-					avail = model.addGizmo(newAbs);
+					avail = model.addAbsorber(idGen, me.getX()/board.getLtoPx(), me.getY()/board.getLtoPx(), (me.getX()/board.getLtoPx()) +1, (me.getY()/board.getLtoPx()) +1);
 				}
 			});
 
