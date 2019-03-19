@@ -196,7 +196,7 @@ public class Model extends IModel{
         this.notifyObservers();
     }
 
-    //adding a gizmo to the global gizmoList
+    //adding a gizmo to gizmoList
     public boolean addGizmo(IGizmo g){
         if(g.type().equals("Absorber")){
             boolean trigger = true;
@@ -240,7 +240,7 @@ public class Model extends IModel{
         return false;
     }
 
-    //adding a ball to global ballList
+    //adding a ball to ballList
     public void addBall(IBall b){
         if(!isOccupied(b.getPos().x(), b.getPos().y())) {
             ballList.add(b);
@@ -248,12 +248,10 @@ public class Model extends IModel{
         nob();
     }
 
-    //finding a gizmo from global gizmoList based on (x,y) position
+    //finding a gizmo in gizmoList based on (x,y) position
     public IGizmo gizmoSearch(int x, int y){
-
         for(int i=0; i<gizmoList.size(); i++){
             if(gizmoList.get(i).type().equals("Absorber")) {
-
                 IGizmo absorber =(Absorber) gizmoList.get(i);
                 double rangeX = ((Absorber) absorber).getPos2().x() - absorber.getPos().x();
                 double rangeY = ((Absorber) absorber).getPos2().y() - absorber.getPos().y();
@@ -283,12 +281,8 @@ public class Model extends IModel{
         return null;
     }
 
-    //finding a ball from global ballList based on (x,y) position
+    //finding a ball from ballList based on (x,y) position
     public IBall ballSearch(int x, int y){
-        System.out.println("mouse x: "+x);
-        System.out.println("mouse y: "+y);
-        System.out.println();
-
         int range = 1;
         for(int i=0; i<ballList.size(); i++) {
             double ballX = ballList.get(i).getPos().x();
