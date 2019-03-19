@@ -19,6 +19,53 @@ public class ModelTest {
     }
 
     @Test
+    void addCircleTest(){
+        //adding circle
+        model.addGizmo("Circle", "C1", 2, 3);
+        assertEquals(model.getGizmos().size(), 1);
+        //adding circle in same position
+        model.addGizmo("Circle", "C2", 2, 3);
+        assertEquals(model.getGizmos().size(), 1);
+    }
+
+    @Test
+    void addTriangleTest(){
+        //adding triangle
+        model.addGizmo("Triangle", "T1", 4, 5);
+        assertEquals(model.getGizmos().size(), 1);
+        //adding triangle in same place
+        model.addGizmo("Triangle", "T2", 4, 5);
+        assertEquals(model.getGizmos().size(), 1);
+    }
+
+    @Test
+    void addFlipperTest(){
+        //adding LeftFlipper
+        model.addGizmo("LeftFlipper", "LF1", 7,8);
+        assertEquals(model.getGizmos().size(), 1);
+        //adding LeftFlipper in same place
+        model.addGizmo("LeftFlipper", "LF2", 7,8);
+        assertEquals(model.getGizmos().size(), 1);
+
+        //adding RightFlipper
+        model.addGizmo("RightFlipper", "RF1", 9,8);
+        assertEquals(model.getGizmos().size(), 2);
+        //adding LeftFlipper in same place
+        model.addGizmo("RightFlipper", "RF2", 9,8);
+        assertEquals(model.getGizmos().size(), 2);
+    }
+
+    @Test
+    void addAbsorberTest(){
+        //adding absorber
+        model.addAbsorber("A1", 5, 5, 8, 8);
+        assertEquals(model.getGizmos().size(), 1);
+        //adding overlapping absorber
+        model.addAbsorber("A2", 3, 3, 6, 6);
+        assertEquals(model.getGizmos().size(), 1);
+    }
+
+    @Test
     void deleteGizmosTest(){
         assertEquals(model.getGizmos().size(), 0);
         model.addGizmo("Square", "S1", 2, 3);
@@ -68,6 +115,15 @@ public class ModelTest {
         model.addBall("B1", 2, 3, 10, -20);
         assertFalse(model.checkBallId("B1"));
         assertTrue(model.checkBallId("B2"));
+    }
+
+    @Test
+    void ballSearchTest(){
+        //search for added ball
+        model.addBall("B1", 2, 3, 10, 20);
+        assertEquals(model.ballSearch(2, 3).getId(), "B1");
+        //search for non-existant ball
+        assertNull(model.ballSearch(5, 6));
     }
 
     @Test
