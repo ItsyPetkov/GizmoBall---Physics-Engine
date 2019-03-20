@@ -23,7 +23,11 @@ public class BuildModeKeyListener implements KeyListener {
     public void keyTyped(KeyEvent e) {
         CustomKeys.setLast(e);
 
-        keyConnects.put(target.getId(), (int) e.getKeyChar());
+        try {
+            keyConnects.put(target.getId(), (int) e.getKeyChar());
+        } catch (NullPointerException ex) {
+
+        }
 
         ka.close();
         new CustomKeyListener(CustomKeys.getLastKey(), target);
