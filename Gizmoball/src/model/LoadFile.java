@@ -173,12 +173,14 @@ public class LoadFile implements ILoadFile{
             String[] comd = commands.get(i);
             List<IGizmo> gizmoList = model.getGizmos();
             if (comd[0].equals("KeyConnect")) {
-                int keyCode = Integer.parseInt(comd[2]);
-                char key = (char) keyCode;
-                String id = comd[4];
-                for (IGizmo g : gizmoList) {
-                    if (g.getId().equals(id)) {
-                        new CustomKeyListener(key, g);
+                if (comd[3].equals("down")){
+                    int keyCode = Integer.parseInt(comd[2]);
+                    char key = (char) keyCode;
+                    String id = comd[4];
+                    for (IGizmo g : gizmoList) {
+                        if (g.getId().equals(id)) {
+                            new CustomKeyListener(key, g);
+                        }
                     }
                 }
             }
