@@ -5,6 +5,7 @@ import controller.BuildModeKeyListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SaveFile implements ISaveFile{
@@ -71,10 +72,10 @@ public class SaveFile implements ISaveFile{
             for (IBall b : ballList) {
                 wr.write(b.getType()+" ");
                 wr.write(b.getId()+" ");
-                wr.write(Double.toString(b.getPos().x())+ " ");
-                wr.write(Double.toString(b.getPos().y())+ " ");
-                wr.write(Double.toString(b.getVelo().x())+ " ");
-                wr.write(Double.toString(b.getVelo().y()));
+                wr.write(Double.toString(Math.round(b.getPos().x()))+ " ");
+                wr.write(Double.toString(Math.round(b.getPos().y()))+ " ");
+                wr.write(Double.toString(Math.round(b.getVelo().x()))+ " ");
+                wr.write(Double.toString(Math.round(b.getVelo().y())));
                 wr.write("\n");
             }
             //Saving KeyConnect
@@ -89,8 +90,16 @@ public class SaveFile implements ISaveFile{
                 }
             }
 
-            //Saving Connect
-
+            //Saving Connects
+            for (IGizmo g : gizmoList) {
+                List<IGizmo> connections = g.getConnections();
+                for (IGizmo c : connections) {
+                    wr.write("Connect ");
+                    wr.write(g.getId()+" ");
+                    wr.write(c.getId());
+                    wr.write("\n");
+                }
+            }
 
             wr.write("\n");
 
