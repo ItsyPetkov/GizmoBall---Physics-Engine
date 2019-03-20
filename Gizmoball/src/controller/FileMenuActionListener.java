@@ -60,7 +60,7 @@ public class FileMenuActionListener implements ActionListener {
             chooser.setFileFilter(filter);
             int returnVal = chooser.showOpenDialog(null);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-                if (loadfile.load(chooser.getSelectedFile().getName())) {
+                if (loadfile.load(chooser.getSelectedFile().getPath())) {
                     System.out.println(chooser.getSelectedFile().getName()+" loaded successfully");
                 }
             }
