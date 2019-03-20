@@ -5,11 +5,14 @@ import view.KeyAlert;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BuildModeKeyListener implements KeyListener {
 
     KeyAlert ka = null;
     IGizmo target;
+    public static Map<String, Integer> keyConnects = new HashMap<>();
 
     public BuildModeKeyListener(KeyAlert ka, IGizmo target) {
         this.ka = ka;
@@ -19,6 +22,8 @@ public class BuildModeKeyListener implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
         CustomKeys.setLast(e);
+
+        keyConnects.put(target.getId(), (int) e.getKeyChar());
 
         ka.close();
         new CustomKeyListener(CustomKeys.getLastKey(), target);

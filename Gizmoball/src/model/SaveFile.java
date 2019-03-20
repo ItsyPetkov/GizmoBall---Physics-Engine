@@ -1,5 +1,7 @@
 package model;
 
+import controller.BuildModeKeyListener;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -52,14 +54,16 @@ public class SaveFile implements ISaveFile{
                 wr.write("\n");
 
             }
-            //Writing Gravity
+            //Saving Gravity
             double gravity = model.getGravity();
+            wr.write("Gravity ");
             wr.write(gravity+"");
             wr.write("\n");
 
-            //Writing Friction
+            //Saving Friction
             double[] friction = model.getFriction();
-            wr.write(friction[0]+"");
+            wr.write("Friction ");
+            wr.write(friction[0]+" ");
             wr.write(friction[1]+"");
             wr.write("\n");
 
@@ -73,6 +77,21 @@ public class SaveFile implements ISaveFile{
                 wr.write(Double.toString(b.getVelo().y()));
                 wr.write("\n");
             }
+            //Saving KeyConnect
+            for (IGizmo g : gizmoList) {
+                if (BuildModeKeyListener.keyConnects.get(g.getId()) != null) {
+                    wr.write("KeyConnect ");
+                    wr.write("key ");
+                    wr.write(BuildModeKeyListener.keyConnects.get(g.getId())+ " ");
+                    wr.write("down ");
+                    wr.write(g.getId());
+                    wr.write("\n");
+                }
+            }
+
+            //Saving Connect
+
+
             wr.write("\n");
 
 

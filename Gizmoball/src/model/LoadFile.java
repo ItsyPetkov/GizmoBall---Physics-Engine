@@ -72,8 +72,8 @@ public class LoadFile implements ILoadFile{
         } catch(FileNotFoundException ex) {
             System.out.println("File "+filename+" failed to load.");
             JOptionPane.showMessageDialog(null,
-                    filename+" does not exist.",
-                    "Error 404 - File not found",
+                    filename+" can't be accessed.",
+                    "Access Denied",
                     JOptionPane.ERROR_MESSAGE);
             return false;
         }
