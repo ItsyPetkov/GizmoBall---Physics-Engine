@@ -181,7 +181,7 @@ public class LoadFile implements ILoadFile{
                     for (IGizmo g : gizmoList) {
                         if (g.getId().equals(id)) {
                             BuildModeKeyListener.keyConnects.put(g.getId(), keyCode);
-                            new CustomKeyListener(key, g);
+                            new CustomKeyListener(Character.toLowerCase(key), g);
                         }
                     }
                 }

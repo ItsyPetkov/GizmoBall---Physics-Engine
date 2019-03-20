@@ -81,7 +81,7 @@ public class Model extends IModel{
                                     conList.get(j).trigger();
                                     if(conList.get(j).type().equals("LeftFlipper") || conList.get(j).type().equals("RightFlipper")){
                                         for(int k=0; k<kl.size(); k++){
-                                            if(kl.get(k).getGizmo().getId().equals(conList.get(j).getId())){
+                                            if(kl.get(k).getGizmo().getId().equals(conList.get(j).getId()) && !keypressed){
                                                 char key = kl.get(k).getKey();
                                                 keyCode = java.awt.event.KeyEvent.getExtendedKeyCodeForChar(key);
                                                 r.keyPress(keyCode);
