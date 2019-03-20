@@ -1,5 +1,6 @@
 package model;
 
+import controller.BuildModeKeyListener;
 import controller.CustomKeyListener;
 import view.MainMenu;
 
@@ -179,6 +180,7 @@ public class LoadFile implements ILoadFile{
                     String id = comd[4];
                     for (IGizmo g : gizmoList) {
                         if (g.getId().equals(id)) {
+                            BuildModeKeyListener.keyConnects.put(g.getId(), keyCode);
                             new CustomKeyListener(key, g);
                         }
                     }
