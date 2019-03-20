@@ -177,11 +177,12 @@ public class LoadFile implements ILoadFile{
                 if (comd[3].equals("down")){
                     int keyCode = Integer.parseInt(comd[2]);
                     char key = (char) keyCode;
+                    System.out.println(key);
                     String id = comd[4];
                     for (IGizmo g : gizmoList) {
                         if (g.getId().equals(id)) {
                             BuildModeKeyListener.keyConnects.put(g.getId(), keyCode);
-                            new CustomKeyListener(key, g);
+                            new CustomKeyListener(Character.toLowerCase(key), g);
                         }
                     }
                 }
