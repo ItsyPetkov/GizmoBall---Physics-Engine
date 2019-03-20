@@ -55,19 +55,6 @@ public class SaveFile implements ISaveFile{
                 wr.write("\n");
 
             }
-            //Saving Gravity
-            double gravity = model.getGravity();
-            wr.write("Gravity ");
-            wr.write(gravity+"");
-            wr.write("\n");
-
-            //Saving Friction
-            double[] friction = model.getFriction();
-            wr.write("Friction ");
-            wr.write(friction[0]+" ");
-            wr.write(friction[1]+"");
-            wr.write("\n");
-
             //Saving Balls
             for (IBall b : ballList) {
                 wr.write(b.getType()+" ");
@@ -100,9 +87,19 @@ public class SaveFile implements ISaveFile{
                     wr.write("\n");
                 }
             }
-
+            //Saving Gravity
+            double gravity = model.getGravity();
+            wr.write("Gravity ");
+            wr.write(gravity+"");
             wr.write("\n");
 
+            //Saving Friction
+            double[] friction = model.getFriction();
+            wr.write("Friction ");
+            wr.write(friction[0]+" ");
+            wr.write(friction[1]+"");
+            wr.write("\n");
+            wr.write("\n");
 
             wr.flush();
             wr.close();
