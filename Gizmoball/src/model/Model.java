@@ -1,10 +1,13 @@
 package model;
 
+import controller.CustomKeyListener;
+import controller.CustomKeys;
 import physics.LineSegment;
 import physics.Vect;
 import physics.Circle;
 import physics.Geometry;
-import java.awt.Color;
+
+import java.awt.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -22,17 +25,24 @@ public class Model extends IModel{
     private int collisionType = 0;
     private IGizmo collidingG;
     private IBall collidingB;
+    private Robot r;
+    private boolean keypressed = false;
+    private int keyCode = 0;
 
     public Model(){
         walls = new Walls(0,0,20,20);
         gizmoList = new ArrayList<>();
         ballList = new ArrayList<>();
-
+        try {
+            r = new Robot();
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
     }
 
     public void moveBall(){
         double moveTime = 0.05;
-
+        List<CustomKeyListener> kl = CustomKeys.getKeys();
         for(int i=0; i<ballList.size(); i++) {
             if (!(ballList.get(i).getVelo().x() == 0 && ballList.get(i).getVelo().y() == 0) || !(ballList.get(i).isCaptured())) {
                 CollisionDetails cd = timeUntilCollision(ballList.get(i), i);
@@ -40,6 +50,10 @@ public class Model extends IModel{
                 if (tuc > moveTime) {
                     //no collision
                     moveBallForTime(ballList.get(i), moveTime);
+                    if(keypressed){
+                        r.keyRelease(keyCode);
+                        keypressed = false;
+                    }
                 } else {
                     //collision
                     if(ballList.get(i).isCaptured()){
@@ -65,6 +79,16 @@ public class Model extends IModel{
                                 List<IGizmo> conList = collidingG.getConnections();
                                 for(int j=0; j<conList.size(); j++){
                                     conList.get(j).trigger();
+                                    if(conList.get(j).type().equals("LeftFlipper") || conList.get(j).type().equals("RightFlipper")){
+                                        for(int k=0; k<kl.size(); k++){
+                                            if(kl.get(k).getGizmo().getId().equals(conList.get(j).getId())){
+                                                char key = kl.get(k).getKey();
+                                                keyCode = java.awt.event.KeyEvent.getExtendedKeyCodeForChar(key);
+                                                r.keyPress(keyCode);
+                                                keypressed = true;
+                                            }
+                                        }
+                                    }
                                 }
                                 break;
                             case 2:
